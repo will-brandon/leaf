@@ -5,6 +5,9 @@
 #
 # Marks files to be excluded from the git version-controled project.
 
+# Build Files
+./bin/*
+
 # macOS Metadata Files
 *.DS_Store
 
