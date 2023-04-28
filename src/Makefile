@@ -1,28 +1,37 @@
-# GNU Makefile
+# Makefile
 #
-# Author:	William R. Brandon
-#
-# Date:		Apr 20, 2023
+# Type:		GNU Makefile
+# Author:	Will Brandon
+# Date:		Apr 28, 2023
 #
 # Recursively builds the source code for the entire project.
 #
 # Usage:	make
 
+# Define the compiler program, C++ version, optimization level, and accepted warnings.
 CC = g++
-OLVL = 0
-CFLAGS = -std=c++20 -O$(OLVL) -Wall
+CFLAGS = -std=c++17 -O0 -Wall
 
-OUTDIR = ../bin
+# Define a path the binary object root for the source directory built by this Makefile.
+OBJDIR = ../build/obj
 
+# Get a list of all subdirectories.
 SUBDIRS := $(wildcard */.)
+
+# Create a list of source file names and ther corresponding object file names.
 SRCS := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 
-all: outdir $(SUBDIRS) $(OBJS)
+# This target is the default. It will create output directories, recursively build any
+# subdirectories, and compile the source code at the current source level into binary objects.
+all: outdirs $(SUBDIRS) $(OBJS)
 
-outdir:
-	mkdir -p $(OUTDIR)
+# This target will create the directories for the produced output if they do not already exist.
+outdirs:
+	mkdir -p $(OBJDIR)
 
+# This target which applies to all subdirectories will call a Makefile within the subdirectory if it
+# exists.
 $(SUBDIRS):
 	@echo "Checking subdir: $@"
 	@if [ -f $@/Makefile ]; then \
@@ -31,7 +40,10 @@ $(SUBDIRS):
   	fi
 
 
+# This target will compile each source C++ file into an object file in the proper mirrored directory
+# and name in the binary object tree.
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $(OUTDIR)/$@
+	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)/$@
 
+# All targets in this Makefile are phony (they are not file names).
 .PHONY: all outdir $(SUBDIRS)
