@@ -1,9 +1,22 @@
+# .gitmpodules
+#
+# Type:     Gitmodules
+# Author:   Will Brandon
+# Date:     Apr 19, 2023
+#
+# Specifies Git repositories to be used as submodules.
+
+# bkaradzic general utilities library
 [submodule "libs/bx"]
 	path = libs/bx
 	url = https://github.com/bkaradzic/bx.git
+
+# bkaradzic graphics library
 [submodule "libs/bgfx"]
 	path = libs/bgfx
 	url = https://github.com/bkaradzic/bgfx.git
+
+# bkaradzic image library
 [submodule "libs/bimg"]
 	path = libs/bimg
 	url = https://github.com/bkaradzic/bimg.git

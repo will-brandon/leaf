@@ -8,6 +8,7 @@
 #
 # Usage:	make
 
+
 # Define the compiler program, C++ version, optimization level, and accepted warnings.
 CC = g++
 CFLAGS = -std=c++17 -O0 -Wall
@@ -21,6 +22,12 @@ SUBDIRS := $(wildcard */.)
 # Create a list of source file names and ther corresponding object file names.
 SRCS := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
+
+# Define any includes.
+INCLUDES =	-I ../../libs/bx/include \
+			-I ../../libs/bgfx/include \
+			-I ../../libs/bimg/include
+
 
 # This target is the default. It will create output directories, recursively build any
 # subdirectories, and compile the source code at the current source level into binary objects.
@@ -39,11 +46,10 @@ $(SUBDIRS):
   		make -C $@; \
   	fi
 
-
 # This target will compile each source C++ file into an object file in the proper mirrored directory
 # and name in the binary object tree.
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)/$@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $(OBJDIR)/$@
 
 # All targets in this Makefile are phony (they are not file names).
 .PHONY: all outdir $(SUBDIRS)

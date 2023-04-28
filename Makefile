@@ -8,6 +8,7 @@
 #
 # Usage:	make
 
+
 # Define the compiler program, C++ version, optimization level, and accepted warnings.
 CC = g++
 CFLAGS = -std=c++17 -O0 -Wall
@@ -24,6 +25,7 @@ EXEC = test
 INSTALLED_LIBS = -lSDL2
 MANUAL_LIBS = ./libs/bgfx/.build/osx-x64/bin/*.a
 FRAMEWORKS = -framework Cocoa -framework IOKit -framework Metal -framework QuartzCore
+
 
 # This target is the default. It will create output directories, compile, and link.
 all: outdirs compile link

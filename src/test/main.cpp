@@ -11,9 +11,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <thread>
-#include "../../libs/bgfx/include/bgfx/bgfx.h"
-#include "../../libs/bgfx/include/bgfx/platform.h"
-#include "../../libs/bx/include/bx/platform.h"
+#include <bgfx/bgfx.h>
+#include <bgfx/platform.h>
+#include <bx/platform.h>
 #include <stdio.h>
 #include <iostream>
 
@@ -32,9 +32,9 @@ int main(int argc, char **argv)
   SDL_Surface* screenSurface = NULL;
   
   /*
-  * Initialises the SDL video subsystem (as well as the events subsystem).
-  * Returns 0 on success or a negative error code on failure using SDL_GetError().
-  */
+   * Initialises the SDL video subsystem (as well as the events subsystem).
+   * Returns 0 on success or a negative error code on failure using SDL_GetError().
+   */
   if (SDL_Init(0) != 0) {
     fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
     return 1;

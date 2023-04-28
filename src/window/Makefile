@@ -14,7 +14,7 @@ CC = g++
 CFLAGS = -std=c++17 -O0 -Wall
 
 # Define a path the binary object root for the source directory built by this Makefile.
-OBJDIR = ../../build/obj/test
+OBJDIR = ../../build/obj/window
 
 # Get a list of all subdirectories.
 SUBDIRS := $(wildcard */.)
