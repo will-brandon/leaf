@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <bx/platform.h>
+#include "sdltypes.hpp"
 #include "../nativewindow.hpp"
 
 using namespace std;
@@ -26,7 +27,7 @@ namespace leaf
      */
     class sdl_window : public native_window
     {
-        // The SDL class must be able to create windows.
+        // The SDL class must be able to create and destroy windows.
         friend class sdl;
 
         private:
@@ -99,6 +100,23 @@ namespace leaf
              * @param   other a separate window object
              */
             sdl_window &operator=(sdl_window &&other) noexcept = delete;
+
+            /**
+             * @brief   Determines the version of SDL being used for the window.
+             * 
+             * @return  a structure containing components comprising the version of SDL being used
+             */
+            inline static sdl_version_t sdl_version(void) noexcept
+            {
+                // Create a version structure.
+                sdl_version_t version;
+
+                // Copy the SDL version information into the structure.
+                SDL_VERSION(&version)
+
+                // Return the version structure.
+                return version;
+            }
 
             /**
              * @brief   Determines the name of the operating system the window resides on.

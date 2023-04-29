@@ -15,6 +15,7 @@
 #include <set>
 #include <bx/platform.h>
 #include "../../utils/inittracker.hpp"
+#include "sdltypes.hpp"
 #include "sdlwindow.hpp"
 
 using namespace std;
@@ -63,6 +64,23 @@ namespace leaf
              * @return  true if and only if SDL was not already initialized.
              */
             static bool deinit(void) noexcept;
+
+            /**
+             * @brief   Determines the version of SDL being used.
+             * 
+             * @return  a structure containing components comprising the version of SDL being used
+             */
+            inline static sdl_version_t version(void) noexcept
+            {
+                // Create a version structure.
+                sdl_version_t version;
+
+                // Copy the SDL version information into the structure.
+                SDL_VERSION(&version)
+
+                // Return the version structure.
+                return version;
+            }
             
             /**
              * @brief   Determines the name of the operating system the SDL windows resides on.

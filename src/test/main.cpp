@@ -33,6 +33,7 @@ void my_window(void)
 {
     try
     {
+      cout << sdl::version() << "\n";
       sdl::init();
       sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
       sdl::destroy_window(window);

@@ -34,9 +34,6 @@ namespace leaf
         {
             throw runtime_error("Failed to create SDL window. (" + string(SDL_GetError()) + ')');
         }
-
-        // Read the SDL version into the system information structure.
-        SDL_VERSION(&m_system_info.version)
     }
 
     sdl_window::~sdl_window() noexcept
