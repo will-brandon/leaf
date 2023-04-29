@@ -9,8 +9,8 @@
  * @copyright Copyright (c) 2023
  */
 
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#ifndef CONSOLE_H_HEADER_GUARD
+#define CONSOLE_H_HEADER_GUARD
 
 #include <iostream>
 
@@ -49,33 +49,14 @@ namespace utl
             static void set_ansi_style_enabled(bool enabled) noexcept;
 
             /**
-             * @brief   Displays a formatted error message in standard output, then exits with code
-             *          1.
-             * 
-             * @tparam  T   the type of object to pipe into standard output as the message
-             * @param   obj the object to pipe into standard output as the messsage
-             * 
-             * @throw   exception if the the object of type T is not insertable into an output
-             *          stream
-             */
-            template<typename T> static void err(const T &obj)
-            {
-                // Delegate the task and use error code 1.
-                err(obj, EXIT_FAILURE);
-            }
-
-            /**
              * @brief   Displays a formatted error message in standard output, then exits with the
              *          given code.
              * 
              * @tparam  T           the type of object to pipe into standard output as the message
              * @param   obj         the object to pipe into standard output as the messsage
              * @param   exit_code   the exit code
-             * 
-             * @throw   exception if the the object of type T is not insertable into an output
-             *          stream
              */
-            template<typename T> static void err(const T &obj, int exit_code)
+            template<typename T> static void err(const T &obj, int exit_code) noexcept
             {
                 // Print a styled message if ANSI style is enabled, print a clean message otherwise.
                 if (f_ansi_style_enabled)
@@ -92,15 +73,54 @@ namespace utl
             }
 
             /**
+             * @brief   Displays a formatted error message in standard output, then exits with code
+             *          1.
+             * 
+             * @tparam  T   the type of object to pipe into standard output as the message
+             * @param   obj the object to pipe into standard output as the messsage
+             */
+            template<typename T> inline static void err(const T &obj) noexcept
+            {
+                // Delegate the task and use exit code 1.
+                err(obj, EXIT_FAILURE);
+            }
+
+            /**
+             * @brief   Displays a formatted error message from an exception in standard output,
+             *          then exits with the given code.
+             * 
+             * @param   exc         the exception object whose message will pipe into standard
+             *                      output
+             * @param   exit_code   the exit code
+             */
+            inline static void err(const exception &exc, int exit_code) noexcept
+            {
+                // Retreieve the message from the exception and deletage to the templated err
+                // function.
+                err(exc.what(), exit_code);
+            }
+
+            /**
+             * @brief   Displays a formatted error message from an exception in standard output,
+             *          then exits with code 1.
+             * 
+             * @param   exc the exception object whose message will pipe into standard
+             *              output
+             */
+            inline static void err(const exception &exc) noexcept
+            {
+                // Retreieve the message from the exception and deletage to the templated err
+                // function. Use exit code 1.
+                err(exc.what(), EXIT_FAILURE);
+            }
+
+            /**
              * @brief   Displays a formatted warning message in standard output.
              * 
              * @tparam  T   the type of object to pipe into standard output as the message
              * @param   obj the object to pipe into standard output as the messsage
-             * 
-             * @throw   exception if the the object of type T is not insertable into an output
-             *          stream
              */
-            template<typename T> static void warn(const T &obj)
+            template<typename T> static void warn(const T &obj) noexcept
             {
                 // Print a styled message if ANSI style is enabled, print a clean message otherwise.
                 if (f_ansi_style_enabled)
@@ -111,6 +131,19 @@ namespace utl
                 {
                     cout << "Warning: " << obj << "\n";
                 }
+            }
+
+            /**
+             * @brief   Displays a formatted warning message from an exception in standard output.
+             * 
+             * @param   exc the exception object whose message will pipe into standard
+             *              output
+             */
+            inline static void warn(const exception &exc) noexcept
+            {
+                // Retreieve the message from the exception and deletage to the templated warn
+                // function.
+                warn(exc.what());
             }
     };
 

@@ -25,6 +25,9 @@ namespace leaf
      */
     class sdl_window : public native_window
     {
+        // The SDL class must be able to create windows.
+        friend class sdl;
+
         private:
             /**
              * @brief   The internal SDL window pointer.

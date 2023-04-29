@@ -27,5 +27,4 @@ namespace utl
         // Set whether ANSI style is enabled.
         f_ansi_style_enabled = enabled;
     }
-
 }

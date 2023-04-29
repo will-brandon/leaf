@@ -16,6 +16,8 @@
 #include <bx/platform.h>
 #include <stdio.h>
 #include <iostream>
+#include "../utils/console.hpp"
+#include "../window/sdl/sdl.hpp"
 #include "../window/sdl/sdlwindow.hpp"
 
 /* Sets constants */
@@ -24,17 +26,30 @@
 #define DELAY 3000
 
 using namespace std;
+using namespace utl;
 using namespace leaf;
 
 void my_window(void)
 {
-    sdl_window w("Leaf Window", 100, 100, 600, 400);
-    cout << w.native_os_name() << "\n";
+    try
+    {
+      cout << sdl::init() << "\n";
+      cout << sdl::init() << "\n";
+      cout << sdl::deinit() << "\n";
+      sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
+      cout << window->native_os_name() << "\n";
+    }
+    catch (const exception &exc)
+    {
+      console::err(exc);
+    }
 }
 
 int main(int argc, char **argv)
 {
   my_window();
+
+  return 0;
 
   /* Initialises data */
   SDL_Window *window = NULL;

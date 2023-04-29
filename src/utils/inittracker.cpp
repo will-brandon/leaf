@@ -40,14 +40,14 @@ namespace utl
         m_did_init = false;
     }
 
-    void init_tracker::assert_init(const string &function_name) const
+    void init_tracker::assert_init(const string &operation) const
     {
         // If the tracker is not in an initialized state, throw an appropriate error that includes
         // the subject and function name.
         if (!m_did_init)
         {
-            throw runtime_error("Attempted to use functionality on a subject, '" + m_subject_name
-                + "', that was never initialized: '" + function_name + "'.");
+            throw runtime_error("Failed to " + operation + ". (" + m_subject_name
+                + " was never initialized)");
         }
     }
 }

@@ -11,8 +11,8 @@
  * @copyright Copyright (c) 2023
  */
 
-#ifndef INIT_TRACKER_H
-#define INIT_TRACKER_H
+#ifndef INIT_TRACKER_H_HEADER_GUARD
+#define INIT_TRACKER_H_HEADER_GUARD
 
 #include <string>
 
@@ -81,11 +81,11 @@ namespace utl
              * @brief   Throws a runtime_error if an initialization has not yet been registered
              *          since construction or since the last deinit.
              * 
-             * @param   function_name   the name of the function that was called
+             * @param   operation   the name of the operation that was attempted
              * 
              * @throw   runtime_error if initialization has not yet been registered
              */
-            void assert_init(const string &function_name) const;
+            void assert_init(const string &operation) const;
     };
 }
 
