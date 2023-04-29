@@ -1,9 +1,9 @@
 /**
- * @file main.cpp
- * @author Will Brandon (brandon.w@northeastern.edu)
- * @brief 
- * @version 1.0
- * @date 4-19-2023
+ * @file    main.cpp
+ * @author  Will Brandon (brandon.w@northeastern.edu)
+ * @date    April 19, 2023
+ * 
+ * @brief   
  * 
  * @copyright Copyright (c) 2023
  */
@@ -16,6 +16,7 @@
 #include <bx/platform.h>
 #include <stdio.h>
 #include <iostream>
+#include "../window/sdl/sdlwindow.hpp"
 
 /* Sets constants */
 #define WIDTH 800
@@ -23,13 +24,20 @@
 #define DELAY 3000
 
 using namespace std;
+using namespace leaf;
+
+void my_window(void)
+{
+    sdl_window w("Leaf Window", 100, 100, 600, 400);
+    cout << w.native_os_name() << "\n";
+}
 
 int main(int argc, char **argv)
 {
+  my_window();
+
   /* Initialises data */
   SDL_Window *window = NULL;
-
-  SDL_Surface* screenSurface = NULL;
   
   /*
    * Initialises the SDL video subsystem (as well as the events subsystem).

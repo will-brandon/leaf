@@ -12,6 +12,16 @@
 #ifndef WINDOW_H_HEADER_GUARD
 #define WINDOW_H_HEADER_GUARD
 
+/**
+ * @brief   The default width of a Leaf window.
+ */
+#define LEAF_WINDOW_DEFAULT_WIDTH 600
+
+/**
+ * @brief   The default height of a Leaf window.
+ */
+#define LEAF_WINDOW_DEFAULT_HEIGHT 400
+
 using namespace std;
 
 namespace leaf
@@ -21,7 +31,7 @@ namespace leaf
      */
     class window
     {
-
+        
     };
 }
 

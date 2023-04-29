@@ -13,8 +13,11 @@
 CC = g++
 CFLAGS = -std=c++17 -O0 -Wall
 
+# Define a path back to the project root.
+PROJECTROOT = ../..
+
 # Define a path the binary object root for the source directory built by this Makefile.
-OBJDIR = ../../build/obj/window
+OBJDIR = $(PROJECTROOT)/build/obj/window
 
 # Get a list of all subdirectories.
 SUBDIRS := $(wildcard */.)
@@ -24,9 +27,9 @@ SRCS := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 
 # Define any includes.
-INCLUDES =	-I ../../libs/bx/include \
-			-I ../../libs/bgfx/include \
-			-I ../../libs/bimg/include
+INCLUDES =	-I $(PROJECTROOT)/libs/bx/include \
+			-I $(PROJECTROOT)/libs/bgfx/include \
+			-I $(PROJECTROOT)/libs/bimg/include
 
 
 # This target is the default. It will create output directories, recursively build any
