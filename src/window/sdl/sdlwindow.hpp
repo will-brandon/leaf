@@ -13,6 +13,7 @@
 #define SDL_WINDOW_H_HEADER_GUARD
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
 #include <bx/platform.h>
 #include "../nativewindow.hpp"
 
@@ -33,6 +34,11 @@ namespace leaf
              * @brief   The internal SDL window pointer.
              */
             SDL_Window *m_internal_window;
+
+            /**
+             * @brief   System information about the internal window.
+             */
+            SDL_SysWMinfo m_system_info;
 
         protected:
             /**
@@ -55,6 +61,11 @@ namespace leaf
              * @throw   runtime_error if an error occurs creating the SDL window
              */
             sdl_window(const string &title, int x, int y, int width, int height);
+
+            /**
+             * @brief   Destroys the SDL window.
+             */
+            virtual ~sdl_window() noexcept;
 
         public:
             /**
@@ -88,11 +99,6 @@ namespace leaf
              * @param   other a separate window object
              */
             sdl_window &operator=(sdl_window &&other) noexcept = delete;
-
-            /**
-             * @brief   Destroys the SDL window.
-             */
-            virtual ~sdl_window() noexcept;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.

@@ -57,7 +57,8 @@ namespace leaf
             static bool init(void);
 
             /**
-             * @brief   Deinitializes SDL.
+             * @brief   Deinitializes SDL. All remaining SDL windows will be automatically
+             *          destroyed.
              * 
              * @return  true if and only if SDL was not already initialized.
              */
@@ -104,6 +105,26 @@ namespace leaf
              */
             static sdl_window *create_window(
                 const string &title, int x, int y, int width, int height);
+            
+            /**
+             * @brief   Destroys an SDL window. If the window pointer is null, nothing happens.
+             * 
+             * @param   window  a pointer to the window to destroy
+             * 
+             * @return  true if and only if the window pointer is not null
+             * 
+             * @throw   runtime_error if SDL is not initialized
+             */
+            static bool destroy_window(sdl_window *window);
+
+            /**
+             * @brief   Destroys all SDL windows.
+             * 
+             * @return  true if and only if there were any windows to destroy
+             * 
+             * @throw   runtime_error if SDL is not initialized
+             */
+            static bool destroy_all_windows(void);
             
             /**
              * @brief   Polls events for all SDL windows. This is necessary to perform windowing

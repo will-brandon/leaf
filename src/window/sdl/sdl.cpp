@@ -59,6 +59,9 @@ namespace leaf
             return false;
         }
 
+        // Destroy all windows that still exist.
+        destroy_all_windows();
+
         // Deinitalizes SDL.
         SDL_Quit();
 
@@ -80,8 +83,14 @@ namespace leaf
         // Ensure that SDL was initialized.
         f_init_tracker.assert_init("create an SDL window");
 
-        // Create a new window on the heap and return a pointer to it.
-        return new sdl_window();
+        // Create a new window on the heap.
+        sdl_window *window = new sdl_window();
+
+        // Begin tracking the window.
+        f_windows.insert(window);
+
+        // Return the window pointer.
+        return window;
     }
 
     sdl_window *sdl::create_window(const string &title, int x, int y, int width, int height)
@@ -89,8 +98,58 @@ namespace leaf
         // Ensure that SDL was initialized.
         f_init_tracker.assert_init("create an SDL window");
 
-        // Create a new window on the heap and return a pointer to it.
-        return new sdl_window(title, x, y, width, height);
+        // Create a new window on the heap.
+        sdl_window *window = new sdl_window(title, x, y, width, height);
+
+        // Begin tracking the window.
+        f_windows.insert(window);
+
+        // Return the window pointer.
+        return window;
+    }
+
+    bool sdl::destroy_window(sdl_window *window)
+    {
+        // Ensure that SDL was initialized.
+        f_init_tracker.assert_init("destroy an SDL window");
+
+        // If the window pointer does not exist, do nothing and return false indicating that no
+        // deletion took place.
+        if (!window)
+        {
+            return false;
+        }
+
+        // Remove the window from the set of tracked windows.
+        f_windows.erase(window);
+
+        // Delete the window.
+        delete window;
+
+        // Return true indicating that the deletion succeeded.
+        return true;
+    }
+
+    bool sdl::destroy_all_windows(void)
+    {
+        // Ensure that SDL was initialized.
+        f_init_tracker.assert_init("destroy all SDL windows");
+        
+        // If there are no registered windows, return false indicating that there are no windows to
+        // delete.
+        if (!window_count())
+        {
+            return false;
+        }
+
+        // Loop through all registered windows and delete them.
+        for (sdl_window *window : f_windows)
+        {
+            delete window;
+        }
+
+        // Return true indicating that at least one window was deleted.
+        return true;
     }
 
     void sdl::poll_events(void)

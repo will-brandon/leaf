@@ -33,11 +33,10 @@ void my_window(void)
 {
     try
     {
-      cout << sdl::init() << "\n";
-      cout << sdl::init() << "\n";
-      cout << sdl::deinit() << "\n";
+      sdl::init();
       sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
-      cout << window->native_os_name() << "\n";
+      sdl::destroy_window(window);
+      sdl::deinit();
     }
     catch (const exception &exc)
     {
