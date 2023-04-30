@@ -17,6 +17,7 @@
 #include <bx/platform.h>
 #include "sdltypes.hpp"
 #include "../nativewindow.hpp"
+#include "../nativewindowtypes.hpp"
 
 using namespace std;
 
@@ -37,9 +38,21 @@ namespace leaf
             SDL_Window *m_internal_window;
 
             /**
-             * @brief   System information about the internal window.
+             * @brief   Internal platform-dependent system information about the window.
              */
             SDL_SysWMinfo m_system_info;
+
+            /**
+             * @brief   Native platform-dependent data about the window.
+             */
+            native_window_data_t m_native_data;
+
+            /**
+             * @brief   Creates the native data for the window.
+             * 
+             * @throw   runtime_error if the operating system is not supported
+             */
+            void init_natives(void);
 
         protected:
             /**
@@ -130,11 +143,13 @@ namespace leaf
             }
 
             /**
-             * @brief   Determines the operating system native handle of the window.
+             * @brief   Returns native platform-dependent data about the window. A null display type
+             *          pointer is acceptable on some systems. However, a null window handle pointer
+             *          indicates that the operating system is not supported.
              * 
-             * @return  The native window handle in the form of a pointer
+             * @return  a structure of native window data
              */
-            void *native_handle(void) const noexcept override;
+            native_window_data_t native_data(void) const noexcept override;
     };
 }
 

@@ -14,6 +14,7 @@
 
 #include <string>
 #include "window.hpp"
+#include "nativewindowtypes.hpp"
 
 using namespace std;
 
@@ -29,16 +30,16 @@ namespace leaf
             /**
              * @brief   Determines the name of the operating system the window resides on.
              * 
-             * @return  The name string of the operating system
+             * @return  the name string of the operating system
              */
             virtual string native_os_name(void) const noexcept = 0;
 
             /**
-             * @brief   Determines the operating system native handle of the window.
+             * @brief   Returns native platform-dependent data about a window.
              * 
-             * @return  The native window handle in the form of a pointer
+             * @return  a structure of native window data
              */
-            virtual void *native_handle(void) const noexcept = 0;
+            virtual native_window_data_t native_data(void) const noexcept = 0;
     };
 }
 
