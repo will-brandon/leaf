@@ -4,7 +4,7 @@
  * @date    May 1, 2023
  * 
  * @brief   Header for an abstract class that represents an interface specification for a graphical
- *          user interface drawing surface.
+ *          user interface display surface.
  * 
  * @copyright Copyright (c) 2023
  */
@@ -17,7 +17,7 @@ using namespace std;
 namespace leaf
 {
     /**
-     * @brief   Represents an interface specification for a graphical user interface drawing
+     * @brief   Represents an interface specification for a graphical user interface display
      *          surface.
      */
     class surface_i

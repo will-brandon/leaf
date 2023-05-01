@@ -1,5 +1,5 @@
 /**
- * @file    sdl.hpp
+ * @file    sdl_types.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 29, 2023
  * 

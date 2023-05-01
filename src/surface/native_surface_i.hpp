@@ -4,7 +4,7 @@
  * @date    April 28, 2023
  * 
  * @brief   Header for an abstract class that represents an interface specification for a graphical
- *          user interface drawing surface native to the operating system it resides on.
+ *          user interface display surface native to the operating system it resides on.
  * 
  * @copyright Copyright (c) 2023
  */
@@ -21,7 +21,7 @@ using namespace std;
 namespace leaf
 {
     /**
-     * @brief   Represents an interface specification for a graphical user interface drawing surface
+     * @brief   Represents an interface specification for a graphical user interface display surface
      *          native to the operating system it resides on.
      */
     class native_surface_i : public surface_i

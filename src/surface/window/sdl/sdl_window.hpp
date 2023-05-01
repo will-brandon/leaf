@@ -1,10 +1,11 @@
 /**
- * @file    sdlwindow.hpp
+ * @file    sdl_window.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 28, 2023
  * 
  * @brief   Header for a class that represents a graphical user interface window implemented with
- *          SDL.
+ *          SDL. A window is immediately alive (open) upon its object's construction, however, it
+ *          may be closed before its object's destruction.
  *
  * @copyright Copyright (c) 2023
  */
@@ -15,23 +16,36 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <bx/platform.h>
-#include "sdltypes.hpp"
-#include "../nativewindow.hpp"
-#include "../nativewindowtypes.hpp"
+#include "../../native_surface_i.hpp"
+#include "../nonatomic_window_i.hpp"
+#include "sdl_types.hpp"
 
 using namespace std;
 
 namespace leaf
 {
     /**
-     * @brief   Represents an interface specification for a graphical user interface window.
+     * @brief   Represents a graphical user interface window implemented with SDL. A window is
+     *          immediately alive (open) upon its object's construction, however, it may be closed
+     *          before its object's destruction.
      */
-    class sdl_window : public native_window
+    class sdl_window : public native_surface_i, public nonatomic_window_i
     {
-        // The SDL class must be able to create and destroy windows.
+        // The SDL manager class must be able to create and destroy windows.
         friend class sdl;
 
         private:
+            /**
+             * @brief   Denotes whether the window is alive (open) or dead (closed) represented by
+             *          the values true or false respectively.
+             */
+            bool m_is_alive;
+
+            /**
+             * @brief   Denotes whether the window should close the next time events are polled.
+             */
+            bool m_should_close;
+
             /**
              * @brief   The internal SDL window pointer.
              */
@@ -43,12 +57,12 @@ namespace leaf
             SDL_SysWMinfo m_system_info;
 
             /**
-             * @brief   Native platform-dependent data about the window.
+             * @brief   Native platform-dependent data about the window's display surface.
              */
-            native_window_data_t m_native_data;
+            native_surface_data_t m_native_data;
 
             /**
-             * @brief   Creates the native data for the window.
+             * @brief   Creates the native data for the window's display surface.
              * 
              * @throw   runtime_error if the operating system is not supported
              */

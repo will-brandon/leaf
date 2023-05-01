@@ -51,7 +51,7 @@ namespace leaf
              * 
              * @throw   exception if an error occurs determining if the window should close
              */
-            bool should_close(void) const;
+            virtual bool should_close(void) const = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the
@@ -62,34 +62,6 @@ namespace leaf
              * @throw   exception if an error occurs polling window events
              */
             virtual bool poll_events(void) = 0;
-
-            /**
-             * @brief   Determines whether the window will automatically enable the close flag when
-             *          the user performs a close action on the user interface (This is often in
-             *          the form of clicking a red 'x' button).
-             * 
-             * @return  true if and only if the window will automatically enable the close flag when
-             *          the user performs a close action
-             * 
-             * @throw   exception if an error occurs determining whether the window will
-             *          automatically enable the close flag
-             */
-            virtual bool is_user_closable(void) const noexcept = 0;
-
-            /**
-             * @brief   Sets whether the window will automatically enable the close flag when the
-             *          user performs a close action on the user interface (This is often in the
-             *          form of clicking a red 'x' button).
-             * 
-             * @param   is_user_closable    a true value indicates that the window should
-             *                              automatically enable the close flag
-             * 
-             * @return  the previous value of the user closable option prior to setting
-             * 
-             * @throw   exception if an error occurs setting whether the window will automatically
-             *          enable the close flag
-             */
-            virtual bool set_user_closable(bool is_user_closable) noexcept = 0;
     };
 }
 

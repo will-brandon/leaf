@@ -1,5 +1,5 @@
 /**
- * @file    sdl.hpp
+ * @file    sdl_types.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 29, 2023
  * 
@@ -9,7 +9,7 @@
  */
 
 #include <sstream>
-#include "sdltypes.hpp"
+#include "sdl_types.hpp"
 
 using namespace std;
 

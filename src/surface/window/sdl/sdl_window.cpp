@@ -1,15 +1,16 @@
 /**
- * @file    sdlwindow.cpp
+ * @file    sdl_window.cpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 28, 2023
  * 
  * @brief   Implementation for a class that represents a graphical user interface window implemented
- *          with SDL.
+ *          with SDL. A window is immediately alive (open) upon its object's construction, however,
+ *          it may be closed before its object's destruction.
  *
  * @copyright Copyright (c) 2023
  */
 
-#include "sdlwindow.hpp"
+#include "sdl_window.hpp"
 
 using namespace std;
 
