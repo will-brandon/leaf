@@ -35,7 +35,9 @@ void my_window(void)
     {
       sdl::init();
       sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
-      cout << window->native_data().handle << "\n";
+      cout << window->is_alive() << '\n';
+      window->close();
+      cout << window->is_alive() << '\n';
       sdl::destroy_window(window);
       sdl::deinit();
     }

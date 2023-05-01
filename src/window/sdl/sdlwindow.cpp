@@ -70,7 +70,7 @@ namespace leaf
         ) {}
 
     sdl_window::sdl_window(const string &title, int x, int y, int width, int height)
-        : m_internal_window(NULL)
+        : m_internal_window(NULL), m_is_alive(true), m_should_close(false)
     {
         // Create an SDL window and store the pointer to it.
         m_internal_window = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_INIT_VIDEO);
@@ -99,8 +99,39 @@ namespace leaf
 
     sdl_window::~sdl_window() noexcept
     {
-        // Destroys the SDL window.
+        // Ensure that the internal window is destroyed.
+        close();
+    }
+
+    bool sdl_window::should_close(void) const noexcept
+    {
+        // Return the flag denoting whether the window should close.
+        return m_should_close;
+    }
+
+    bool sdl_window::is_alive(void) const noexcept
+    {
+        // Return the flag denoting whether the window is alive.
+        return m_is_alive;
+    }
+
+    bool sdl_window::close(void) noexcept
+    {
+        // If the window has already been closed, do nothing and return false indicating that no
+        // close was needed.
+        if (!m_is_alive)
+        {
+            return false;
+        }
+        
+        // Destroy the SDL window.
         SDL_DestroyWindow(m_internal_window);
+
+        // Update the alive flag indicating that the window is now closed.
+        m_is_alive = false;
+
+        // Return true indicating that the window was successfully closed.
+        return true;
     }
 
     native_window_data_t sdl_window::native_data(void) const noexcept

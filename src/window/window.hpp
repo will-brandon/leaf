@@ -31,7 +31,22 @@ namespace leaf
      */
     class window
     {
+        /**
+         * @brief   Determines whether the window is alive (as opposed to being closed).
+         * 
+         * @return  true if and only if the window is not closed.
+         */
+        virtual bool is_alive(void) const noexcept = 0;
         
+        /**
+         * @brief   Informs the window that it should close. Note that this does not guaruntee an
+         *          immediate close. Depending on implementation, this may necessitate other events
+         *          to perform a close. For instance, some implementations will require window
+         *          library events to be polled to recognize that a close should take place.
+         * 
+         * @return  true if and only if the window was not already closed
+         */
+        virtual bool close(void) noexcept = 0;
     };
 }
 

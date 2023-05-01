@@ -57,14 +57,18 @@ namespace leaf
         protected:
             /**
              * @brief   Creates an SDL window. The title, position, and size are set to default
-             *          values.
+             *          values. When the window is created it is immediately active. Assuming that
+             *          it is visible and SDL events are polled, it will begin displaying upon
+             *          creation.
              * 
              * @throw   runtime_error if an error occurs creating the SDL window
              */
             sdl_window(void);
 
             /**
-             * @brief   Creates an SDL window.
+             * @brief   Creates an SDL window. When the window is created it is immediately active.
+             *          Assuming that it is visible and SDL events are polled, it will begin
+             *          displaying upon creation.
              * 
              * @param   title   the title bar content string
              * @param   x       the initial x-position
@@ -119,7 +123,7 @@ namespace leaf
              * 
              * @return  a structure containing components comprising the version of SDL being used
              */
-            inline static sdl_version_t sdl_version(void) noexcept
+            inline sdl_version_t sdl_version(void) const noexcept
             {
                 // Create a version structure.
                 sdl_version_t version;
