@@ -1,5 +1,5 @@
 /**
- * @file    inittracker.cpp
+ * @file    init_tracker.cpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    February 6, 2023
  * 
@@ -12,7 +12,7 @@
  */
 
 #include <stdexcept>
-#include "inittracker.hpp"
+#include "init_tracker.hpp"
 
 using namespace std;
 

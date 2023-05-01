@@ -1,10 +1,10 @@
 /**
- * @file    surfacei.hpp
+ * @file    surface_i.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    May 1, 2023
  * 
- * @brief   Header for a class that represents an interface specification for a graphical user
- *          interface drawing surface.
+ * @brief   Header for an abstract class that represents an interface specification for a graphical
+ *          user interface drawing surface.
  * 
  * @copyright Copyright (c) 2023
  */

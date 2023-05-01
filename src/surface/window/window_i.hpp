@@ -1,10 +1,11 @@
 /**
- * @file    windowi.hpp
+ * @file    window_i.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 28, 2023
  * 
- * @brief   Header for a class that represents an interface specification for a graphical user
- *          interface window.
+ * @brief   Header for an abstract class that represents an interface specification for a graphical
+ *          user interface window. A window is immediately alive (open) upon its object's
+ *          construction, however, it may be closed before its object's destruction.
  *
  * @copyright Copyright (c) 2023
  */
@@ -12,7 +13,7 @@
 #ifndef WINDOW_I_H_HEADER_GUARD
 #define WINDOW_I_H_HEADER_GUARD
 
-#include "../usermutablesurfacei.hpp"
+#include "../user_mutable_surface_i.hpp"
 
 /**
  * @brief   The default width of a Leaf window.
@@ -29,7 +30,9 @@ using namespace std;
 namespace leaf
 {
     /**
-     * @brief   Represents an interface specification for a graphical user interface window.
+     * @brief   Represents an interface specification for a graphical user interface window. A
+     *          window is immediately alive (open) upon its object's construction, however, it may
+     *          be closed before its object's destruction.
      */
     class window_i : public user_mutable_surface_i
     {

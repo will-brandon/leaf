@@ -1,10 +1,10 @@
 /**
- * @file    nativesurfacei.hpp
+ * @file    native_surface_i.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 28, 2023
  * 
- * @brief   Header for a class that represents an interface specification for a graphical user
- *          interface drawing surface native to the operating system it resides on.
+ * @brief   Header for an abstract class that represents an interface specification for a graphical
+ *          user interface drawing surface native to the operating system it resides on.
  * 
  * @copyright Copyright (c) 2023
  */
@@ -13,8 +13,8 @@
 #define NATIVE_SURFACE_I_H_HEADER_GUARD
 
 #include <string>
-#include "surfacei.hpp"
-#include "nativesurfacetypes.hpp"
+#include "surface_i.hpp"
+#include "native_surface_types.hpp"
 
 using namespace std;
 

@@ -1,13 +1,14 @@
 /**
- * @file    nonatomicwindowi.hpp
+ * @file    nonatomic_window_i.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    May 1, 2023
  * 
- * @brief   Header for a class that represents an interface specification for a graphical user
- *          interface window that is managed by multiple threads. This results in a need for
+ * @brief   Header for an abstract class that represents an interface specification for a graphical
+ *          user interface window that is managed by multiple threads. This results in a need for
  *          correspondence between threads, often a window driver thread and a graphics thread. This
  *          interaction occurs in the form of polling events that need updating and using flags to
- *          indicate necessary actions such as closing.
+ *          indicate necessary actions such as closing. A window is immediately alive (open) upon
+ *          its object's construction, however, it may be closed before its object's destruction.
  * 
  * @copyright Copyright (c) 2023
  */
@@ -15,7 +16,7 @@
 #ifndef NONATOMIC_WINDOW_I_H_HEADER_GUARD
 #define NONATOMIC_WINDOW_I_H_HEADER_GUARD
 
-#include "windowi.hpp"
+#include "window_i.hpp"
 
 using namespace std;
 
@@ -26,7 +27,8 @@ namespace leaf
      *          managed by multiple threads. This results in a need for correspondence between
      *          threads, often a window driver thread and a graphics thread. This interaction occurs
      *          in the form of polling events that need updating and using flags to indicate
-     *          necessary actions such as closing.
+     *          necessary actions such as closing. A window is immediately alive (open) upon its
+     *          object's construction, however, it may be closed before its object's destruction.
      */
     class nonatomic_window_i : public window_i
     {

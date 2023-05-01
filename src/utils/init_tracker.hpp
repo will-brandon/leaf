@@ -1,5 +1,5 @@
 /**
- * @file    inittracker.hpp
+ * @file    init_tracker.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    February 6, 2023
  * 

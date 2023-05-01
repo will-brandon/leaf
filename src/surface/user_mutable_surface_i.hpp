@@ -1,11 +1,12 @@
 /**
- * @file    usermutablesurfacei.hpp
+ * @file    user_mutable_surface_i.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    May 1, 2023
  * 
- * @brief   Header for a class that represents an interface specification for a user-mutable
- *          graphical user interface drawing surface. It is user-mutable in the sense that it may be
- *          repositioned or resized by user interaction such as clicking and dragging the mouse.
+ * @brief   Header for an abstract class that represents an interface specification for a
+ *          user-mutable graphical user interface drawing surface. It is user-mutable in the sense
+ *          that it may be repositioned or resized by user interaction such as clicking and dragging
+ *          the mouse.
  * 
  * @copyright Copyright (c) 2023
  */
@@ -13,7 +14,7 @@
 #ifndef USER_MUTABLE_SURFACE_I_H_HEADER_GUARD
 #define USER_MUTABLE_SURFACE_I_H_HEADER_GUARD
 
-#include "mutablesurfacei.hpp"
+#include "mutable_surface_i.hpp"
 
 using namespace std;
 
