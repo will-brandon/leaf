@@ -1,5 +1,5 @@
 /**
- * @file    window.hpp
+ * @file    windowi.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    April 28, 2023
  * 
@@ -9,18 +9,20 @@
  * @copyright Copyright (c) 2023
  */
 
-#ifndef WINDOW_H_HEADER_GUARD
-#define WINDOW_H_HEADER_GUARD
+#ifndef WINDOW_I_H_HEADER_GUARD
+#define WINDOW_I_H_HEADER_GUARD
+
+#include "../usermutablesurfacei.hpp"
 
 /**
  * @brief   The default width of a Leaf window.
  */
-#define LEAF_WINDOW_DEFAULT_WIDTH 600
+#define LEAF_WINDOW_DEFAULT_WIDTH (int)600
 
 /**
  * @brief   The default height of a Leaf window.
  */
-#define LEAF_WINDOW_DEFAULT_HEIGHT 400
+#define LEAF_WINDOW_DEFAULT_HEIGHT (int)400
 
 using namespace std;
 
@@ -29,12 +31,12 @@ namespace leaf
     /**
      * @brief   Represents an interface specification for a graphical user interface window.
      */
-    class window
+    class window_i : public user_mutable_surface_i
     {
         /**
          * @brief   Determines whether the window is alive (as opposed to being closed).
          * 
-         * @return  true if and only if the window is not closed.
+         * @return  true if and only if the window is not closed
          */
         virtual bool is_alive(void) const noexcept = 0;
         

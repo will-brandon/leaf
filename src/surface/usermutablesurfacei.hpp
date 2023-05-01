@@ -40,8 +40,7 @@ namespace leaf
              * @param   is_user_movable whether the user can interact with the surface to
              *                          reposition it
              * 
-             * @return  true if and only if the user was previously able to interact with the
-             *          surface to reposition it before this action
+             * @return  the previous value of the user movable option prior to setting
              */
             virtual bool set_user_movable(bool is_user_movable) = 0;
 
@@ -58,8 +57,7 @@ namespace leaf
              * @param   is_user_resizable   whether the user can interact with the surface to resize
              *                              it
              * 
-             * @return  true if and only if the user was previously able to interact with the
-             *          surface to resize it before this action
+             * @return  the previous value of the user resizable option prior to setting
              */
             virtual bool set_user_resizable(bool is_user_resizable) = 0;
     };
