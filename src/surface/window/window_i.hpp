@@ -13,7 +13,7 @@
 #ifndef WINDOW_I_H_HEADER_GUARD
 #define WINDOW_I_H_HEADER_GUARD
 
-#include "../user_mutable_surface_i.hpp"
+#include "../framed_surface_i.hpp"
 
 /**
  * @brief   The default width of a Leaf window.
@@ -34,7 +34,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class window_i : public user_mutable_surface_i
+    class window_i : public framed_surface_i
     {
         /**
          * @brief   Determines whether the window is alive (as opposed to being closed).

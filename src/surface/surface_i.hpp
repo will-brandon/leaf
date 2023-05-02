@@ -24,28 +24,6 @@ namespace leaf
     {
         public:
             /**
-             * @brief   Determines the x-position of the surface in pixels. The coordinates are
-             *          cartesian and originate from the upper left corner of the monitor that the
-             *          surface primarily resides in.
-             * 
-             * @return  the x-position of the surface in pixels
-             * 
-             * @throw   exception if an error occured retrieving the x-position
-             */
-            virtual int x(void) const = 0;
-
-            /**
-             * @brief   Determines the y-position of the surface in pixels. The coordinates are
-             *          cartesian and originate from the upper left corner of the monitor that the
-             *          surface primarily resides in.
-             * 
-             * @return  the y-position of the surface in pixels
-             * 
-             * @throw   exception if an error occured retrieving the y-position
-             */
-            virtual int y(void) const = 0;
-
-            /**
              * @brief   Determines the width of the surface in pixels.
              * 
              * @return  the width of the surface in pixels
@@ -62,6 +40,39 @@ namespace leaf
              * @throw   exception if an error occured retrieving the height
              */
             virtual int height(void) const = 0;
+
+            /**
+             * @brief   Sets the width of the surface in pixels. The height is not affected.
+             * 
+             * @param   width   the new width of the surface in pixels
+             * 
+             * @return  the original width of the surface in pixels prior to this action
+             * 
+             * @throw   exception if an error occured setting the width
+             */
+            virtual int set_width(int width) = 0;
+
+            /**
+             * @brief   Sets the height of the surface in pixels. The width is not affected.
+             * 
+             * @param   height   the new height of the surface in pixels
+             * 
+             * @return  the original height of the surface in pixels prior to this action
+             * 
+             * @throw   exception if an error occured setting the height
+             */
+            virtual int set_height(int height) = 0;
+
+            /**
+             * @brief   Sets the size of the surface in pixels. Both the width and height are
+             *          affected.
+             * 
+             * @param   width   the new width of the surface in pixels
+             * @param   height  the new height of the surface in pixels
+             * 
+             * @throw   exception if an error occured setting the size
+             */
+            virtual void set_size(int width, int height) = 0;
 
             /**
              * @brief   Determines the dimensional aspect ratio (width/height) of the surface.
@@ -86,6 +97,21 @@ namespace leaf
              *          visible
              */
             virtual bool is_visible(void) const = 0;
+
+            /**
+             * @brief   Sets whether the surface is currently visible on the user's display. A true
+             *          value will make the surface visible while a false value will hide the
+             *          surface. This will only account for whether the surface is active and
+             *          visible in a computational sense. For instance, in the case of windows,
+             *          z-overlapping or minimization may cause the surface to appear out of view.
+             *          These cases are not congruent with the functionality of this action. Be sure
+             *          to check implementation details for further clarification.
+             * 
+             * @return  whether the surface was visible prior to this action
+             * 
+             * @throw   exception if an error occured setting the visibility of the surface
+             */
+            virtual bool set_visible(bool is_visible) = 0;
     };
 }
 
