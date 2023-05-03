@@ -17,7 +17,7 @@ CFLAGS = -std=c++17 -O0 -Wall
 PROJECTROOT = ../../../..
 
 # Define a path the binary object root for the source directory built by this Makefile.
-OBJDIR = $(PROJECTROOT)/build/obj/surface/window/sdl
+OBJDIR = $(PROJECTROOT)/build/obj/graphics/surface/window
 
 # Get a list of all subdirectories.
 SUBDIRS := $(wildcard */.)

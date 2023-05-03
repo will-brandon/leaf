@@ -36,7 +36,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured retrieving the x-position
              */
-            virtual int x(void) const = 0;
+            virtual px_t x(void) const = 0;
 
             /**
              * @brief   Determines the y-position of the surface in pixels. The coordinates are
@@ -47,7 +47,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured retrieving the y-position
              */
-            virtual int y(void) const = 0;
+            virtual px_t y(void) const = 0;
 
             /**
              * @brief   Sets the x-position of the surface in pixels. The y-position is not
@@ -60,7 +60,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured setting the x-position
              */
-            virtual int set_x(int x) = 0;
+            virtual px_t set_x(px_t x) = 0;
 
             /**
              * @brief   Sets the y-position of the surface in pixels. The x-position is not
@@ -73,7 +73,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured setting the y-position
              */
-            virtual int set_y(int y) = 0;
+            virtual px_t set_y(px_t y) = 0;
 
             /**
              * @brief   Sets the position of the surface in pixels. Both the x-position and
@@ -81,11 +81,11 @@ namespace leaf
              *          the upper left corner of the monitor that the surface primarily resides in.
              * 
              * @param   x   the new x-position of the surface in pixels
-             * @param   y  the new y-position of the surface in pixels
+             * @param   y   the new y-position of the surface in pixels
              * 
              * @throw   exception if an error occured setting the position
              */
-            virtual void set_position(int x, int y) = 0;
+            virtual void set_position(px_t x, px_t y) = 0;
     };
 }
 

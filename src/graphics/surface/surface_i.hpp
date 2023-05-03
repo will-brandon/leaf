@@ -12,6 +12,8 @@
 #ifndef SURFACE_I_H_HEADER_GUARD
 #define SURFACE_I_H_HEADER_GUARD
 
+#include "../graphics_types.hpp"
+
 using namespace std;
 
 namespace leaf
@@ -30,7 +32,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured retrieving the width
              */
-            virtual int width(void) const = 0;
+            virtual px_t width(void) const = 0;
 
             /**
              * @brief   Determines the height of the surface in pixels.
@@ -39,7 +41,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured retrieving the height
              */
-            virtual int height(void) const = 0;
+            virtual px_t height(void) const = 0;
 
             /**
              * @brief   Sets the width of the surface in pixels. The height is not affected.
@@ -50,7 +52,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured setting the width
              */
-            virtual int set_width(int width) = 0;
+            virtual px_t set_width(px_t width) = 0;
 
             /**
              * @brief   Sets the height of the surface in pixels. The width is not affected.
@@ -61,7 +63,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured setting the height
              */
-            virtual int set_height(int height) = 0;
+            virtual px_t set_height(px_t height) = 0;
 
             /**
              * @brief   Sets the size of the surface in pixels. Both the width and height are
@@ -72,7 +74,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured setting the size
              */
-            virtual void set_size(int width, int height) = 0;
+            virtual void set_size(px_t width, px_t height) = 0;
 
             /**
              * @brief   Determines the dimensional aspect ratio (width/height) of the surface.
