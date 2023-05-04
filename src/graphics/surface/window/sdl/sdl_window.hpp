@@ -303,6 +303,112 @@ namespace leaf
             void set_position(px_t x, px_t y) noexcept override;
 
             /**
+             * @brief   Determines whether the user can interact with the window's frame to
+             *          reposition it.
+             * 
+             * @return  true if and only if the user can interact with the frame to reposition it
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            bool is_user_movable(void) const noexcept override;
+            
+            /**
+             * @brief   Sets whether the user can interact with the window's frame to reposition it.
+             * 
+             * @param   is_user_movable whether the user can interact with the frame to
+             *                          reposition it
+             * 
+             * @return  the previous value of the user movable option prior to setting
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            bool set_user_movable(bool is_user_movable) noexcept override;
+
+            /**
+             * @brief   Determines whether the user can interact with the window's frame to resize
+             *          it.
+             * 
+             * @return  true if and only if the user can interact with the frame to resize it
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            bool is_user_resizable(void) const noexcept override;
+
+            /**
+             * @brief   Sets whether the user can interact with the window's frame to resize it.
+             * 
+             * @param   is_user_resizable   whether the user can interact with the frame to resize
+             *                              it
+             * 
+             * @return  the previous value of the user resizable option prior to setting
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            bool set_user_resizable(bool is_user_resizable) noexcept override;
+
+            /**
+             * @brief   Determines whether the window is alive (as opposed to being closed).
+             * 
+             * @return  true if and only if the window is not closed
+             */
+            bool is_alive(void) const noexcept override;
+        
+            /**
+             * @brief   Informs the window that it should close. Note that this does not guaruntee
+             *          an immediate close. SDL events must be polled to recognize that a close
+             *          should take place.
+             * 
+             * @return  true if and only if the window was not already closed (or flagged to close)
+             */
+            bool close(void) noexcept override;
+
+            /**
+             * @brief   Determines whether the window will automatically enable the close flag when
+             *          the user activates the close button on the frame.
+             * 
+             * @return  true if and only if the window will automatically enable the close flag when
+             *          the user activates the close button
+             */
+            bool is_user_closable(void) const noexcept override;
+
+            /**
+             * @brief   Sets whether the window will automatically enable the close flag when the
+             *          user activates the close button on the frame.
+             * 
+             * @param   is_user_closable    a true value indicates that the window should
+             *                              automatically enable the close flag
+             * 
+             * @return  the previous value of the user closable option prior to setting
+             */
+            bool set_user_closable(bool is_user_closable) noexcept override;
+
+            /**
+             * @brief   Determines the title of the window displayed on the frame.
+             * 
+             * @return  the title of the window
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            string title(void) const noexcept override;
+
+            /**
+             * @brief   Sets the title of the window displayed on the frame.
+             * 
+             * @param   title   the title of the window
+             * 
+             * @return  the previous title prior to setting
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            string set_title(const string &title) const noexcept override;
+
+            /**
              * @brief   Determines the name of the operating system the window resides on.
              * 
              * @return  The name string of the operating system
@@ -314,11 +420,11 @@ namespace leaf
             }
 
             /**
-             * @brief   Returns native platform-dependent data about the window. A null display type
-             *          pointer is acceptable on some systems. However, a null window handle pointer
-             *          indicates that the operating system is not supported.
+             * @brief   Returns native platform-dependent data about the window's display surface.
+             *          A null display type pointer is acceptable on some systems. However, a null
+             *          handle pointer indicates that the operating system is not supported.
              * 
-             * @return  a structure of native window data
+             * @return  a structure of native surface data
              */
             native_surface_data_t native_data(void) const noexcept override;
 

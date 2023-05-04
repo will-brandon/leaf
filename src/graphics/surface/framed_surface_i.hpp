@@ -26,36 +26,48 @@ namespace leaf
     {
         public:
             /**
-             * @brief   Determines whether the user can interact with the surface to reposition it.
+             * @brief   Determines whether the user can interact with the surface's frame to
+             *          reposition it.
              * 
-             * @return  true if and only if the user can interact with the surface to reposition it
+             * @return  true if and only if the user can interact with the frame to reposition it
+             * 
+             * @throw   exception if an error occured setting whether the user can move the frame
              */
             virtual bool is_user_movable(void) const = 0;
             
             /**
-             * @brief   Sets whether the user can interact with the surface to reposition it.
+             * @brief   Sets whether the user can interact with the surface's frame to reposition
+             *          it.
              * 
-             * @param   is_user_movable whether the user can interact with the surface to
+             * @param   is_user_movable whether the user can interact with the frame to
              *                          reposition it
              * 
              * @return  the previous value of the user movable option prior to setting
+             * 
+             * @throw   exception if an error occured setting whether the user can move the frame
              */
             virtual bool set_user_movable(bool is_user_movable) = 0;
 
             /**
-             * @brief   Determines whether the user can interact with the surface to resize it.
+             * @brief   Determines whether the user can interact with the surface's frame to resize
+             *          it.
              * 
-             * @return  true if and only if the user can interact with the surface to resize it
+             * @return  true if and only if the user can interact with the frame to resize it
+             * 
+             * @throw   exception if an error occured determining whether the frame is user
+             *          resizable
              */
             virtual bool is_user_resizable(void) const = 0;
 
             /**
-             * @brief   Sets whether the user can interact with the surface to resize it.
+             * @brief   Sets whether the user can interact with the surface's frame to resize it.
              * 
-             * @param   is_user_resizable   whether the user can interact with the surface to resize
+             * @param   is_user_resizable   whether the user can interact with the frame to resize
              *                              it
              * 
              * @return  the previous value of the user resizable option prior to setting
+             * 
+             * @throw   exception if an error occured setting whether the frame is user resizable
              */
             virtual bool set_user_resizable(bool is_user_resizable) = 0;
     };
