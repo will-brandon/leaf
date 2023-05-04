@@ -13,7 +13,8 @@
 #ifndef WINDOW_I_H_HEADER_GUARD
 #define WINDOW_I_H_HEADER_GUARD
 
-#include "../framed_surface_i.hpp"
+#include <string>
+#include "../graphics/surface/framed_surface_i.hpp"
 
 /**
  * @brief   The default width of a Leaf window.

@@ -2,7 +2,7 @@
 #
 # Type:		GNU Makefile
 # Author:	Will Brandon
-# Date:		Apr 28, 2023
+# Date:		April 28, 2023
 #
 # Recursively builds the source code for the entire project.
 #
@@ -17,7 +17,7 @@ CFLAGS = -std=c++17 -O0 -Wall
 PROJECTROOT = ../../../..
 
 # Define a path the binary object root for the source directory built by this Makefile.
-OBJDIR = $(PROJECTROOT)/build/obj/graphics/surface/window
+OBJDIR = $(PROJECTROOT)/build/obj/window/managed/sdl
 
 # Get a list of all subdirectories.
 SUBDIRS := $(wildcard */.)
