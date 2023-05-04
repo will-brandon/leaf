@@ -99,6 +99,15 @@ namespace leaf
              */
             virtual ~sdl_window() noexcept;
 
+            /**
+             * @brief   Destroys the window (deallocates internal SDL functionality and deems it
+             *          dead and therefore closed). If the window was already closed, nothing
+             *          happens.
+             * 
+             * @return  true if and only if the window was not already dead (closed)
+             */
+            bool destroy(void) noexcept override;
+
         public:
             /**
              * @brief   An SDL window should not be copied as this copy would be shallow. Therefore
@@ -407,6 +416,21 @@ namespace leaf
              *          likely.
              */
             string set_title(const string &title) const noexcept override;
+
+            /**
+             * @brief   Determines whether the window should close the next time events are polled.
+             * 
+             * @return  true if the window should close
+             */
+            bool should_close(void) const noexcept override;
+
+            /**
+             * @brief   Performs any necessary updates for the window. This includes closing the
+             *          window if a close was requested. If the window is closed, nothing happens.
+             * 
+             * @return  true if and only if the window is active (has not been closed)
+             */
+            bool poll_events(void) noexcept override;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.
