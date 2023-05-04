@@ -79,18 +79,24 @@ namespace leaf
             /**
              * @brief   Determines the dimensional aspect ratio (width/height) of the surface.
              * 
+             * @note    A default implementation is provided.
+             * 
              * @return  the aspect ratio of the surface
              * 
              * @throw   exception if an error occured retrieving the aspect ratio
              */
-            virtual double aspect_ratio(void) const = 0;
+            virtual inline double aspect_ratio(void) const
+            {
+                // Divide the with of the surface by the height of the surface.
+                return (double)width() / (double)height();
+            }
 
             /**
              * @brief   Determines whether the surface is currently visible on the user's display.
-             *          This will only account for whether the surface is active and visible in a
-             *          computational sense. For instance, in the case of windows, z-overlapping or
-             *          minimization may cause the surface to appear out of view. These cases will
-             *          not be considered hidden. Be sure to check implementation details for
+             *          This will only account for whether the surface is visible in an absolute
+             *          sense. For instance, in the case of windows, z-overlapping or minimization
+             *          may cause the surface to appear out of view. These cases will not be
+             *          considered hidden. Be sure to check implementation details for
              *          further clarification.
              * 
              * @return  whether the surface is currently visible
@@ -103,11 +109,10 @@ namespace leaf
             /**
              * @brief   Sets whether the surface is currently visible on the user's display. A true
              *          value will make the surface visible while a false value will hide the
-             *          surface. This will only account for whether the surface is active and
-             *          visible in a computational sense. For instance, in the case of windows,
-             *          z-overlapping or minimization may cause the surface to appear out of view.
-             *          These cases are not congruent with the functionality of this action. Be sure
-             *          to check implementation details for further clarification.
+             *          surface. This will only account for whether the surface is visible in an
+             *          absolute sense. For instance, in the case of windows, z-overlapping or
+             *          minimization may cause the surface to appear out of view. These cases are
+             *          not congruent with the functionality of this action.
              * 
              * @return  whether the surface was visible prior to this action
              * 
