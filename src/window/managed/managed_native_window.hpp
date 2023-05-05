@@ -1,43 +1,38 @@
 /**
- * @file    managed_window.hpp
+ * @file    managed_native_window.hpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    May 4, 2023
  * 
  * @brief   Header for an abstract class that represents a graphical user interface window that is
- *          managed by a window manager. A window is immediately alive (open) upon its object's
- *          construction, however, it may be closed before its object's destruction.
+ *          managed by a window manager and has a native handle for the underlying operating system.
+ *          A window is immediately alive (open) upon its object's construction, however, it may be
+ *          closed before its object's destruction.
  *
  * @copyright Copyright (c) 2023
  */
 
-#ifndef MANAGED_WINDOW_H_HEADER_GUARD
-#define MANAGED_WINDOW_H_HEADER_GUARD
+#ifndef MANAGED_NATIVE_WINDOW_H_HEADER_GUARD
+#define MANAGED_NATIVE_WINDOW_H_HEADER_GUARD
 
-#include "../../graphics/surface/native_surface_i.hpp"
-#include "../nonatomic_window_i.hpp"
+#include "managed_window.hpp"
 
 using namespace std;
 
 namespace leaf
 {
     /**
-     * @brief   Represents a graphical user interface window that is managed by a window manager. A
-     *          window is immediately alive (open) upon its object's construction, however, it may
-     *          be closed before its object's destruction.
+     * @brief   Represents a graphical user interface window that is managed by a window manager and
+     *          has a native handle for the underlying operating system. A window is immediately
+     *          alive (open) upon its object's construction, however, it may be closed before its
+     *          object's destruction.
      */
-    class managed_window : public nonatomic_window_i
+    class managed_native_window : public managed_window, public native_surface_i
     {
         private:
             /**
-             * @brief   Denotes whether the window is alive (open) or dead (closed) represented by
-             *          the values true or false respectively.
+             * @brief   Native platform-dependent data about the window's display surface.
              */
-            bool m_is_alive;
-
-            /**
-             * @brief   Denotes whether the window can be closed by the user.
-             */
-            bool m_is_user_closable;
+            native_surface_data_t m_native_data;
 
         protected:
             /**
@@ -48,30 +43,19 @@ namespace leaf
              * 
              * @throw   runtime_error if an error occurs creating the window
              */
-            managed_window(void);
+            managed_native_window(void);
 
             /**
              * @brief   Destructs the window object.
              */
-            virtual ~managed_window() noexcept;
+            virtual ~managed_native_window() noexcept;
 
             /**
-             * @brief   Destroys the window (deallocates internal functionality and deems it dead
-             *          and therefore closed). If the window was already closed, nothing happens.
+             * @brief   Creates the native data for the window's display surface.
              * 
-             * @return  true if and only if the window was not already dead (closed)
+             * @throw   runtime_error if the operating system is not supported
              */
-            virtual bool destroy(void) noexcept override = 0;
-
-            /**
-             * @brief   Sets the flag indicating whether the window should close the next time
-             *          events are polled.
-             * 
-             * @param   should_close  true if the window should close, false if it should not close
-             * 
-             * @return  the previous value of the should close flag prior to setting
-             */
-            virtual bool set_should_close(bool should_close) noexcept override;
+            virtual void init_natives(void) = 0;
 
         public:
             /**
@@ -281,7 +265,11 @@ namespace leaf
              * 
              * @return  true if and only if the window is not closed
              */
-            virtual bool is_alive(void) const noexcept override;
+            virtual bool is_alive(void) const noexcept override
+            {
+                // Return the flag denoting whether the window is alive.
+                return m_is_alive;
+            }
 
             /**
              * @brief   Informs the window that it should close. Note that this does not guaruntee
@@ -290,7 +278,22 @@ namespace leaf
              * 
              * @return  true if and only if the window was not already closed (or flagged to close)
              */
-            virtual bool close(void) noexcept override;
+            virtual bool close(void) noexcept override
+            {
+                // If the window is alive and not already flagged to close, set the flag indicating
+                // that it should close.
+                if (m_is_alive && !should_close())
+                {
+                    // Set the flag indicating that it should close. 
+                    set_should_close(true);
+
+                    // Return true indicating that the window has been flagged for closing.
+                    return true;
+                }
+
+                // If the window was not alive, return false indicating that nothing happened. 
+                return false;
+            }
 
             /**
              * @brief   Determines whether the window will automatically enable the close flag when
@@ -299,7 +302,11 @@ namespace leaf
              * @return  true if and only if the window will automatically enable the close flag when
              *          the user activates the close button
              */
-            virtual bool is_user_closable(void) const noexcept override;
+            virtual bool is_user_closable(void) const noexcept override
+            {
+                // Return the flag identifying whether the window is user closable.
+                return m_is_user_closable;
+            }
 
             /**
              * @brief   Sets whether the window will automatically enable the close flag when the
@@ -310,7 +317,17 @@ namespace leaf
              * 
              * @return  the previous value of the user closable option prior to setting
              */
-            virtual bool set_user_closable(bool is_user_closable) noexcept override;
+            virtual bool set_user_closable(bool is_user_closable) noexcept override
+            {
+                // Store the previous value of the flag for returning.
+                bool previous_value = is_user_closable;
+
+                // Set the flag to the new value.
+                m_is_user_closable = is_user_closable;
+
+                // Return the previous value.
+                return previous_value;
+            }
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to
@@ -396,6 +413,26 @@ namespace leaf
              * @return  true if and only if the window is active (has not been closed)
              */
             virtual bool poll_events(void) noexcept override = 0;
+
+            /**
+             * @brief   Determines the name of the operating system the window resides on.
+             * 
+             * @return  The name string of the operating system
+             */
+            virtual string native_os_name(void) const noexcept override
+            {
+                // Return the platform name macro from BX.
+                return BX_PLATFORM_NAME;
+            }
+
+            /**
+             * @brief   Returns native platform-dependent data about the window's display surface.
+             *          A null display type pointer is acceptable on some systems. However, a null
+             *          handle pointer indicates that the operating system is not supported.
+             * 
+             * @return  a structure of native surface data
+             */
+            native_surface_data_t native_data(void) const noexcept override;
     };
 }
 

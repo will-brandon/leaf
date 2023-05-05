@@ -85,7 +85,7 @@ namespace leaf
              * 
              * @throw   exception if an error occured retrieving the aspect ratio
              */
-            inline virtual double aspect_ratio(void) const
+            virtual double aspect_ratio(void) const
             {
                 // Divide the with of the surface by the height of the surface.
                 return (double)width() / (double)height();
