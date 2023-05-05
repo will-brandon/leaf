@@ -35,6 +35,11 @@ namespace leaf
             bool m_is_alive;
 
             /**
+             * @brief   Denotes whether the window can be closed by the user.
+             */
+            bool m_is_user_closable;
+
+            /**
              * @brief   Native platform-dependent data about the window's display surface.
              */
             native_surface_data_t m_native_data;
@@ -84,6 +89,26 @@ namespace leaf
              * @return  true if and only if the window was not already dead (closed)
              */
             virtual bool destroy(void) noexcept override = 0;
+
+            /**
+             * @brief   Sets the flag indicating whether the window should close the next time
+             *          events are polled.
+             * 
+             * @param   should_close  true if the window should close, false if it should not close
+             * 
+             * @return  the previous value of the should close flag prior to setting
+             */
+            bool set_should_close(bool should_close) noexcept override = 0
+            {
+                // Store the previous value of the flag for returning.
+                bool previous_value = should_close;
+
+                // Set the flag to the new value.
+                m_is_user_closable = should_close;
+
+                // Return the previous value.
+                return previous_value;
+            }
 
         public:
             /**
@@ -289,6 +314,75 @@ namespace leaf
             virtual void set_position(px_t x, px_t y) noexcept override = 0;
 
             /**
+             * @brief   Determines whether the window is alive (as opposed to being closed).
+             * 
+             * @return  true if and only if the window is not closed
+             */
+            inline bool is_alive(void) const noexcept override
+            {
+                // Return the flag denoting whether the window is alive.
+                return m_is_alive;
+            }
+
+            /**
+             * @brief   Informs the window that it should close. Note that this does not guaruntee
+             *          an immediate close. Window manager events must be polled to recognize that a
+             *          close should take place.
+             * 
+             * @return  true if and only if the window was not already closed (or flagged to close)
+             */
+            inline bool close(void) noexcept override
+            {
+                // If the window is alive and not already flagged to close, set the flag indicating
+                // that it should close.
+                if (m_is_alive && !should_close())
+                {
+                    // Set the flag indicating that it should close. 
+                    set_should_close(true);
+
+                    // Return true indicating that the window has been flagged for closing.
+                    return true;
+                }
+
+                // If the window was not alive, return false indicating that nothing happened. 
+                return false;
+            }
+
+            /**
+             * @brief   Determines whether the window will automatically enable the close flag when
+             *          the user activates the close button on the frame.
+             * 
+             * @return  true if and only if the window will automatically enable the close flag when
+             *          the user activates the close button
+             */
+            inline bool is_user_closable(void) const noexcept override
+            {
+                // Return the flag identifying whether the window is user closable.
+                return m_is_user_closable;
+            }
+
+            /**
+             * @brief   Sets whether the window will automatically enable the close flag when the
+             *          user activates the close button on the frame.
+             * 
+             * @param   is_user_closable    a true value indicates that the window should
+             *                              automatically enable the close flag
+             * 
+             * @return  the previous value of the user closable option prior to setting
+             */
+            inline bool set_user_closable(bool is_user_closable) noexcept override
+            {
+                // Store the previous value of the flag for returning.
+                bool previous_value = is_user_closable;
+
+                // Set the flag to the new value.
+                m_is_user_closable = is_user_closable;
+
+                // Return the previous value.
+                return previous_value;
+            }
+
+            /**
              * @brief   Determines whether the user can interact with the window's frame to
              *          reposition it.
              * 
@@ -337,55 +431,6 @@ namespace leaf
             virtual bool set_user_resizable(bool is_user_resizable) noexcept override = 0;
 
             /**
-             * @brief   Determines whether the window is alive (as opposed to being closed).
-             * 
-             * @return  true if and only if the window is not closed
-             */
-            inline bool is_alive(void) const noexcept override
-            {
-                // Return the flag denoting whether the window is alive.
-                return m_is_alive;
-            }
-        
-            /**
-             * @brief   Informs the window that it should close. Note that this does not guaruntee
-             *          an immediate close. Window manager events must be polled to recognize that a
-             *          close should take place.
-             * 
-             * @return  true if and only if the window was not already closed (or flagged to close)
-             */
-            inline bool close(void) noexcept override
-            {
-                if (m_is_alive)
-                {
-                    
-                    return true;
-                }
-
-                return false;
-            }
-
-            /**
-             * @brief   Determines whether the window will automatically enable the close flag when
-             *          the user activates the close button on the frame.
-             * 
-             * @return  true if and only if the window will automatically enable the close flag when
-             *          the user activates the close button
-             */
-            bool is_user_closable(void) const noexcept override;
-
-            /**
-             * @brief   Sets whether the window will automatically enable the close flag when the
-             *          user activates the close button on the frame.
-             * 
-             * @param   is_user_closable    a true value indicates that the window should
-             *                              automatically enable the close flag
-             * 
-             * @return  the previous value of the user closable option prior to setting
-             */
-            bool set_user_closable(bool is_user_closable) noexcept override;
-
-            /**
              * @brief   Determines the title of the window displayed on the frame.
              * 
              * @return  the title of the window
@@ -393,7 +438,7 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            string title(void) const noexcept override;
+            virtual string title(void) const noexcept override = 0;
 
             /**
              * @brief   Sets the title of the window displayed on the frame.
@@ -405,14 +450,14 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            string set_title(const string &title) const noexcept override;
+            virtual string set_title(const string &title) const noexcept override = 0;
 
             /**
              * @brief   Determines whether the window should close the next time events are polled.
              * 
              * @return  true if the window should close
              */
-            bool should_close(void) const noexcept override;
+            virtual bool should_close(void) const noexcept override = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the
@@ -420,7 +465,7 @@ namespace leaf
              * 
              * @return  true if and only if the window is active (has not been closed)
              */
-            bool poll_events(void) noexcept override;
+            virtual bool poll_events(void) noexcept override = 0;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.
