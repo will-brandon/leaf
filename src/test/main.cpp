@@ -61,7 +61,6 @@ void my_window(void)
           
           if (e.type == SDL_KEYDOWN)
           {
-            //quit = true;
             switch (e.key.keysym.sym)
             {
               case SDLK_r: window1.set_user_resizable(!window1.is_user_resizable()); break;
@@ -69,7 +68,13 @@ void my_window(void)
               case SDLK_DOWN: window1.move_vertically(10); break;
               case SDLK_LEFT: window1.move_horizontally(-10); break;
               case SDLK_RIGHT: window1.move_horizontally(10); break;
-              case SDLK_c: window1.close(); break;
+              case SDLK_c:
+                window1.close();
+                quit = true;
+                break;
+              case SDLK_v:
+                window1.set_visible(!window1.is_visible());
+                break;
             }
 
           }

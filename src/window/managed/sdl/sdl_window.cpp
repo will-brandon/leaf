@@ -82,8 +82,12 @@ namespace leaf
         // user.
         : m_should_close(false), m_is_user_resizable(false)
     {
-        // Create an SDL window and store the pointer to it.
-        m_internal_window = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_INIT_VIDEO);
+        // Establish some default flags for the window state upon creation. Only the video window
+        // mode is needed and the window should start hidden.
+        uint32_t window_flags = SDL_INIT_VIDEO | SDL_WINDOW_HIDDEN;
+
+        // Create an SDL window using the default flags and store the pointer to it.
+        m_internal_window = SDL_CreateWindow(title.c_str(), x, y, width, height, window_flags);
 
         // Ensure that the pointer is not null, i.e. the window was successfully created.
         if (!m_internal_window)
@@ -149,10 +153,24 @@ namespace leaf
 
     bool sdl_window::poll_events(void) noexcept
     {
+        // If the window is not alive return false immediately.
+        if (!is_alive())
+        {
+            return false;
+        }
+
+        // Check if the window should close and destroy it if necessary.
         if (m_should_close)
         {
+            // Destroy the window.
             destroy();
+
+            // Return false inciating that the window is now dead.
+            return false;
         }
+
+        // Return true indicating that the window is still alive.
+        return true;
     }
 
     px_t sdl_window::width(void) const noexcept
@@ -208,15 +226,30 @@ namespace leaf
 
     bool sdl_window::is_visible(void) const noexcept
     {
-
+        // Use SDL functionality to determine if the window shown flag is enabled denoting that the
+        // window is not hidden.
+        return SDL_GetWindowFlags(m_internal_window) & SDL_WINDOW_SHOWN;
     }
 
     sdl_window *sdl_window::set_visible(bool is_visible) noexcept
     {
+        // If the window should be visible, show the window. Otherwise hide it.
+        if (is_visible)
+        {
+            // Use SDL functionality to enable the shown flag.
+            SDL_ShowWindow(m_internal_window);
+        }
+        else
+        {
+            // Use SDL functionality to enable the hidden flag.
+            SDL_HideWindow(m_internal_window);
+        }
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
-    px_t sdl_window:: x(void) const noexcept
+    px_t sdl_window::x(void) const noexcept
     {
         // Allocate a variable to read the x-position into.
         int x;
