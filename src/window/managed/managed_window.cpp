@@ -16,6 +16,8 @@ using namespace std;
 
 namespace leaf
 {
+    // The window is alive upon construction. By default, it is closable by the user.
+    managed_window::managed_window(void) noexcept : m_is_alive(true), m_is_user_closable(true) {}
 
     bool managed_window::set_should_close(bool should_close) noexcept
     {

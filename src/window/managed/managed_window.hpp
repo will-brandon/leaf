@@ -45,15 +45,17 @@ namespace leaf
              *          values. When the window is created it is immediately alive. Assuming that it
              *          is visible and window manager events are polled, it will begin displaying
              *          upon creation.
-             * 
-             * @throw   runtime_error if an error occurs creating the window
              */
-            managed_window(void);
+            managed_window(void) noexcept;
 
             /**
              * @brief   Destructs the window object.
+             * 
+             * @note    The default implementation in maintained because no resources need
+             *          deallocation. The declaration is only explicit so that the destructor can be
+             *          marked virtual.
              */
-            virtual ~managed_window() noexcept;
+            virtual ~managed_window() noexcept = default;
 
             /**
              * @brief   Destroys the window (deallocates internal functionality and deems it dead
@@ -64,6 +66,13 @@ namespace leaf
             virtual bool destroy(void) noexcept override = 0;
 
             /**
+             * @brief   Determines whether the window should close the next time events are polled.
+             * 
+             * @return  true if the window should close
+             */
+            virtual bool should_close(void) const noexcept override = 0;
+
+            /**
              * @brief   Sets the flag indicating whether the window should close the next time
              *          events are polled.
              * 
@@ -72,6 +81,14 @@ namespace leaf
              * @return  the previous value of the should close flag prior to setting
              */
             virtual bool set_should_close(bool should_close) noexcept override;
+
+            /**
+             * @brief   Performs any necessary updates for the window. This includes closing the
+             *          window if a close was requested. If the window is closed, nothing happens.
+             * 
+             * @return  true if and only if the window is active (has not been closed)
+             */
+            virtual bool poll_events(void) noexcept override = 0;
 
         public:
             /**
@@ -381,21 +398,6 @@ namespace leaf
              *          likely.
              */
             virtual string set_title(const string &title) const noexcept override = 0;
-
-            /**
-             * @brief   Determines whether the window should close the next time events are polled.
-             * 
-             * @return  true if the window should close
-             */
-            virtual bool should_close(void) const noexcept override = 0;
-
-            /**
-             * @brief   Performs any necessary updates for the window. This includes closing the
-             *          window if a close was requested. If the window is closed, nothing happens.
-             * 
-             * @return  true if and only if the window is active (has not been closed)
-             */
-            virtual bool poll_events(void) noexcept override = 0;
     };
 }
 

@@ -2,7 +2,7 @@
 #
 # Type:		GNU Makefile
 # Author:	Will Brandon
-# Date:		Apr 28, 2023
+# Date:		April 28, 2023
 #
 # Recursively builds and links the entire project.
 #

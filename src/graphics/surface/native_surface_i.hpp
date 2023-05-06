@@ -28,7 +28,7 @@ namespace leaf
     {
         public:
             /**
-             * @brief   Determines the name of the operating system the window resides on.
+             * @brief   Determines the name of the operating system the surface resides on.
              * 
              * @return  the name string of the operating system
              * 
@@ -37,7 +37,7 @@ namespace leaf
             virtual string native_os_name(void) const = 0;
 
             /**
-             * @brief   Returns native platform-dependent data about a window.
+             * @brief   Returns native platform-dependent data about a surface.
              * 
              * @return  a structure of native surface data
              * 

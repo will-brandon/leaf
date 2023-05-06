@@ -42,6 +42,16 @@ namespace leaf
              * @throw   exception if an error occurs destroying the window
              */
             virtual bool destroy(void) = 0;
+        
+        public:
+            /**
+             * @brief   Determines whether the window should close the next time events are polled.
+             * 
+             * @return  true if the window should close
+             * 
+             * @throw   exception if an error occurs determining if the window should close
+             */
+            virtual bool should_close(void) const = 0;
             
             /**
              * @brief   Sets the flag indicating whether the window should close the next time
@@ -54,16 +64,6 @@ namespace leaf
              * @throw   exception if an error occurs setting whether the window should close
              */
             virtual bool set_should_close(bool should_close) = 0;
-
-        public:
-            /**
-             * @brief   Determines whether the window should close the next time events are polled.
-             * 
-             * @return  true if the window should close
-             * 
-             * @throw   exception if an error occurs determining if the window should close
-             */
-            virtual bool should_close(void) const = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the
