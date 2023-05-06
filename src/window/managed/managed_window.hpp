@@ -101,7 +101,7 @@ namespace leaf
              * 
              * @return  a pointer to the window for chaining
              */
-            virtual managed_window *set_should_close(bool should_close) noexcept override;
+            virtual managed_window *set_should_close(bool should_close) noexcept override = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the

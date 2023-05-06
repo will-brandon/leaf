@@ -33,7 +33,10 @@ void my_window(void)
 {
     try
     {
-      sdl_window window("Test", 0, 0, 600, 400);
+      sdl_window window1("Test1", 0, 0, 600, 400);
+      sdl_window window2("Test2", 0, 0, 700, 300);
+      sdl_window window3("Test3", 0, 0, 500, 500);
+      sdl_window window4("Test4", 0, 0, 1000, 800);
       //sdl::init();
       //sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
       //cout << window->is_alive() << '\n';
@@ -44,31 +47,44 @@ void my_window(void)
 
       SDL_Event e;
       bool quit = false;
-      while (!quit){
+      while (!quit)
+      {
 
-      //bgfx::frame();
+        //bgfx::frame();
 
-      while (SDL_PollEvent(&e)){
-        if (e.type == SDL_QUIT){
-          quit = true;
-        }
-        if (e.type == SDL_KEYDOWN){
-          //quit = true;
-          window.set_user_resizable(!window.is_user_resizable());
-          switch (e.key.keysym.sym)
+        while (SDL_PollEvent(&e))
+        {
+          if (e.window.type == SDL_WINDOWEVENT_CLOSE)
           {
-            case SDLK_UP: window.move_vertically(-10); break;
-            case SDLK_DOWN: window.move_vertically(10); break;
-            case SDLK_LEFT: window.move_horizontally(-10); break;
-            case SDLK_RIGHT: window.move_horizontally(10); break;
+            quit = true;
+          }
+          
+          if (e.type == SDL_KEYDOWN)
+          {
+            //quit = true;
+            switch (e.key.keysym.sym)
+            {
+              case SDLK_r: window1.set_user_resizable(!window1.is_user_resizable()); break;
+              case SDLK_UP: window1.move_vertically(-10); break;
+              case SDLK_DOWN: window1.move_vertically(10); break;
+              case SDLK_LEFT: window1.move_horizontally(-10); break;
+              case SDLK_RIGHT: window1.move_horizontally(10); break;
+              case SDLK_c: window1.close(); break;
+            }
+
           }
 
+          if (e.type == SDL_MOUSEBUTTONDOWN)
+          {
+            //quit = true;
+          }
         }
-        if (e.type == SDL_MOUSEBUTTONDOWN){
-          //quit = true;
-        }
+
+        window1.poll_events();
+        window2.poll_events();
+        window3.poll_events();
+        window4.poll_events();
       }
-  }
     }
     catch (const exception &exc)
     {

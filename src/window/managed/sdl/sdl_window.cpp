@@ -138,9 +138,21 @@ namespace leaf
         return m_should_close;
     }
 
+    managed_window *sdl_window::set_should_close(bool should_close) noexcept
+    {
+        // Set the flag to the new value.
+        m_should_close = should_close;
+
+        // Return a pointer to the window for chaining.
+        return this;
+    }
+
     bool sdl_window::poll_events(void) noexcept
     {
-
+        if (m_should_close)
+        {
+            destroy();
+        }
     }
 
     px_t sdl_window::width(void) const noexcept

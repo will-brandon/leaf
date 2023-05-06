@@ -127,6 +127,16 @@ namespace leaf
             virtual bool should_close(void) const noexcept override;
 
             /**
+             * @brief   Sets the flag indicating whether the window should close the next time
+             *          events are polled.
+             * 
+             * @param   should_close  true if the window should close, false if it should not close
+             * 
+             * @return  a pointer to the window for chaining
+             */
+            virtual managed_window *set_should_close(bool should_close) noexcept override;
+
+            /**
              * @brief   Performs any necessary updates for the window. This includes closing the
              *          window if a close was requested. If the window is closed, nothing happens.
              * 
