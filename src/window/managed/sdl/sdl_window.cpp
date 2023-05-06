@@ -72,7 +72,7 @@ namespace leaf
 
     }
 
-    bool sdl_window::set_visible(bool is_visible) noexcept override
+    bool sdl_window::set_visible(bool is_visible) noexcept
     {
 
     }
@@ -184,6 +184,6 @@ namespace leaf
 
     native_surface_data_t sdl_window::native_data(void) const noexcept
     {
-        
+
     }
 }
