@@ -51,12 +51,12 @@ namespace leaf
 
     }
 
-    px_t set_width(px_t width) noexcept
+    px_t sdl_window::set_width(px_t width) noexcept
     {
 
     }
 
-    px_t set_height(px_t height) noexcept
+    px_t sdl_window::set_height(px_t height) noexcept
     {
 
     }
@@ -77,41 +77,6 @@ namespace leaf
     }
 
     px_t sdl_window:: x(void) const noexcept
-    {
-
-    }
-
-    px_t sdl_window::y(void) const noexcept
-    {
-
-    }
-
-    px_t sdl_window::set_x(px_t x) noexcept
-    {
-
-    }
-
-    px_t sdl_window::set_y(px_t y) noexcept
-    {
-
-    }
-
-    void sdl_window::set_position(px_t x, px_t y) noexcept
-    {
-
-    }
-    
-    bool sdl_window::is_visible(void) const noexcept
-    {
-
-    }
-
-    bool sdl_window::set_visible(bool is_visible) noexcept
-    {
-
-    }
-
-    px_t sdl_window::x(void) const noexcept
     {
 
     }

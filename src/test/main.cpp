@@ -17,8 +17,8 @@
 #include <stdio.h>
 #include <iostream>
 #include "../utils/console.hpp"
-#include "../window/sdl/sdl.hpp"
-#include "../window/sdl/sdlwindow.hpp"
+//#include "../window/managed/sdl/sdl.hpp"
+#include "../window/managed/sdl/sdl_window.hpp"
 
 /* Sets constants */
 #define WIDTH 800
@@ -33,13 +33,15 @@ void my_window(void)
 {
     try
     {
-      sdl::init();
-      sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
-      cout << window->is_alive() << '\n';
-      window->close();
-      cout << window->is_alive() << '\n';
-      sdl::destroy_window(window);
-      sdl::deinit();
+      //sdl::init();
+      //sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
+      //cout << window->is_alive() << '\n';
+      //window->close();
+      //cout << window->is_alive() << '\n';
+      //sdl::destroy_window(window);
+      //sdl::deinit();
+
+      cout << "Hello World!\n";
     }
     catch (const exception &exc)
     {
