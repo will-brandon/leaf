@@ -33,6 +33,7 @@ void my_window(void)
 {
     try
     {
+      sdl_window window("Test", 0, 0, 600, 400);
       //sdl::init();
       //sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
       //cout << window->is_alive() << '\n';
@@ -41,7 +42,25 @@ void my_window(void)
       //sdl::destroy_window(window);
       //sdl::deinit();
 
-      cout << "Hello World!\n";
+      SDL_Event e;
+      bool quit = false;
+      while (!quit){
+
+      //bgfx::frame();
+
+      while (SDL_PollEvent(&e)){
+        if (e.type == SDL_QUIT){
+          quit = true;
+        }
+        if (e.type == SDL_KEYDOWN){
+          //quit = true;
+          window.set_user_resizable(!window.is_user_resizable());
+        }
+        if (e.type == SDL_MOUSEBUTTONDOWN){
+          //quit = true;
+        }
+      }
+  }
     }
     catch (const exception &exc)
     {
@@ -57,6 +76,8 @@ int main(int argc, char **argv)
 
   /* Initialises data */
   SDL_Window *window = NULL;
+
+  
   
   /*
    * Initialises the SDL video subsystem (as well as the events subsystem).

@@ -66,6 +66,27 @@ namespace leaf
             virtual bool destroy(void) noexcept override = 0;
 
             /**
+             * @brief   Flags the window as dead (closed). This should be used internally after the
+             *          window has been destroyed.
+             * 
+             * @return  true if and only if the window was not already flagged as closed
+             */
+            inline bool flag_as_closed(void) noexcept
+            {
+                // If the window is already closed, return false.
+                if (!m_is_alive)
+                {
+                    return false;
+                }
+
+                // Set the flag to true indicating that the window is closed.
+                m_is_alive = true;
+
+                // Return true indicating that the flag was set successfully.
+                return true;
+            }
+
+            /**
              * @brief   Determines whether the window should close the next time events are polled.
              * 
              * @return  true if the window should close

@@ -19,6 +19,20 @@ using namespace std;
 namespace leaf
 {
     /**
+     * @brief   Converts a standard C++ boolean to an SDL boolean enumeration type.
+     * 
+     * @param   value   a standard C++ boolean
+     * 
+     * @return  the equivalent SDL boolean enumeration type
+     */
+    inline SDL_bool sdl_bool(bool value) noexcept
+    {
+        // Simply cast the standard C++ boolean to an SDL boolean enumeration since the numeric
+        // values backing the enumeration correspond directly (SDL_TRUE = 1 and SDL_FALSE = 0).
+        return (SDL_bool)value;
+    }
+
+    /**
      * @brief   Represents a version of SDL.
      */
     typedef struct sdl_version : public SDL_version

@@ -13,9 +13,7 @@
 #ifndef SDL_WINDOW_H_HEADER_GUARD
 #define SDL_WINDOW_H_HEADER_GUARD
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
-#include <bx/platform.h>
 #include "../../../graphics/surface/native_surface_i.hpp"
 #include "../managed_window.hpp"
 #include "sdl_types.hpp"
@@ -48,6 +46,11 @@ namespace leaf
             bool m_should_close;
 
             /**
+             * @brief   Denotes whether the window is resizable by the user.
+             */
+            bool m_is_user_resizable;
+
+            /**
              * @brief   The internal SDL window pointer.
              */
             SDL_Window *m_internal_window;
@@ -69,7 +72,13 @@ namespace leaf
              */
             void init_natives(void);
 
-        protected:
+            /**
+             * @brief   Sets the defaults presets of the window upon initialization.
+             */
+            void set_defaults(void) noexcept;
+
+        public:
+        //protected:
             /**
              * @brief   Creates an SDL window. The title, position, and size are set to default
              *          values. When the window is created it is immediately active. Assuming that
@@ -96,7 +105,8 @@ namespace leaf
             sdl_window(const string &title, int x, int y, int width, int height);
 
             /**
-             * @brief   Destroys the SDL window.
+             * @brief   Destructs the SDL window. The underlying SDL window is destroyed if it is
+             *          not already dead.
              */
             virtual ~sdl_window() noexcept;
 
@@ -309,9 +319,6 @@ namespace leaf
              *          it.
              * 
              * @return  true if and only if the user can interact with the frame to resize it
-             * 
-             * @warning Behavior is undefined if the window is closed and a segmentation fault is
-             *          likely.
              */
             virtual bool is_user_resizable(void) const noexcept override;
 
