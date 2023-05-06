@@ -37,7 +37,9 @@ namespace leaf
             virtual string native_os_name(void) const = 0;
 
             /**
-             * @brief   Returns native platform-dependent data about a surface.
+             * @brief   Returns native platform-dependent data about the surface. A null display
+             *          type pointer is acceptable on some systems. However, a null handle pointer
+             *          indicates that the operating system is not supported.
              * 
              * @return  a structure of native surface data
              * 
