@@ -26,7 +26,6 @@ namespace leaf
 
     }
 
-
     sdl_window::sdl_window(const string &title, int x, int y, int width, int height)
     {
 
