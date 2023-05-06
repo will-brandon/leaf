@@ -80,29 +80,6 @@ namespace leaf
             virtual window_i *set_user_closable(bool is_user_closable) = 0;
 
             /**
-             * @brief   Determines whether the user can interact with the window's frame to
-             *          reposition it.
-             * 
-             * @return  true if and only if the user can interact with the window's frame to
-             *          reposition it
-             * 
-             * @throw   exception if an error occured setting whether the user can move the window
-             */
-            virtual bool is_user_movable(void) const = 0;
-            
-            /**
-             * @brief   Sets whether the user can interact with the window's frame to reposition it.
-             * 
-             * @param   is_user_movable whether the user can interact with the window's frame to
-             *                          reposition it
-             * 
-             * @return  a pointer to the window for chaining
-             * 
-             * @throw   exception if an error occured setting whether the user can move the window
-             */
-            virtual window_i *set_user_movable(bool is_user_movable) = 0;
-
-            /**
              * @brief   Determines whether the user can interact with the window's frame to resize
              *          it.
              * 

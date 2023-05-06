@@ -302,16 +302,6 @@ namespace leaf
         return this;
     }
 
-    bool sdl_window::is_user_movable(void) const noexcept
-    {
-
-    }
-            
-    sdl_window *sdl_window::set_user_movable(bool is_user_movable) noexcept
-    {
-
-    }
-
     bool sdl_window::is_user_resizable(void) const noexcept
     {
         // Return the flag denoting whether the winddow is user-resizable.

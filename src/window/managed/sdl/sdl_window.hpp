@@ -320,30 +320,6 @@ namespace leaf
             virtual sdl_window *set_position(px_t x, px_t y) noexcept override;
 
             /**
-             * @brief   Determines whether the user can interact with the window's frame to
-             *          reposition it.
-             * 
-             * @return  true if and only if the user can interact with the frame to reposition it
-             * 
-             * @warning Behavior is undefined if the window is closed and a segmentation fault is
-             *          likely.
-             */
-            virtual bool is_user_movable(void) const noexcept override;
-            
-            /**
-             * @brief   Sets whether the user can interact with the window's frame to reposition it.
-             * 
-             * @param   is_user_movable whether the user can interact with the frame to
-             *                          reposition it
-             * 
-             * @return  a pointer to the window for chaining
-             * 
-             * @warning Behavior is undefined if the window is closed and a segmentation fault is
-             *          likely.
-             */
-            virtual sdl_window *set_user_movable(bool is_user_movable) noexcept override;
-
-            /**
              * @brief   Determines whether the user can interact with the window's frame to resize
              *          it.
              * 
