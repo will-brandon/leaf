@@ -151,12 +151,12 @@ namespace leaf
              * 
              * @param   width   the new width of the surface in pixels
              * 
-             * @return  the original width of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_width(px_t width) noexcept override;
+            virtual sdl_window *set_width(px_t width) noexcept override;
 
             /**
              * @brief   Sets the height of the window's display surface in pixels. The width is not
@@ -166,12 +166,12 @@ namespace leaf
              * 
              * @param   height   the new height of the surface in pixels
              * 
-             * @return  the original height of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_height(px_t height) noexcept override;
+            virtual sdl_window *set_height(px_t height) noexcept override;
 
             /**
              * @brief   Sets the size of the surface in pixels. Both the width and height are
@@ -182,10 +182,12 @@ namespace leaf
              * @param   width   the new width of the surface in pixels
              * @param   height  the new height of the surface in pixels
              * 
+             * @return  a pointer to the window for chaining
+             * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual void set_size(px_t width, px_t height) noexcept override;
+            virtual sdl_window *set_size(px_t width, px_t height) noexcept override;
 
             /**
              * @brief   Determines whether the window is currently visible on the user's display.
@@ -207,12 +209,12 @@ namespace leaf
              *          minimization may cause the window to appear out of view. These cases are not
              *          congruent with the functionality of this action.
              * 
-             * @return  whether the window was visible prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_visible(bool is_visible) noexcept override;
+            virtual sdl_window *set_visible(bool is_visible) noexcept override;
 
             /**
              * @brief   Determines the x-position of the window's display surface in pixels. Note
@@ -250,12 +252,12 @@ namespace leaf
              * 
              * @param   x   the new x-position of the surface in pixels
              * 
-             * @return  the original x-position of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_x(px_t x) noexcept override;
+            virtual sdl_window *set_x(px_t x) noexcept override;
 
             /**
              * @brief   Sets the y-position of the window's display surface in pixels. The
@@ -267,12 +269,12 @@ namespace leaf
              * 
              * @param   y   the new y-position of the surface in pixels
              * 
-             * @return  the original y-position of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_y(px_t y) noexcept override;
+            virtual sdl_window *set_y(px_t y) noexcept override;
 
             /**
              * @brief   Sets the position of the window's display surface in pixels. Both the
@@ -285,10 +287,12 @@ namespace leaf
              * @param   x   the new x-position of the surface in pixels
              * @param   y   the new y-position of the surface in pixels
              * 
+             * @return  a pointer to the window for chaining
+             * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual void set_position(px_t x, px_t y) noexcept override;
+            virtual sdl_window *set_position(px_t x, px_t y) noexcept override;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to
@@ -307,12 +311,12 @@ namespace leaf
              * @param   is_user_movable whether the user can interact with the frame to
              *                          reposition it
              * 
-             * @return  the previous value of the user movable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_user_movable(bool is_user_movable) noexcept override;
+            virtual sdl_window *set_user_movable(bool is_user_movable) noexcept override;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to resize
@@ -328,12 +332,12 @@ namespace leaf
              * @param   is_user_resizable   whether the user can interact with the frame to resize
              *                              it
              * 
-             * @return  the previous value of the user resizable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_user_resizable(bool is_user_resizable) noexcept override;
+            virtual sdl_window *set_user_resizable(bool is_user_resizable) noexcept override;
 
             /**
              * @brief   Determines the title of the window displayed on the frame.
@@ -350,12 +354,12 @@ namespace leaf
              * 
              * @param   title   the title of the window
              * 
-             * @return  the previous title prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual string set_title(const string &title) const noexcept override;
+            virtual sdl_window *set_title(const string &title) noexcept override;
 
             /**
              * @brief   Determines whether the window should close the next time events are polled.

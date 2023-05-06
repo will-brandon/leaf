@@ -19,16 +19,13 @@ namespace leaf
     // The window is alive upon construction. By default, it is closable by the user.
     managed_window::managed_window(void) noexcept : m_is_alive(true), m_is_user_closable(true) {}
 
-    bool managed_window::set_should_close(bool should_close) noexcept
+    managed_window *managed_window::set_should_close(bool should_close) noexcept
     {
-        // Store the previous value of the flag for returning.
-        bool previous_value = should_close;
-
         // Set the flag to the new value.
         m_is_user_closable = should_close;
 
-        // Return the previous value.
-        return previous_value;
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     bool managed_window::is_alive(void) const noexcept
@@ -60,15 +57,12 @@ namespace leaf
         return m_is_user_closable;
     }
     
-    bool managed_window::set_user_closable(bool is_user_closable) noexcept
+    managed_window *managed_window::set_user_closable(bool is_user_closable) noexcept
     {
-        // Store the previous value of the flag for returning.
-        bool previous_value = is_user_closable;
-
         // Set the flag to the new value.
         m_is_user_closable = is_user_closable;
 
-        // Return the previous value.
-        return previous_value;
+        // Return a pointer to the window for chaining.
+        return this;
     }
 }

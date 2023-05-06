@@ -48,22 +48,22 @@ namespace leaf
              * 
              * @param   width   the new width of the surface in pixels
              * 
-             * @return  the original width of the surface in pixels prior to this action
+             * @return  a pointer to the surface for chaining
              * 
              * @throw   exception if an error occured setting the width
              */
-            virtual px_t set_width(px_t width) = 0;
+            virtual surface_i *set_width(px_t width) = 0;
 
             /**
              * @brief   Sets the height of the surface in pixels. The width is not affected.
              * 
              * @param   height   the new height of the surface in pixels
              * 
-             * @return  the original height of the surface in pixels prior to this action
+             * @return  a pointer to the surface for chaining
              * 
              * @throw   exception if an error occured setting the height
              */
-            virtual px_t set_height(px_t height) = 0;
+            virtual surface_i *set_height(px_t height) = 0;
 
             /**
              * @brief   Sets the size of the surface in pixels. Both the width and height are
@@ -72,9 +72,11 @@ namespace leaf
              * @param   width   the new width of the surface in pixels
              * @param   height  the new height of the surface in pixels
              * 
+             * @return  a pointer to the surface for chaining
+             * 
              * @throw   exception if an error occured setting the size
              */
-            virtual void set_size(px_t width, px_t height) = 0;
+            virtual surface_i *set_size(px_t width, px_t height) = 0;
 
             /**
              * @brief   Determines the dimensional aspect ratio (width/height) of the surface.
@@ -114,11 +116,11 @@ namespace leaf
              *          minimization may cause the surface to appear out of view. These cases are
              *          not congruent with the functionality of this action.
              * 
-             * @return  whether the surface was visible prior to this action
+             * @return  a pointer to the surface for chaining
              * 
              * @throw   exception if an error occured setting the visibility of the surface
              */
-            virtual bool set_visible(bool is_visible) = 0;
+            virtual surface_i *set_visible(bool is_visible) = 0;
     };
 }
 

@@ -25,7 +25,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class window_i : public pos_surface_i
+    class window_i : public virtual pos_surface_i
     {
         public:
             /**
@@ -72,12 +72,12 @@ namespace leaf
              * @param   is_user_closable    a true value indicates that the window should
              *                              automatically enable the close flag
              * 
-             * @return  the previous value of the user closable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @throw   exception if an error occurs setting whether the window will automatically
              *          enable the close flag
              */
-            virtual bool set_user_closable(bool is_user_closable) = 0;
+            virtual window_i *set_user_closable(bool is_user_closable) = 0;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to
@@ -96,11 +96,11 @@ namespace leaf
              * @param   is_user_movable whether the user can interact with the window's frame to
              *                          reposition it
              * 
-             * @return  the previous value of the user movable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @throw   exception if an error occured setting whether the user can move the window
              */
-            virtual bool set_user_movable(bool is_user_movable) = 0;
+            virtual window_i *set_user_movable(bool is_user_movable) = 0;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to resize
@@ -120,11 +120,11 @@ namespace leaf
              * @param   is_user_resizable   whether the user can interact with the window's frame to
              *                              resize it
              * 
-             * @return  the previous value of the user resizable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @throw   exception if an error occured setting whether the window is user resizable
              */
-            virtual bool set_user_resizable(bool is_user_resizable) = 0;
+            virtual window_i *set_user_resizable(bool is_user_resizable) = 0;
 
             /**
              * @brief   Determines the title of the window. This title is often displayed on the
@@ -142,11 +142,11 @@ namespace leaf
              * 
              * @param   title   the title of the window
              * 
-             * @return  the previous title prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @throw   exception if an error occurs setting the title
              */
-            virtual string set_title(const string &title) const = 0;
+            virtual window_i *set_title(const string &title) = 0;
     };
 }
 

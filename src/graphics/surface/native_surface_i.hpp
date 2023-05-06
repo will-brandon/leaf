@@ -24,7 +24,7 @@ namespace leaf
      * @brief   Represents an interface specification for a graphical user interface display surface
      *          native to the operating system it resides on.
      */
-    class native_surface_i : public surface_i
+    class native_surface_i : public virtual surface_i
     {
         public:
             /**

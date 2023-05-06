@@ -142,17 +142,17 @@ namespace leaf
 
     }
 
-    px_t sdl_window::set_width(px_t width) noexcept
+    sdl_window *sdl_window::set_width(px_t width) noexcept
     {
 
     }
 
-    px_t sdl_window::set_height(px_t height) noexcept
+    sdl_window *sdl_window::set_height(px_t height) noexcept
     {
 
     }
 
-    void sdl_window::set_size(px_t width, px_t height) noexcept
+    sdl_window *sdl_window::set_size(px_t width, px_t height) noexcept
     {
 
     }
@@ -162,7 +162,7 @@ namespace leaf
 
     }
 
-    bool sdl_window::set_visible(bool is_visible) noexcept
+    sdl_window *sdl_window::set_visible(bool is_visible) noexcept
     {
 
     }
@@ -177,17 +177,17 @@ namespace leaf
 
     }
 
-    px_t sdl_window::set_x(px_t x) noexcept
+    sdl_window *sdl_window::set_x(px_t x) noexcept
     {
 
     }
 
-    px_t sdl_window::set_y(px_t y) noexcept
+    sdl_window *sdl_window::set_y(px_t y) noexcept
     {
 
     }
 
-    void sdl_window::set_position(px_t x, px_t y) noexcept
+    sdl_window *sdl_window::set_position(px_t x, px_t y) noexcept
     {
 
     }
@@ -197,7 +197,7 @@ namespace leaf
 
     }
             
-    bool sdl_window::set_user_movable(bool is_user_movable) noexcept
+    sdl_window *sdl_window::set_user_movable(bool is_user_movable) noexcept
     {
 
     }
@@ -208,30 +208,31 @@ namespace leaf
         return m_is_user_resizable;
     }
 
-    bool sdl_window::set_user_resizable(bool is_user_resizable) noexcept
+    sdl_window *sdl_window::set_user_resizable(bool is_user_resizable) noexcept
     {
-        // Store the previous value of the flag for returning.
-        bool previous_value = is_user_resizable;
-
-        // Use the SDL window resizable function on the internal handle and provide it with the
-        // given boolean value as an SDL boolean enumeration.
+        // Use SDL functionality to set whether the window is user-resizable.
         SDL_SetWindowResizable(m_internal_window, sdl_bool(is_user_resizable));
 
         // Set the flag to the new value.
         m_is_user_resizable = is_user_resizable;
 
-        // Return the previous value.
-        return previous_value;
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     string sdl_window::title(void) const noexcept
     {
-
+        // Use SDL functionality to retrieve the title of the window.
+        return SDL_GetWindowTitle(m_internal_window);
     }
 
-    string sdl_window::set_title(const string &title) const noexcept
+    sdl_window *sdl_window::set_title(const string &title) noexcept
     {
+        // Use SDL functionality to set the window title.
+        SDL_SetWindowTitle(m_internal_window, title.c_str());
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     bool sdl_window::should_close(void) const noexcept

@@ -25,7 +25,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class managed_window : public nonatomic_window_i
+    class managed_window : public virtual nonatomic_window_i
     {
         private:
             /**
@@ -99,9 +99,9 @@ namespace leaf
              * 
              * @param   should_close  true if the window should close, false if it should not close
              * 
-             * @return  the previous value of the should close flag prior to setting
+             * @return  a pointer to the window for chaining
              */
-            virtual bool set_should_close(bool should_close) noexcept override;
+            virtual managed_window *set_should_close(bool should_close) noexcept override;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the
@@ -175,12 +175,12 @@ namespace leaf
              * 
              * @param   width   the new width of the surface in pixels
              * 
-             * @return  the original width of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_width(px_t width) noexcept override = 0;
+            virtual managed_window *set_width(px_t width) noexcept override = 0;
 
             /**
              * @brief   Sets the height of the window's display surface in pixels. The width is not
@@ -190,12 +190,12 @@ namespace leaf
              * 
              * @param   height   the new height of the surface in pixels
              * 
-             * @return  the original height of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_height(px_t height) noexcept override = 0;
+            virtual managed_window *set_height(px_t height) noexcept override = 0;
 
             /**
              * @brief   Sets the size of the surface in pixels. Both the width and height are
@@ -206,10 +206,12 @@ namespace leaf
              * @param   width   the new width of the surface in pixels
              * @param   height  the new height of the surface in pixels
              * 
+             * @return  a pointer to the window for chaining
+             * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual void set_size(px_t width, px_t height) noexcept override = 0;
+            virtual managed_window *set_size(px_t width, px_t height) noexcept override = 0;
 
             /**
              * @brief   Determines whether the window is currently visible on the user's display.
@@ -231,12 +233,12 @@ namespace leaf
              *          minimization may cause the window to appear out of view. These cases are not
              *          congruent with the functionality of this action.
              * 
-             * @return  whether the window was visible prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_visible(bool is_visible) noexcept override = 0;
+            virtual managed_window *set_visible(bool is_visible) noexcept override = 0;
 
             /**
              * @brief   Determines the x-position of the window's display surface in pixels. Note
@@ -274,12 +276,12 @@ namespace leaf
              * 
              * @param   x   the new x-position of the surface in pixels
              * 
-             * @return  the original x-position of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_x(px_t x) noexcept override = 0;
+            virtual managed_window *set_x(px_t x) noexcept override = 0;
 
             /**
              * @brief   Sets the y-position of the window's display surface in pixels. The
@@ -291,12 +293,12 @@ namespace leaf
              * 
              * @param   y   the new y-position of the surface in pixels
              * 
-             * @return  the original y-position of the surface in pixels prior to this action
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual px_t set_y(px_t y) noexcept override = 0;
+            virtual managed_window *set_y(px_t y) noexcept override = 0;
 
             /**
              * @brief   Sets the position of the window's display surface in pixels. Both the
@@ -309,10 +311,12 @@ namespace leaf
              * @param   x   the new x-position of the surface in pixels
              * @param   y   the new y-position of the surface in pixels
              * 
+             * @return  a pointer to the window for chaining
+             * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual void set_position(px_t x, px_t y) noexcept override = 0;
+            virtual managed_window *set_position(px_t x, px_t y) noexcept override = 0;
 
             /**
              * @brief   Determines whether the window is alive (as opposed to being closed).
@@ -346,9 +350,9 @@ namespace leaf
              * @param   is_user_closable    a true value indicates that the window should
              *                              automatically enable the close flag
              * 
-             * @return  the previous value of the user closable option prior to setting
+             * @return  a pointer to the window for chaining
              */
-            virtual bool set_user_closable(bool is_user_closable) noexcept override;
+            virtual managed_window *set_user_closable(bool is_user_closable) noexcept override;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to
@@ -367,12 +371,12 @@ namespace leaf
              * @param   is_user_movable whether the user can interact with the frame to
              *                          reposition it
              * 
-             * @return  the previous value of the user movable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_user_movable(bool is_user_movable) noexcept override = 0;
+            virtual managed_window *set_user_movable(bool is_user_movable) noexcept override = 0;
 
             /**
              * @brief   Determines whether the user can interact with the window's frame to resize
@@ -391,12 +395,12 @@ namespace leaf
              * @param   is_user_resizable   whether the user can interact with the frame to resize
              *                              it
              * 
-             * @return  the previous value of the user resizable option prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual bool set_user_resizable(bool is_user_resizable) noexcept override = 0;
+            virtual managed_window *set_user_resizable(bool is_user_resizable) noexcept override = 0;
 
             /**
              * @brief   Determines the title of the window displayed on the frame.
@@ -413,12 +417,12 @@ namespace leaf
              * 
              * @param   title   the title of the window
              * 
-             * @return  the previous title prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual string set_title(const string &title) const noexcept override = 0;
+            virtual managed_window *set_title(const string &title) noexcept override = 0;
     };
 }
 

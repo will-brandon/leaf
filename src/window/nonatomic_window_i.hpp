@@ -30,7 +30,7 @@ namespace leaf
      *          necessary actions such as closing. A window is immediately alive (open) upon its
      *          object's construction, however, it may be closed before its object's destruction.
      */
-    class nonatomic_window_i : public window_i
+    class nonatomic_window_i : public virtual window_i
     {
         protected:            
             /**
@@ -59,11 +59,11 @@ namespace leaf
              * 
              * @param   should_close  true if the window should close, false if it should not close
              * 
-             * @return  the previous value of the should close flag prior to setting
+             * @return  a pointer to the window for chaining
              * 
              * @throw   exception if an error occurs setting whether the window should close
              */
-            virtual bool set_should_close(bool should_close) = 0;
+            virtual nonatomic_window_i *set_should_close(bool should_close) = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the

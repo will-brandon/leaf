@@ -24,7 +24,7 @@ namespace leaf
      *          display surface. It is positioned relative to the origin in the upper left corner of
      *          the monitor it resides in.
      */
-    class pos_surface_i : public surface_i
+    class pos_surface_i : public virtual surface_i
     {
         public:
             /**
@@ -56,11 +56,11 @@ namespace leaf
              * 
              * @param   x   the new x-position of the surface in pixels
              * 
-             * @return  the original x-position of the surface in pixels prior to this action
+             * @return  a pointer to the surface for chaining
              * 
              * @throw   exception if an error occured setting the x-position
              */
-            virtual px_t set_x(px_t x) = 0;
+            virtual pos_surface_i *set_x(px_t x) = 0;
 
             /**
              * @brief   Sets the y-position of the surface in pixels. The x-position is not
@@ -69,11 +69,11 @@ namespace leaf
              * 
              * @param   y   the new y-position of the surface in pixels
              * 
-             * @return  the original y-position of the surface in pixels prior to this action
+             * @return  a pointer to the surface for chaining
              * 
              * @throw   exception if an error occured setting the y-position
              */
-            virtual px_t set_y(px_t y) = 0;
+            virtual pos_surface_i *set_y(px_t y) = 0;
 
             /**
              * @brief   Sets the position of the surface in pixels. Both the x-position and
@@ -83,9 +83,11 @@ namespace leaf
              * @param   x   the new x-position of the surface in pixels
              * @param   y   the new y-position of the surface in pixels
              * 
+             * @return  a pointer to the surface for chaining
+             * 
              * @throw   exception if an error occured setting the position
              */
-            virtual void set_position(px_t x, px_t y) = 0;
+            virtual pos_surface_i *set_position(px_t x, px_t y) = 0;
     };
 }
 

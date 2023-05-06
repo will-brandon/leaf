@@ -42,6 +42,10 @@ void my_window(void)
       //sdl::destroy_window(window);
       //sdl::deinit();
 
+      cout << window.title() << "\n";
+
+      window.set_title("New Title!");
+
       SDL_Event e;
       bool quit = false;
       while (!quit){
@@ -55,6 +59,7 @@ void my_window(void)
         if (e.type == SDL_KEYDOWN){
           //quit = true;
           window.set_user_resizable(!window.is_user_resizable());
+          cout << boolalpha << window.is_user_resizable() << '\n';
         }
         if (e.type == SDL_MOUSEBUTTONDOWN){
           //quit = true;
