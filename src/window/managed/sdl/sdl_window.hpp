@@ -119,6 +119,21 @@ namespace leaf
              */
             bool destroy(void) noexcept override;
 
+            /**
+             * @brief   Determines whether the window should close the next time events are polled.
+             * 
+             * @return  true if the window should close
+             */
+            virtual bool should_close(void) const noexcept override;
+
+            /**
+             * @brief   Performs any necessary updates for the window. This includes closing the
+             *          window if a close was requested. If the window is closed, nothing happens.
+             * 
+             * @return  true if and only if the window is active (has not been closed)
+             */
+            virtual bool poll_events(void) noexcept override;
+
         public:
             /**
              * @brief   Determines the width of the window's display surface in pixels. Note that
@@ -360,21 +375,6 @@ namespace leaf
              *          likely.
              */
             virtual sdl_window *set_title(const string &title) noexcept override;
-
-            /**
-             * @brief   Determines whether the window should close the next time events are polled.
-             * 
-             * @return  true if the window should close
-             */
-            virtual bool should_close(void) const noexcept override;
-
-            /**
-             * @brief   Performs any necessary updates for the window. This includes closing the
-             *          window if a close was requested. If the window is closed, nothing happens.
-             * 
-             * @return  true if and only if the window is active (has not been closed)
-             */
-            virtual bool poll_events(void) noexcept override;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.

@@ -132,29 +132,66 @@ namespace leaf
         return true;
     }
 
+    bool sdl_window::should_close(void) const noexcept
+    {
+        // Return the flag indicating whether the window should close.
+        return m_should_close;
+    }
+
+    bool sdl_window::poll_events(void) noexcept
+    {
+
+    }
+
     px_t sdl_window::width(void) const noexcept
     {
-        
+        // Allocate a variable to read the width into.
+        int width;
+
+        // Use SDL fucntionality to read the width into the variable.
+        SDL_GetWindowSizeInPixels(m_internal_window, &width, NULL);
+
+        // Return the width.
+        return width;
     }
 
     px_t sdl_window::height(void) const noexcept
     {
+        // Allocate a variable to read the height into.
+        int height;
 
+        // Use SDL fucntionality to read the height into the variable.
+        SDL_GetWindowSizeInPixels(m_internal_window, NULL, &height);
+
+        // Return the height.
+        return height;
     }
 
     sdl_window *sdl_window::set_width(px_t width) noexcept
     {
+        // Use SDL functionality to set the width, explicitly set the height to its previous value.
+        SDL_SetWindowSize(m_internal_window, width, height());
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     sdl_window *sdl_window::set_height(px_t height) noexcept
     {
+        // Use SDL functionality to set the height, explicitly set the width to its previous value.
+        SDL_SetWindowSize(m_internal_window, width(), height);
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     sdl_window *sdl_window::set_size(px_t width, px_t height) noexcept
     {
+        // Use SDL functionality to set the size.
+        SDL_SetWindowSize(m_internal_window, width, height);
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     bool sdl_window::is_visible(void) const noexcept
@@ -169,27 +206,55 @@ namespace leaf
 
     px_t sdl_window:: x(void) const noexcept
     {
+        // Allocate a variable to read the x-position into.
+        int x;
 
+        // Use SDL fucntionality to read the x-position into the variable.
+        SDL_GetWindowPosition(m_internal_window, &x, NULL);
+
+        // Return the x-position.
+        return x;
     }
 
     px_t sdl_window::y(void) const noexcept
     {
+        // Allocate a variable to read the y-position into.
+        int y;
 
+        // Use SDL fucntionality to read the y-position into the variable.
+        SDL_GetWindowPosition(m_internal_window, NULL, &y);
+
+        // Return the y-position.
+        return y;
     }
 
     sdl_window *sdl_window::set_x(px_t x) noexcept
     {
+        // Use SDL functionality to set the x-position, explicitly set the y-position to its
+        // previous value.
+        SDL_SetWindowPosition(m_internal_window, x, y());
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     sdl_window *sdl_window::set_y(px_t y) noexcept
     {
+        // Use SDL functionality to set the y-position, explicitly set the x-position to its
+        // previous value.
+        SDL_SetWindowPosition(m_internal_window, x(), y);
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     sdl_window *sdl_window::set_position(px_t x, px_t y) noexcept
     {
+        // Use SDL functionality to set the position.
+        SDL_SetWindowPosition(m_internal_window, x, y);
 
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     bool sdl_window::is_user_movable(void) const noexcept
@@ -233,16 +298,6 @@ namespace leaf
 
         // Return a pointer to the window for chaining.
         return this;
-    }
-
-    bool sdl_window::should_close(void) const noexcept
-    {
-
-    }
-
-    bool sdl_window::poll_events(void) noexcept
-    {
-
     }
 
     string sdl_window::native_os_name(void) const noexcept

@@ -81,11 +81,11 @@ namespace leaf
             /**
              * @brief   Determines the dimensional aspect ratio (width/height) of the surface.
              * 
-             * @note    A default implementation is provided.
-             * 
              * @return  the aspect ratio of the surface
              * 
              * @throw   exception if an error occured retrieving the aspect ratio
+             * 
+             * @note    A default implementation is provided in this interface.
              */
             virtual double aspect_ratio(void) const
             {

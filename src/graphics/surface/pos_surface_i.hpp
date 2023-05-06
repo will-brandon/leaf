@@ -88,6 +88,78 @@ namespace leaf
              * @throw   exception if an error occured setting the position
              */
             virtual pos_surface_i *set_position(px_t x, px_t y) = 0;
+
+            /**
+             * @brief   Moves the surface horizontally by the given displacement in pixels. Only the
+             *          x-position is affected. Positive displacement values move the surface right,
+             *          negative values move the surface left.
+             * 
+             * @param   x_displacement  the number of pixels by which to increment (or decrement)
+             *                          the x-position
+             * 
+             * @return  a pointer to the surface for chaining
+             * 
+             * @throw   exception if an error occured moving the surface
+             * 
+             * @note    A default implementation is provided in this interface.
+             */
+            virtual pos_surface_i *move_horizontally(px_t x_displacement)
+            {
+                // Increment (or decrement) the x-position by the given distance.
+                set_x(x() + x_displacement);
+
+                // Return a pointer to the surface for chaining.
+                return this;
+            }
+
+            /**
+             * @brief   Moves the surface vertically by the given displacement in pixels. Only the
+             *          y-position is affected. Positive displacement values move the surface down,
+             *          negative values move the surface up.
+             * 
+             * @param   y_displacement  the number of pixels by which to increment (or decrement)
+             *                          the y-position
+             * 
+             * @return  a pointer to the surface for chaining
+             * 
+             * @throw   exception if an error occured moving the surface
+             * 
+             * @note    A default implementation is provided in this interface.
+             */
+            virtual pos_surface_i *move_vertically(px_t y_displacement)
+            {
+                // Increment (or decrement) the y-position by the given distance.
+                set_y(y() + y_displacement);
+
+                // Return a pointer to the surface for chaining.
+                return this;
+            }
+
+            /**
+             * @brief   Moves the surface by the given displacement in pixels. Both the x-position
+             *          and y-position are affected. For horizontal and vertical translation,
+             *          positive displacement values move the surface right and down respectively,
+             *          negative values move the surface left up respectively.
+             * 
+             * @param   x_displacement  the number of pixels by which to increment (or decrement)
+             *                          the x-position
+             * @param   y_displacement  the number of pixels by which to increment (or decrement)
+             *                          the y-position
+             * 
+             * @return  a pointer to the surface for chaining
+             * 
+             * @throw   exception if an error occured moving the surface
+             * 
+             * @note    A default implementation is provided in this interface.
+             */
+            virtual pos_surface_i *move(px_t x_displacement, px_t y_displacement)
+            {
+                // Increment (or decrement) the x-position and y-position by the given distances.
+                set_position(x() + x_displacement, y() + y_displacement);
+
+                // Return a pointer to the surface for chaining.
+                return this;
+            }
     };
 }
 
