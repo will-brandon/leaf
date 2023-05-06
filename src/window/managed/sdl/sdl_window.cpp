@@ -65,7 +65,8 @@ namespace leaf
 
     void sdl_window::set_defaults(void) noexcept
     {
-        // By default the window is not resizable by the user.
+        // By default the window is not resizable by the user. This cannot be set via a flag upon
+        // window creation.
         set_user_resizable(false);
     }
 

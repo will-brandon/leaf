@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <iostream>
 #include "../utils/console.hpp"
-//#include "../window/managed/sdl/sdl.hpp"
 #include "../window/managed/sdl/sdl_window.hpp"
 
 /* Sets constants */
@@ -29,192 +28,75 @@ using namespace std;
 using namespace utl;
 using namespace leaf;
 
-void my_window(void)
+int main(int argc, char **argv)
 {
+    SDL_Init(0);
+
     try
     {
-      sdl_window window1("Test1", 0, 0, 600, 400);
-      sdl_window window2("Test2", 0, 0, 700, 300);
-      sdl_window window3("Test3", 0, 0, 500, 500);
-      sdl_window window4("Test4", 0, 0, 1000, 800);
-      //sdl::init();
-      //sdl_window *window = sdl::create_window("Leaf Window", 100, 100, 600, 400);
-      //cout << window->is_alive() << '\n';
-      //window->close();
-      //cout << window->is_alive() << '\n';
-      //sdl::destroy_window(window);
-      //sdl::deinit();
+        sdl_window window("Test1", 0, 0, 600, 400);
+        
+        window.set_visible(true);
+        window.set_user_resizable(true);
 
-      SDL_Event e;
-      bool quit = false;
-      while (!quit)
-      {
+        native_surface_data_t native_surface_data = window.native_data();
 
-        //bgfx::frame();
+        bgfx::PlatformData platform_data;
+        platform_data.ndt = native_surface_data.display_type;
+        platform_data.nwh = native_surface_data.handle;
+        platform_data.context = NULL;
+        platform_data.backBuffer = NULL;
+        platform_data.backBufferDS = NULL;
+        bgfx::setPlatformData(platform_data);
+      
+        bgfx::renderFrame();
 
-        while (SDL_PollEvent(&e))
+        bgfx::init();
+
+        SDL_Event e;
+        bool quit = false;
+        while (!quit)
         {
-          if (e.window.type == SDL_WINDOWEVENT_CLOSE)
-          {
-            quit = true;
-          }
-          
-          if (e.type == SDL_KEYDOWN)
-          {
-            switch (e.key.keysym.sym)
+            bgfx::setViewRect(0, 100, 100, bgfx::BackbufferRatio::Double);
+            bgfx::setViewClear(0, 0, 0x00FF00, (float)0.0, 0);
+            
+            bgfx::frame();
+
+            while (SDL_PollEvent(&e))
             {
-              case SDLK_r: window1.set_user_resizable(!window1.is_user_resizable()); break;
-              case SDLK_UP: window1.move_vertically(-10); break;
-              case SDLK_DOWN: window1.move_vertically(10); break;
-              case SDLK_LEFT: window1.move_horizontally(-10); break;
-              case SDLK_RIGHT: window1.move_horizontally(10); break;
-              case SDLK_c:
-                window1.close();
-                quit = true;
-                break;
-              case SDLK_v:
-                window1.set_visible(!window1.is_visible());
-                break;
+                if (e.window.event == SDL_WINDOWEVENT_CLOSE)
+                {
+                    window.close();
+                    quit = true;
+                }
+            
+                if (e.type == SDL_KEYDOWN)
+                {
+                    switch (e.key.keysym.sym)
+                    {
+                    case SDLK_c:
+                        window.close();
+                        quit = true;
+                        break;
+                    }
+
+                }
+
+                if (e.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    //quit = true;
+                }
             }
 
-          }
-
-          if (e.type == SDL_MOUSEBUTTONDOWN)
-          {
-            //quit = true;
-          }
+            window.poll_events();
         }
 
-        window1.poll_events();
-        window2.poll_events();
-        window3.poll_events();
-        window4.poll_events();
-      }
+        bgfx::shutdown();
     }
     catch (const exception &exc)
     {
-      console::err(exc);
+        console::err(exc);
     }
-}
-
-int main(int argc, char **argv)
-{
-  my_window();
-
-  return 0;
-
-  /* Initialises data */
-  SDL_Window *window = NULL;
-
   
-  
-  /*
-   * Initialises the SDL video subsystem (as well as the events subsystem).
-   * Returns 0 on success or a negative error code on failure using SDL_GetError().
-   */
-  if (SDL_Init(0) != 0) {
-    fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
-    return 1;
-  }
-
-  /* Creates a SDL window */
-  window = SDL_CreateWindow(
-    "SDL Example", /* Title of the SDL window */
-		SDL_WINDOWPOS_UNDEFINED, /* Position x of the window */
-		SDL_WINDOWPOS_UNDEFINED, /* Position y of the window */
-		WIDTH, /* Width of the window in pixels */
-		HEIGHT, /* Height of the window in pixels */
-		SDL_INIT_VIDEO
-  ); /* Additional flag(s) */
-  
-  /* Checks if window has been created; if not, exits program */
-  if (window == NULL) {
-    fprintf(stderr, "SDL window failed to initialise: %s\n", SDL_GetError());
-    return 1;
-  }
-
-  SDL_SysWMinfo sdl_window_info;
-  SDL_VERSION(&sdl_window_info.version)
-
-  if (!SDL_GetWindowWMInfo(window, &sdl_window_info))
-  {
-    fprintf(stderr, "SDL window failed to get info: %s\n", SDL_GetError());
-    return 1;
-  }
-  
-  bgfx::PlatformData pd;
-#if BX_PLATFORM_LINUX || BX_PLATFORM_BSD
-    cout << "LINUX\n";
-    pd.ndt = sdl_window_info.info.x11.display;
-    pd.nwh = (void*)(uintptr_t)sdl_window_info.info.x11.window;
-#elif BX_PLATFORM_OSX
-    cout << "OSX\n";
-    pd.ndt = NULL;
-    pd.nwh = sdl_window_info.info.cocoa.window;
-#elif BX_PLATFORM_WINDOWS
-    cout << "WINDOWS\n";
-    pd.ndt = NULL;
-    pd.nwh = sdl_window_info.info.win.window;
-#elif BX_PLATFORM_STEAMLINK
-    cout << "STEAMLINK\n";
-    pd.ndt = sdl_window_info.info.vivante.display;
-    pd.nwh = sdl_window_info.info.vivante.window;
-#else
-    cout << "NOPE\n";
-#endif // BX_PLATFORM_
-
-  pd.context = NULL;
-  pd.backBuffer = NULL;
-  pd.backBufferDS = NULL;
-  bgfx::setPlatformData(pd);
-
-  bgfx::renderFrame();
-
-  //bgfx::setPlatformData(pd);
-  
-  //bgfx::Init bgfxInit;
-  //bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
-  //bgfxInit.resolution.width = WIDTH;
-  //bgfxInit.resolution.height = HEIGHT;
-  //bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
-  //bgfx::init(bgfxInit);
-
-  //bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-  //bgfx::setViewRect(0, 0, 0, WIDTH, HEIGHT);
-
-  //screenSurface = SDL_GetWindowSurface(window);
-  //SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-  //SDL_UpdateWindowSurface(window);
-
-  SDL_SetWindowResizable(window, SDL_TRUE);
-
-  /* Pauses all SDL subsystems for a variable amount of milliseconds */
-  //SDL_Delay(DELAY);
-
-  SDL_Event e;
-  bool quit = false;
-  while (!quit){
-
-      //bgfx::frame();
-
-      while (SDL_PollEvent(&e)){
-          if (e.type == SDL_QUIT){
-              quit = true;
-          }
-          if (e.type == SDL_KEYDOWN){
-              //quit = true;
-          }
-          if (e.type == SDL_MOUSEBUTTONDOWN){
-              //quit = true;
-          }
-      }
-  }
-
-  /* Frees memory */
-  SDL_DestroyWindow(window);
-  
-  /* Shuts down all SDL subsystems */
-  SDL_Quit();
-  
-  return 0;
+    SDL_Quit();
 }
