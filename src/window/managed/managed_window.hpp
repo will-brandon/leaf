@@ -13,10 +13,12 @@
 #ifndef MANAGED_WINDOW_H_HEADER_GUARD
 #define MANAGED_WINDOW_H_HEADER_GUARD
 
+#include "../../utils/unique/unique.hpp"
 #include "../../graphics/surface/native_surface_i.hpp"
 #include "../nonatomic_window_i.hpp"
 
 using namespace std;
+using namespace utl;
 
 namespace leaf
 {
@@ -25,7 +27,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class managed_window : public virtual nonatomic_window_i
+    class managed_window : public unique, public virtual nonatomic_window_i
     {
         private:
             /**
@@ -112,38 +114,6 @@ namespace leaf
             virtual bool poll_events(void) noexcept override = 0;
 
         public:
-            /**
-             * @brief   A window should not be copied as this copy would be shallow. Therefore, this
-             *          functionality is deleted.
-             * 
-             * @param   other   a separate window object
-             */
-            managed_window(const managed_window &other) noexcept = delete;
-
-            /**
-             * @brief   A window should not be moved as this move would be shallow. Therefore, this
-             *          functionality is deleted.
-             * 
-             * @param   other   a separate window object
-             */
-            managed_window(managed_window &&other) noexcept = delete;
-
-            /**
-             * @brief   A window should not be copied as this copy would be shallow. Therefore, this
-             *          functionality is deleted.
-             * 
-             * @param   other   a separate window object
-             */
-            managed_window &operator=(const managed_window &other) noexcept = delete;
-
-            /**
-             * @brief   A window should not be moved as this move would be shallow. Therefore, this
-             *          functionality is deleted.
-             * 
-             * @param   other   a separate window object
-             */
-            managed_window &operator=(managed_window &&other) noexcept = delete;
-
             /**
              * @brief   Determines the width of the window's display surface in pixels. Note that
              *          the surface is only the inner content area of the window, not the frame.

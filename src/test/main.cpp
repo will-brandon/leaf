@@ -16,6 +16,7 @@
 #include <bx/platform.h>
 #include <stdio.h>
 #include <iostream>
+#include "../utils/unique/uuid.hpp"
 #include "../utils/console.hpp"
 #include "../window/managed/sdl/sdl_window.hpp"
 
@@ -30,6 +31,16 @@ using namespace leaf;
 
 int main(int argc, char **argv)
 {
+    for (size_t i = 0; i < 32; i++)
+    {
+        cout << uuid_t() << '\n';
+    }
+
+
+    
+
+    return 0;
+
     SDL_Init(0);
 
     try
