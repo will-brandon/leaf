@@ -31,15 +31,24 @@ namespace utl
             /**
              * @brief   The 16-byte UUID that identifies the unique object.
              */
-            const uuid m_uuid;
+            const uuid_t m_uuid;
         
         public:
             /**
+             * @brief   Constructs a new identifiable object and assigns it a random UUID.
+             */
+            inline identifiable(void) noexcept : m_uuid() {}
+
+            /**
              * @brief   Determines the UUID of the unqiue object.
              * 
-             * @return uuid_t 
+             * @return  the UUID 
              */
-            uuid uuid(void) const noexcept;
+            inline uuid_t uuid(void) const noexcept
+            {
+                // Return the UUID.
+                return m_uuid;
+            }
     };
 }
 

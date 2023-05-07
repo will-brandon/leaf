@@ -13,7 +13,7 @@
 #ifndef MANAGED_WINDOW_H_HEADER_GUARD
 #define MANAGED_WINDOW_H_HEADER_GUARD
 
-#include "../../utils/unique/unique.hpp"
+#include "../../utils/unique/identifiable.hpp"
 #include "../../graphics/surface/native_surface_i.hpp"
 #include "../nonatomic_window_i.hpp"
 
@@ -27,7 +27,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class managed_window : public unique, public virtual nonatomic_window_i
+    class managed_window : public identifiable, public virtual nonatomic_window_i
     {
         private:
             /**

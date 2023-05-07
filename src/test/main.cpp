@@ -31,18 +31,13 @@ using namespace leaf;
 
 int main(int argc, char **argv)
 {
-
-
-
-    
-
-    return 0;
-
     SDL_Init(0);
 
     try
     {
         sdl_window window("Test1", 0, 0, 600, 400);
+
+        cout << window.uuid() << '\n';
         
         window.set_visible(true);
         window.set_user_resizable(true);
