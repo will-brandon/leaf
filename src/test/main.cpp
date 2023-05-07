@@ -38,6 +38,7 @@ int main(int argc, char **argv)
         sdl_window window("Test1", 0, 0, 600, 400);
 
         cout << window.uuid() << '\n';
+        cout << window.sdl_version() << '\n';
         
         window.set_visible(true);
         window.set_user_resizable(true);

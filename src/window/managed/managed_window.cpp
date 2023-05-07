@@ -1,5 +1,5 @@
 /**
- * @file    managed_window.hpp
+ * @file    managed_window.cpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
  * @date    May 5, 2023
  * 

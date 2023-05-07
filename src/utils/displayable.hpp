@@ -40,13 +40,12 @@ namespace utl
             return stream << displayable.to_string();
         }
 
-        public:
-            /**
-             * @brief   Converts the structure to a display string.
-             * 
-             * @return  string  the display string
-             */
-            virtual string to_string(void) const noexcept = 0;
+        /**
+         * @brief   Converts the structure to a display string.
+         * 
+         * @return  string  the display string
+         */
+        virtual string to_string(void) const noexcept = 0;
 
     } displayable_t;
 }

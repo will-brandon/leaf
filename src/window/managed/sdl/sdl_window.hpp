@@ -14,6 +14,7 @@
 #define SDL_WINDOW_H_HEADER_GUARD
 
 #include <SDL2/SDL_syswm.h>
+#include "../../../utils/release_types.hpp"
 #include "../../../graphics/surface/native_surface_i.hpp"
 #include "../managed_window.hpp"
 #include "sdl_types.hpp"
@@ -383,16 +384,16 @@ namespace leaf
              * 
              * @return  a structure containing components comprising the version of SDL being used
              */
-            inline sdl_version_t sdl_version(void) const noexcept
+            inline release_version_t sdl_version(void) const noexcept
             {
                 // Create a version structure.
-                sdl_version_t version;
+                SDL_version version;
 
                 // Copy the SDL version information into the structure.
                 SDL_VERSION(&version)
 
                 // Return the version structure.
-                return version;
+                return {version.major, version.minor, version.patch};
             }
     };
 }

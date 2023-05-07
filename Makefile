@@ -40,7 +40,7 @@ compile:
 	make -C $(SRCDIR)
 
 # This target will link all the objects into an executable. Find all objects in the binary output
-#directory tree.
+# directory tree.
 link:
 	$(CC) $(CFLAGS) $(INSTALLED_LIBS) $(MANUAL_LIBS) $(FRAMEWORKS) \
 		$(shell find $(OBJDIR) -name *.o) -o $(EXECDIR)/$(EXEC)

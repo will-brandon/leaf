@@ -1,28 +1,25 @@
 /**
- * @file    sdl_types.hpp
+ * @file    release_types.cpp
  * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    April 29, 2023
+ * @date    May 7, 2023
  * 
- * @brief   Implementation for type definitions for Simple DirectMedia Layer (SDL).
+ * @brief   Implementation for type definitions for software releases.
  *
  * @copyright Copyright (c) 2023
  */
 
 #include <sstream>
-#include "sdl_types.hpp"
+#include "release_types.hpp"
 
 using namespace std;
 
-namespace leaf
+namespace utl
 {
-    ostream &operator<<(ostream &stream, const sdl_version_t &sdl_version) noexcept
-    {
-        // Inject the version structure display string into the output stream, then return the
-        // stream.
-        return stream << sdl_version.to_string();
-    }
+    release_version::release_version(byte_t major, byte_t minor, byte_t patch) noexcept
+    // Initialize the majpor, minor, and patch components.
+        : major(major), minor(minor), patch(patch) {}
 
-    string sdl_version::to_string(void) const noexcept
+    string release_version::to_string(void) const noexcept
     {
         // Create a buffered string stream to build a display string.
         stringstream stream;
