@@ -28,9 +28,40 @@ namespace utl
         uuid_copy(this->bytes, bytes);
     }
 
+    uuid::uuid(const string &string)
+    {
+        // Attempt to decode the UUID string. If the decode fails, throw an error.
+        if (uuid_parse(string.c_str(), bytes))
+        {
+            throw runtime_error("Failed to create UUID. (Given string representation was invalid)");
+        }
+
+        // Using bit-manipulation, ensure that the 4 most significat bits of the 7th byte are 0100
+        // in compliance with RFC 4122.
+        if ((bytes[6] & 0xF0) - 0b01000000)
+        {
+            throw runtime_error("Failed to create UUID. (Given string representation was invalid because the 4 most significant bits of the 7th byte were not 0100.)");
+        }
+
+        // Using bit-manipulation, ensure that the 2 most significat bits of the 9th byte are 10
+        // in compliance with RFC 4122.
+        if ((bytes[8] & 0xC0) - 0b10000000)
+        {
+            throw runtime_error("Failed to create UUID. (Given string representation was invalid because the 2 most significant bits of the 9th byte were not 10.)");
+        }
+    }
+
     bool uuid::operator==(const uuid &other) const noexcept
     {
-        // Compare the memory of the 16 bytes that compose the UUID of each structure.
+        // Compare the memory of the 16 bytes that compose the UUID of each structure. 0 indicates
+        // equality so treat this as a boolean and negate it.
+        return !uuid_compare(bytes, other.bytes);
+    }
+
+    bool uuid::operator!=(const uuid &other) const noexcept
+    {
+        // Compare the memory of the 16 bytes that compose the UUID of each structure. 0 indicates
+        // equality so treat this as a boolean.
         return uuid_compare(bytes, other.bytes);
     }
 

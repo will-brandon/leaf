@@ -21,10 +21,10 @@
 #define UUID_LEN (size_t)16
 
 /**
- * @brief   A UUID string is 36 characters long. This is composed of 32 hexidecimal digits and 4
- *          hyphens.
+ * @brief   A UUID string is 37 characters long. This is composed of 32 hexidecimal digits, 4
+ *          hyphens, and a terminating '\0' character.
  */
-#define UUID_STRING_LEN (size_t)36
+#define UUID_STRING_LEN (size_t)37
 
 using namespace std;
 
@@ -55,23 +55,44 @@ namespace utl
          *          the case a segmentation fault will likely occur.
          */
         uuid(const byte_t *bytes) noexcept;
+        
+        /**
+         * @brief   Constructs a new UUID from a UUID string. The string must adhere to the RFC 4122
+         *          UUID protocol. It should contain 32 hexadecimal characters separated by 3
+         *          hyphens. It should be in the form xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx. M and N
+         *          hold special values according to the constraints of RFC 4122. M must be the
+         *          digit '4', N can be either '8', '9', 'A', or 'B'.
+         * 
+         * @param   string   the UUID string to decode
+         * 
+         * @throw   runtime_error if the UUID string is invalid and could not be decoded
+         */
+        uuid(const string &string);
 
         /**
-         * @brief   Determines whether the UUID structure is the same as another UUID structure.
+         * @brief   Determines whether the UUID structure is equal to another UUID structure. This 
+         *          simply performs a byte-by-byte comparison.
+         * 
+         * @param   other   the other UUID structure to compare
+         * 
+         * @return  true if and only if all 16 bytes are a perfect match
+         */
+        bool operator==(const uuid &other) const noexcept;
+
+         /**
+         * @brief   Determines whether the UUID structure is not equal to another UUID structure.
          *          This simply performs a byte-by-byte comparison.
          * 
          * @param   other   the other UUID structure to compare
          * 
          * @return  true if and only if all 16 bytes are a perfect match
          */
-        virtual bool operator==(const uuid &other) const noexcept;
-
-        //virtual bool operator!=(const uuid &other) const noexcept;
+        bool operator!=(const uuid &other) const noexcept;
 
         /**
          * @brief   Converts the UUID to a display string. The string adheres to the RFC 4122
          *          UUID protocol. It will contain 32 hexadecimal characters separated by 3
-         *          hyphens. It will b in the form xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx. M and N
+         *          hyphens. It will be in the form xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx. M and N
          *          hold special values according to the constraints of RFC 4122. M must be the
          *          digit '4', N can be either '8', '9', 'A', or 'B'.
          * 
