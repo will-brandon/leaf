@@ -20,11 +20,6 @@
 #include "../utils/console.hpp"
 #include "../window/managed/sdl/sdl_window.hpp"
 
-/* Sets constants */
-#define WIDTH 800
-#define HEIGHT 600
-#define DELAY 3000
-
 using namespace std;
 using namespace utl;
 using namespace leaf;
