@@ -59,6 +59,14 @@ namespace leaf
              */
             virtual ~sdl() noexcept;
 
+            /**
+             * @brief   Determines which window has input focus (if any) and instructs the window to
+             *          handle the SDL event that occured.
+             * 
+             * @param   event   an SDL event that has just occured
+             */
+            void handle_event_on_subject_window(const SDL_Event &event) const noexcept;
+
         public:
             /**
              * @brief   Performs updates on the SDL window manager. This will poll the events of

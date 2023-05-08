@@ -122,6 +122,28 @@ namespace leaf
              * @throw   exception if an error occurs setting the title
              */
             virtual window_i *set_title(const std::string &title) = 0;
+            
+            /**
+             * @brief   Determines whether the window has input focus. This also generally means
+             *          that it in the front in terms of z-position, but this is
+             *          implementation-dependent.
+             * 
+             * @return  true if and only if the window has input focus
+             * 
+             * @throw   exception if an error occurs determining whether the window has input focus
+             */
+            virtual bool has_focus(void) const = 0;
+
+            /**
+             * @brief   Gives the window input focus if it did not have it previously. This also
+             *          generally means that it will be brought to the front in terms of z-position,
+             *          but this is implementation-dependent.
+             * 
+             * @return  a pointer to the window for chaining
+             * 
+             * @throw   exception if an error occurs giving the window input focus
+             */
+            virtual window_i *focus(void) = 0;
     };
 }
 

@@ -28,24 +28,31 @@ int main(int argc, char **argv)
 {
     try
     {
-        cout << sdl::instance.living_window_count() << '\n';
+        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
+            << sdl::instance.window_count() << '\n';
         
-        sdl_window window("Test1", 0, 0, 600, 400);
+        sdl_window window1("Test1", 0, 0, 600, 400);
 
-        cout << sdl::instance.living_window_count() << '\n';
+        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
+            << sdl::instance.window_count() << '\n';
 
-        cout << window.uuid() << '\n';
-        cout << window.sdl_version() << '\n';
+        sdl_window window2("Test2", 0, 0, 600, 400);
+
+        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
+            << sdl::instance.window_count() << '\n';
+
+        sdl_window window3("Test3", 0, 0, 600, 400);
+
+        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
+            << sdl::instance.window_count() << '\n';
         
-        window.set_visible(true);
-        window.set_user_resizable(true);
-
-        native_surface_data_t native_surface_data = window.native_data();
-        cout << ptr_to_str(native_surface_data.display_type) << '\n';
+        window1.set_visible(true)->set_user_resizable(true);
+        window2.set_visible(true)->set_user_resizable(true);
+        window3.set_visible(true)->set_user_resizable(true);
 
         while (sdl::instance.poll_events())
         {
-            
+
         }
     }
     catch (const exception &exc)

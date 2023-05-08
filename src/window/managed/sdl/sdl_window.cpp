@@ -15,7 +15,7 @@
 #include "sdl_window.hpp"
 
 using namespace std;
-
+#include <iostream>
 namespace leaf
 {
     void sdl_window::init_natives(void)
@@ -181,6 +181,28 @@ namespace leaf
         return true;
     }
 
+    void sdl_window::handle_sdl_event(const SDL_Event &event) noexcept
+    {
+        switch (event.type)
+        {
+            case SDL_WINDOWEVENT:
+
+                switch (event.window.event)
+                {
+                    case SDL_WINDOWEVENT_CLOSE:
+                        
+                        if (is_user_closable())
+                        {
+                            this->close();
+                        }
+
+                        cout << "CLOSE : " << title() << "!!!\n";
+                }
+
+                break;
+        }
+    }
+
     px_t sdl_window::width(void) const noexcept
     {
         // Allocate a variable to read the width into.
@@ -338,6 +360,22 @@ namespace leaf
     {
         // Use SDL functionality to set the window title.
         SDL_SetWindowTitle(m_internal_window, title.c_str());
+
+        // Return a pointer to the window for chaining.
+        return this;
+    }
+
+    bool sdl_window::has_focus(void) const noexcept
+    {
+        // Use SDL functionality to reteieve the flag indicating whether the window has input focus.
+        return SDL_GetWindowFlags(m_internal_window) & SDL_WINDOW_INPUT_FOCUS;
+    }
+
+    sdl_window *sdl_window::focus(void) noexcept
+    {
+        // Use SDL functionaslity to give the window focus and bring it to the front in terms of
+        // z-position.
+        SDL_RaiseWindow(m_internal_window);
 
         // Return a pointer to the window for chaining.
         return this;

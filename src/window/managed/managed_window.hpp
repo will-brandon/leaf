@@ -387,6 +387,30 @@ namespace leaf
              *          likely.
              */
             virtual managed_window *set_title(const std::string &title) noexcept override = 0;
+
+            /**
+             * @brief   Determines whether the window has input focus. This also generally means
+             *          that it in the front in terms of z-position, but this is
+             *          implementation-dependent.
+             * 
+             * @return  true if and only if the window has input focus
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            virtual bool has_focus(void) const noexcept override = 0;
+
+            /**
+             * @brief   Gives the window input focus if it did not have it previously. This also
+             *          generally means that it will be brought to the front in terms of z-position,
+             *          but this is implementation-dependent.
+             * 
+             * @return  a pointer to the window for chaining
+             * 
+             * @warning Behavior is undefined if the window is closed and a segmentation fault is
+             *          likely.
+             */
+            virtual managed_window *focus(void) noexcept override = 0;
     };
 }
 

@@ -125,6 +125,18 @@ namespace leaf
              */
             virtual bool poll_events(void) noexcept override;
 
+            /**
+             * @brief   Handles an SDL event that is relevant to this window (i.e. this window is
+             *          the subject of the event).
+             * 
+             * @param   event   the SDL event
+             * 
+             * @warning There is no check in place to ensure this event is relevant to this window.
+             *          It is the duty of the caller to responsibly pass only events where the
+             *          subject is this window.
+             */
+            void handle_sdl_event(const SDL_Event &event) noexcept;
+
         public:
             /**
              * @brief   Creates an SDL window. The title, position, and size are set to default
@@ -156,7 +168,7 @@ namespace leaf
              *          not already dead.
              */
             virtual ~sdl_window() noexcept;
-            
+
             /**
              * @brief   Determines the width of the window's display surface in pixels. Note that
              *          the surface is only the inner content area of the window, not the frame.
@@ -373,6 +385,22 @@ namespace leaf
              *          likely.
              */
             virtual sdl_window *set_title(const std::string &title) noexcept override;
+
+            /**
+             * @brief   Determines whether the window has input focus. This also generally means
+             *          that it in the front in terms of z-position.
+             * 
+             * @return  true if and only if the window has input focus
+             */
+            virtual bool has_focus(void) const noexcept override;
+
+            /**
+             * @brief   Gives the window input focus if it did not have it previously. It will be
+             *          brought to the front in terms of z-position.
+             * 
+             * @return  a pointer to the window for chaining
+             */
+            virtual sdl_window *focus(void) noexcept override;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.

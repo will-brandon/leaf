@@ -28,25 +28,43 @@ namespace leaf
     
     sdl::~sdl() noexcept
     {
+        // Ensure that all windows are closed before deinitializing SDL.
+        close_all_windows();
+
         // Deinitialize SDL.
         SDL_Quit();
     }
 
+    void sdl::handle_event_on_subject_window(const SDL_Event &event) const noexcept
+    {
+        // Check each window to determine if it has focus.
+        for (managed_window *window : windows())
+        {
+            // If the window has focus, instruct it to handle the SDL event.
+            if (window->has_focus())
+            {
+                // Cast the managed window pointer to an SDL window pointer and instruct it to
+                // handle the SDL event.
+                ((sdl_window *)window)->handle_sdl_event(event);
+
+                // Return false since it is assumed no other windows hold input focus so there is no
+                // need to keep looking.
+                return;
+            }
+        }
+    }
+
     bool sdl::poll_events(void) noexcept
     {
+        // Create an event variable to hold SDL events that occur.
         SDL_Event event;
 
+        // Continouslt poll SDL events and read them into the event variable until they have all
+        // been read.
         while (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_KEYDOWN)
-            {
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_c:
-                    close_all_windows();
-                    break;
-                }
-            }
+            // Instruct the relevant currently-focussed window to handle the event.
+            handle_event_on_subject_window(event);
         }
 
         // Poll all managed windows. If the number of living windows is not zero, store this in a
