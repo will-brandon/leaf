@@ -13,8 +13,6 @@
 
 #include <cstdint>
 
-using namespace std;
-
 namespace leaf
 {
     /**

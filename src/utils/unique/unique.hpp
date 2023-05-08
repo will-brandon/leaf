@@ -12,8 +12,6 @@
 #ifndef UNIQUE_H_HEADER_GUARD
 #define UNIQUE_H_HEADER_GUARD
 
-using namespace std;
-
 namespace utl
 {
     /**

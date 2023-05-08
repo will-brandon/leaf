@@ -15,8 +15,6 @@
 
 #include "surface_i.hpp"
 
-using namespace std;
-
 namespace leaf
 {
     /**

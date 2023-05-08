@@ -26,8 +26,6 @@
  */
 #define UUID_STRING_LEN (size_t)37
 
-using namespace std;
-
 namespace utl
 {
     /**
@@ -67,7 +65,7 @@ namespace utl
          * 
          * @throw   runtime_error if the UUID string is invalid and could not be decoded
          */
-        uuid(const string &string);
+        uuid(const std::string &string);
 
         /**
          * @brief   Determines whether the UUID structure is equal to another UUID structure. This 
@@ -100,7 +98,7 @@ namespace utl
          * 
          * @return  string  the display string
          */
-        virtual string to_string(void) const noexcept override;
+        virtual std::string to_string(void) const noexcept override;
             
     } uuid_t;
 }

@@ -13,12 +13,17 @@
 #ifndef MANAGED_WINDOW_H_HEADER_GUARD
 #define MANAGED_WINDOW_H_HEADER_GUARD
 
+// The class must be forward declared because there will be circular includes between the window
+// manager and managed window classes.
+namespace leaf
+{
+    class managed_window;
+}
+
 #include "../../utils/unique/identifiable.hpp"
 #include "../../graphics/surface/native_surface_i.hpp"
 #include "../nonatomic_window_i.hpp"
-
-using namespace std;
-using namespace utl;
+#include "window_manager.hpp"
 
 namespace leaf
 {
@@ -27,8 +32,11 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class managed_window : public identifiable, public virtual nonatomic_window_i
+    class managed_window : public utl::identifiable, public virtual nonatomic_window_i
     {
+        // The window manager must be able to access hidden functionality of a managed window.
+        friend class window_manager;
+
         private:
             /**
              * @brief   Denotes whether the window is alive (open) or dead (closed) represented by
@@ -64,8 +72,10 @@ namespace leaf
              *          and therefore closed). If the window was already closed, nothing happens.
              * 
              * @return  true if and only if the window was not already dead (closed)
+             * 
+             * @throw   exception if an error occurs destroying the window
              */
-            virtual bool destroy(void) noexcept override = 0;
+            virtual bool destroy(void) override = 0;
 
             /**
              * @brief   Flags the window as dead (closed). This should be used internally after the
@@ -92,8 +102,10 @@ namespace leaf
              * @brief   Determines whether the window should close the next time events are polled.
              * 
              * @return  true if the window should close
+             * 
+             * @throw   exception if an error occurs determining whether the window should close
              */
-            virtual bool should_close(void) const noexcept override = 0;
+            virtual bool should_close(void) const override = 0;
 
             /**
              * @brief   Sets the flag indicating whether the window should close the next time
@@ -102,16 +114,22 @@ namespace leaf
              * @param   should_close  true if the window should close, false if it should not close
              * 
              * @return  a pointer to the window for chaining
+             * 
+             * @throw   exception if an error occurs setting whether the window should close
              */
-            virtual managed_window *set_should_close(bool should_close) noexcept override = 0;
+            virtual managed_window *set_should_close(bool should_close) override = 0;
 
             /**
              * @brief   Performs any necessary updates for the window. This includes closing the
              *          window if a close was requested. If the window is closed, nothing happens.
              * 
-             * @return  true if and only if the window is active (has not been closed)
+             * @return  true if and only if the window is active (has not been closed), if this
+             *          action causes the window to close or it was already closed, false will be
+             *          returned
+             * 
+             * @throw   exception if an error occurs polling window events
              */
-            virtual bool poll_events(void) noexcept override = 0;
+            virtual bool poll_events(void) override = 0;
 
         public:
             /**
@@ -356,7 +374,7 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual string title(void) const noexcept override = 0;
+            virtual std::string title(void) const noexcept override = 0;
 
             /**
              * @brief   Sets the title of the window displayed on the frame.
@@ -368,7 +386,7 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual managed_window *set_title(const string &title) noexcept override = 0;
+            virtual managed_window *set_title(const std::string &title) noexcept override = 0;
     };
 }
 

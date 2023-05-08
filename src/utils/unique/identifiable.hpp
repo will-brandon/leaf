@@ -16,8 +16,6 @@
 #include "uuid.hpp"
 #include "unique.hpp"
 
-using namespace std;
-
 namespace utl
 {
     /**

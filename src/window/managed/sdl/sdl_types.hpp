@@ -13,8 +13,6 @@
 
 #include <SDL2/SDL.h>
 
-using namespace std;
-
 namespace leaf
 {
     /**

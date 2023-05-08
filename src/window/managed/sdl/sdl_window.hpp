@@ -103,7 +103,7 @@ namespace leaf
              * 
              * @throw   runtime_error if an error occurs creating the SDL window
              */
-            sdl_window(const string &title, int x, int y, int width, int height);
+            sdl_window(const std::string &title, int x, int y, int width, int height);
 
             /**
              * @brief   Destructs the SDL window. The underlying SDL window is destroyed if it is
@@ -141,7 +141,9 @@ namespace leaf
              * @brief   Performs any necessary updates for the window. This includes closing the
              *          window if a close was requested. If the window is closed, nothing happens.
              * 
-             * @return  true if and only if the window is active (has not been closed)
+             * @return  true if and only if the window is active (has not been closed), if this
+             *          action causes the window to close or it was already closed, false will be
+             *          returned
              */
             virtual bool poll_events(void) noexcept override;
 
@@ -349,7 +351,7 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual string title(void) const noexcept override;
+            virtual std::string title(void) const noexcept override;
 
             /**
              * @brief   Sets the title of the window displayed on the frame.
@@ -361,14 +363,14 @@ namespace leaf
              * @warning Behavior is undefined if the window is closed and a segmentation fault is
              *          likely.
              */
-            virtual sdl_window *set_title(const string &title) noexcept override;
+            virtual sdl_window *set_title(const std::string &title) noexcept override;
 
             /**
              * @brief   Determines the name of the operating system the window resides on.
              * 
              * @return  The name string of the operating system
              */
-            virtual string native_os_name(void) const noexcept override;
+            virtual std::string native_os_name(void) const noexcept override;
 
             /**
              * @brief   Returns native platform-dependent data about the window's display surface.
@@ -384,15 +386,15 @@ namespace leaf
              * 
              * @return  a structure containing components comprising the version of SDL being used
              */
-            inline release_version_t sdl_version(void) const noexcept
+            inline utl::release_version_t sdl_version(void) const noexcept
             {
-                // Create a version structure.
+                // Create an SDL version structure.
                 SDL_version version;
 
                 // Copy the SDL version information into the structure.
                 SDL_VERSION(&version)
 
-                // Return the version structure.
+                // Return a release structure copied from the SDL version structure.
                 return {version.major, version.minor, version.patch};
             }
     };

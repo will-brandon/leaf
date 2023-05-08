@@ -14,8 +14,6 @@
 
 #include <ostream>
 
-using namespace std;
-
 namespace utl
 {
     /**
@@ -32,8 +30,8 @@ namespace utl
          * 
          * @return  a reference to the output stream for chaining
          */
-        inline friend ostream &operator<<(
-            ostream &stream, const displayable &displayable) noexcept
+        inline friend std::ostream &operator<<(
+            std::ostream &stream, const displayable &displayable) noexcept
         {
             // Convert the displayable structure to a string and insert it into the stream. Return
             // the stream for chaining.
@@ -45,7 +43,7 @@ namespace utl
          * 
          * @return  string  the display string
          */
-        virtual string to_string(void) const noexcept = 0;
+        virtual std::string to_string(void) const noexcept = 0;
 
     } displayable_t;
 }

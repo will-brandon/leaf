@@ -18,8 +18,6 @@
 
 #include "window_i.hpp"
 
-using namespace std;
-
 namespace leaf
 {
     /**
@@ -32,7 +30,7 @@ namespace leaf
      */
     class nonatomic_window_i : public virtual window_i
     {
-        protected:            
+        public:            
             /**
              * @brief   Destroys the window (deallocates internal functionality and deems it dead
              *          and therefore closed). If the window was already closed, nothing happens.
@@ -43,13 +41,12 @@ namespace leaf
              */
             virtual bool destroy(void) = 0;
         
-        public:
             /**
              * @brief   Determines whether the window should close the next time events are polled.
              * 
              * @return  true if the window should close
              * 
-             * @throw   exception if an error occurs determining if the window should close
+             * @throw   exception if an error occurs determining whether the window should close
              */
             virtual bool should_close(void) const = 0;
             
@@ -69,7 +66,9 @@ namespace leaf
              * @brief   Performs any necessary updates for the window. This includes closing the
              *          window if a close was requested. If the window is closed, nothing happens.
              * 
-             * @return  true if and only if the window is active (has not been closed)
+             * @return  true if and only if the window is active (has not been closed), if this
+             *          action causes the window to close or it was already closed, false will be
+             *          returned
              * 
              * @throw   exception if an error occurs polling window events
              */

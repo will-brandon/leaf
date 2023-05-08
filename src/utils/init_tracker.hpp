@@ -16,8 +16,6 @@
 
 #include <string>
 
-using namespace std;
-
 namespace utl
 {
     /**
@@ -33,7 +31,7 @@ namespace utl
              * @brief   The name of the subject (often a class) that the initialization tracker is
              *          actively tracking.
              */
-            const string m_subject_name;
+            const std::string m_subject_name;
 
             /**
              * @brief   A flag denoting whether the tracker is in an initialzied state. It will
@@ -50,7 +48,7 @@ namespace utl
              * @param   subject_name    the name of the subject (often a class) that the
              *                          initialization tracker is actively tracking
              */
-            init_tracker(const string &subject_name) noexcept;
+            init_tracker(const std::string &subject_name) noexcept;
 
             /**
              * @brief   Destroys initialization tracker object. The method is set to default because
@@ -85,7 +83,7 @@ namespace utl
              * 
              * @throw   runtime_error if initialization has not yet been registered
              */
-            void assert_init(const string &operation) const;
+            void assert_init(const std::string &operation) const;
     };
 }
 

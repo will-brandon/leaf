@@ -16,8 +16,6 @@
 #include <string>
 #include "../graphics/surface/pos_surface_i.hpp"
 
-using namespace std;
-
 namespace leaf
 {
     /**
@@ -111,7 +109,7 @@ namespace leaf
              * 
              * @throw   exception if an error occurs determining the title of the window
              */
-            virtual string title(void) const = 0;
+            virtual std::string title(void) const = 0;
 
             /**
              * @brief   Sets the title of the window. This title is often displayed on the window's
@@ -123,7 +121,7 @@ namespace leaf
              * 
              * @throw   exception if an error occurs setting the title
              */
-            virtual window_i *set_title(const string &title) = 0;
+            virtual window_i *set_title(const std::string &title) = 0;
     };
 }
 

@@ -12,8 +12,6 @@
 #ifndef NATIVE_SURFACE_TYPES_H_HEADER_GUARD
 #define NATIVE_SURFACE_TYPES_H_HEADER_GUARD
 
-using namespace std;
-
 namespace leaf
 {
     /**

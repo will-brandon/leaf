@@ -14,8 +14,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 namespace utl
 {
     /**
@@ -61,15 +59,15 @@ namespace utl
                 // Print a styled message if ANSI style is enabled, print a clean message otherwise.
                 if (f_ansi_style_enabled)
                 {
-                    cout << "\033[1;91mError:\033[0;1m " << obj << "\033[0m\n";
+                    std::cout << "\033[1;91mError:\033[0;1m " << obj << "\033[0m\n";
                 }
                 else
                 {
-                    cout << "Error: " << obj << "\n";
+                    std::cout << "Error: " << obj << "\n";
                 }
 
                 // Exit with the given exit code.
-                exit(exit_code);
+                std::exit(exit_code);
             }
 
             /**
@@ -79,7 +77,7 @@ namespace utl
              * @tparam  T   the type of object to pipe into standard output as the message
              * @param   obj the object to pipe into standard output as the messsage
              */
-            template<typename T> inline static void err(const T &obj) noexcept
+            template<typename T> static void err(const T &obj) noexcept
             {
                 // Delegate the task and use exit code 1.
                 err(obj, EXIT_FAILURE);
@@ -93,7 +91,7 @@ namespace utl
              *                      output
              * @param   exit_code   the exit code
              */
-            inline static void err(const exception &exc, int exit_code) noexcept
+            inline static void err(const std::exception &exc, int exit_code) noexcept
             {
                 // Retreieve the message from the exception and deletage to the templated err
                 // function.
@@ -107,7 +105,7 @@ namespace utl
              * @param   exc the exception object whose message will pipe into standard
              *              output
              */
-            inline static void err(const exception &exc) noexcept
+            inline static void err(const std::exception &exc) noexcept
             {
                 // Retreieve the message from the exception and deletage to the templated err
                 // function. Use exit code 1.
@@ -125,11 +123,11 @@ namespace utl
                 // Print a styled message if ANSI style is enabled, print a clean message otherwise.
                 if (f_ansi_style_enabled)
                 {
-                    cout << "\033[1;93mWarning:\033[0;1m " << obj << "\033[0m\n";
+                    std::cout << "\033[1;93mWarning:\033[0;1m " << obj << "\033[0m\n";
                 }
                 else
                 {
-                    cout << "Warning: " << obj << "\n";
+                    std::cout << "Warning: " << obj << "\n";
                 }
             }
 
@@ -139,7 +137,7 @@ namespace utl
              * @param   exc the exception object whose message will pipe into standard
              *              output
              */
-            inline static void warn(const exception &exc) noexcept
+            inline static void warn(const std::exception &exc) noexcept
             {
                 // Retreieve the message from the exception and deletage to the templated warn
                 // function.

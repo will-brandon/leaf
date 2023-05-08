@@ -16,8 +16,6 @@
 #include "surface_i.hpp"
 #include "native_surface_types.hpp"
 
-using namespace std;
-
 namespace leaf
 {
     /**
@@ -34,7 +32,7 @@ namespace leaf
              * 
              * @throw   exception if an error occrued retrieving the operating system name
              */
-            virtual string native_os_name(void) const = 0;
+            virtual std::string native_os_name(void) const = 0;
 
             /**
              * @brief   Returns native platform-dependent data about the surface. A null display

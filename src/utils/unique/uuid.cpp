@@ -40,14 +40,16 @@ namespace utl
         // in compliance with RFC 4122.
         if ((bytes[6] & 0xF0) - 0b01000000)
         {
-            throw runtime_error("Failed to create UUID. (Given string representation was invalid because the 4 most significant bits of the 7th byte were not 0100.)");
+            throw runtime_error(
+                "Failed to create UUID. (The 4 most significant bits of byte 7 must be 0100'B.)");
         }
 
         // Using bit-manipulation, ensure that the 2 most significat bits of the 9th byte are 10
         // in compliance with RFC 4122.
         if ((bytes[8] & 0xC0) - 0b10000000)
         {
-            throw runtime_error("Failed to create UUID. (Given string representation was invalid because the 2 most significant bits of the 9th byte were not 10.)");
+            throw runtime_error(
+                "Failed to create UUID. (The 2 most significant bits of byte 9 must be 10'B.)");
         }
     }
 

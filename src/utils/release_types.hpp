@@ -14,8 +14,6 @@
 #include "memory_types.hpp"
 #include "displayable.hpp"
 
-using namespace std;
-
 namespace utl
 {
     /**
@@ -59,7 +57,7 @@ namespace utl
          * 
          * @return  the display string
          */
-        virtual string to_string(void) const noexcept override;
+        virtual std::string to_string(void) const noexcept override;
 
     } release_version_t;
 }
