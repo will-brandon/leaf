@@ -10,6 +10,7 @@
  * @copyright Copyright (c) 2023
  */
 
+#include <SDL2/SDL.h>
 #include <bx/platform.h>
 #include "sdl_window.hpp"
 
@@ -113,10 +114,16 @@ namespace leaf
 
         // Apply the defaut presets to the window.
         set_defaults();
+        
+        // Register the window with the SDL window manager.
+        sdl::instance.register_window(this);
     }
 
     sdl_window::~sdl_window() noexcept
     {
+        // Unregister the window with the SDL window manager.
+        sdl::instance.unregister_window(this);
+
         // Ensure that the internal window is destroyed.
         destroy();
     }
@@ -312,7 +319,7 @@ namespace leaf
     sdl_window *sdl_window::set_user_resizable(bool is_user_resizable) noexcept
     {
         // Use SDL functionality to set whether the window is user-resizable.
-        SDL_SetWindowResizable(m_internal_window, sdl_bool(is_user_resizable));
+        SDL_SetWindowResizable(m_internal_window, (SDL_bool)is_user_resizable);
 
         // Set the flag to the new value.
         m_is_user_resizable = is_user_resizable;

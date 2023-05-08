@@ -12,6 +12,8 @@
 #ifndef NATIVE_SURFACE_TYPES_H_HEADER_GUARD
 #define NATIVE_SURFACE_TYPES_H_HEADER_GUARD
 
+#include "../../utils/displayable.hpp"
+
 namespace leaf
 {
     /**

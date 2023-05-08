@@ -13,8 +13,8 @@
 #ifndef MANAGED_WINDOW_H_HEADER_GUARD
 #define MANAGED_WINDOW_H_HEADER_GUARD
 
-// The class must be forward declared because there will be circular includes between the window
-// manager and managed window classes.
+// The class must be forward declared because there are circular includes between the window manager
+// and managed window classes.
 namespace leaf
 {
     class managed_window;

@@ -22,6 +22,36 @@ namespace leaf
         return m_windows;
     }
 
+    bool window_manager::register_window(managed_window *window)
+    {
+        // Ensure the window pointer is not null.
+        if (!window)
+        {
+            throw runtime_error(
+                "Failed to register managed window. (Given window pointer was null)");
+        }
+
+        // Add the window at the given pointer to the set of managed windows. Return the second flag
+        // in the pair denoting whether the insertion was successful or if the pointer was already
+        // present in the set.
+        return m_windows.insert(window).second;
+    }
+            
+    bool window_manager::unregister_window(managed_window *window)
+    {
+        // Ensure the window pointer is not null.
+        if (!window)
+        {
+            throw runtime_error(
+                "Failed to unregister managed window. (Given window pointer was null)");
+        }
+
+        // Remove the window at the given pointer from the set of managed windows. Return the number
+        // of pointers erased casted as a boolean. This means that a true value indicates that a
+        // window was successfully unregistered from the set.
+        return m_windows.erase(window);
+    }
+
     size_t window_manager::poll_windows(void) const
     {
         // Initialize a living window counter.
@@ -66,5 +96,25 @@ namespace leaf
 
         // Return the counter.
         return living_window_count;
+    }
+
+    size_t window_manager::close_all_windows(void) noexcept
+    {
+        // Initialize a close flagged window counter.
+        size_t flagged_window_count = 0;
+
+        // For each window under management, try to close it.
+        for (managed_window *window : m_windows)
+        {
+            // Try to close the window. If the window is alive and has not been flagged for closing,
+            // increment the counter.
+            if (window->close())
+            {
+                flagged_window_count++;
+            }
+        }
+        
+        // Return the counter.
+        return flagged_window_count;
     }
 }

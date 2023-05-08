@@ -13,11 +13,18 @@
 #ifndef SDL_WINDOW_H_HEADER_GUARD
 #define SDL_WINDOW_H_HEADER_GUARD
 
+// The class must be forward declared because there are circular includes between the SDL window
+// manager and SDL window classes.
+namespace leaf
+{
+    class sdl_window;
+}
+
 #include <SDL2/SDL_syswm.h>
 #include "../../../utils/release_types.hpp"
 #include "../../../graphics/surface/native_surface_i.hpp"
 #include "../managed_window.hpp"
-#include "sdl_types.hpp"
+#include "sdl.hpp"
 
 /**
  * @brief   The default width of an SDL window.
@@ -40,6 +47,9 @@ namespace leaf
      */
     class sdl_window : public managed_window, public native_surface_i
     {
+        // The SDL window manager must be able to access hidden functionality of an SDL window.
+        friend class sdl;
+
         private:
             /**
              * @brief   Denotes whether the window should close the next time events are polled.
@@ -78,39 +88,7 @@ namespace leaf
              */
             void set_defaults(void) noexcept;
 
-        public:
-        //protected:
-            /**
-             * @brief   Creates an SDL window. The title, position, and size are set to default
-             *          values. When the window is created it is immediately active. Assuming that
-             *          it is visible and SDL events are polled, it will begin displaying upon
-             *          creation.
-             * 
-             * @throw   runtime_error if an error occurs creating the SDL window
-             */
-            sdl_window(void);
-
-            /**
-             * @brief   Creates an SDL window. When the window is created it is immediately active.
-             *          Assuming that it is visible and SDL events are polled, it will begin
-             *          displaying upon creation.
-             * 
-             * @param   title   the title bar content string
-             * @param   x       the initial x-position
-             * @param   y       the initial y-position
-             * @param   width   the initial width
-             * @param   height  the initial height
-             * 
-             * @throw   runtime_error if an error occurs creating the SDL window
-             */
-            sdl_window(const std::string &title, int x, int y, int width, int height);
-
-            /**
-             * @brief   Destructs the SDL window. The underlying SDL window is destroyed if it is
-             *          not already dead.
-             */
-            virtual ~sdl_window() noexcept;
-
+        protected:
             /**
              * @brief   Destroys the window (deallocates internal SDL functionality and deems it
              *          dead and therefore closed). If the window was already closed, nothing
@@ -148,6 +126,37 @@ namespace leaf
             virtual bool poll_events(void) noexcept override;
 
         public:
+            /**
+             * @brief   Creates an SDL window. The title, position, and size are set to default
+             *          values. When the window is created it is immediately active. Assuming that
+             *          it is visible and SDL events are polled, it will begin displaying upon
+             *          creation.
+             * 
+             * @throw   runtime_error if an error occurs creating the SDL window
+             */
+            sdl_window(void);
+
+            /**
+             * @brief   Creates an SDL window. When the window is created it is immediately active.
+             *          Assuming that it is visible and SDL events are polled, it will begin
+             *          displaying upon creation.
+             * 
+             * @param   title   the title bar content string
+             * @param   x       the initial x-position
+             * @param   y       the initial y-position
+             * @param   width   the initial width
+             * @param   height  the initial height
+             * 
+             * @throw   runtime_error if an error occurs creating the SDL window
+             */
+            sdl_window(const std::string &title, int x, int y, int width, int height);
+
+            /**
+             * @brief   Destructs the SDL window. The underlying SDL window is destroyed if it is
+             *          not already dead.
+             */
+            virtual ~sdl_window() noexcept;
+            
             /**
              * @brief   Determines the width of the window's display surface in pixels. Note that
              *          the surface is only the inner content area of the window, not the frame.

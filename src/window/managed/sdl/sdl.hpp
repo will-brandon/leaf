@@ -13,10 +13,18 @@
 #ifndef SDL_H_HEADER_GUARD
 #define SDL_H_HEADER_GUARD
 
+// The class must be forward declared because there are circular includes between the SDL window
+// manager and SDL window classes.
+namespace leaf
+{
+    class sdl;
+}
+
 #include <set>
 #include <bx/platform.h>
 #include "../../../utils/release_types.hpp"
 #include "../window_manager.hpp"
+#include "sdl_window.hpp"
 
 namespace leaf
 {
@@ -26,6 +34,31 @@ namespace leaf
      */
     class sdl : public window_manager
     {
+        // SDL windows must be able to access hidden functionality of the SDL window manager.
+        friend class sdl_window;
+
+        public:
+            /**
+             * @brief   One single instance of the SDL window manager will be created. This instance
+             *          should be used externally to make all API calls.
+             */
+            static sdl instance;
+
+        protected:
+            /**
+             * @brief   Creates a new instance of the SDL library and initializes SDL. Only one SDL
+             *          instance object can exist per program runtime.
+             * 
+             * @throw   runtime_error if SDL failed to initialize or if an SDL object has already
+             *          been created in the program environment
+             */
+            sdl(void);
+
+            /**
+             * @brief Deinitializes SDL and destroys the SDL instance object.
+             */
+            virtual ~sdl() noexcept;
+
         public:
             /**
              * @brief   Performs updates on the SDL window manager. This will poll the events of

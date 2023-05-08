@@ -13,8 +13,8 @@
 #ifndef WINDOW_MANAGER_H_HEADER_GUARD
 #define WINDOW_MANAGER_H_HEADER_GUARD
 
-// The class must be forward declared because there will be circular includes between the window
-// manager and managed window classes.
+// The class must be forward declared because there are circular includes between the window manager
+// and managed window classes.
 namespace leaf
 {
     class window_manager;
@@ -44,6 +44,28 @@ namespace leaf
              * @return  a reference to the set of all windows under management
              */
             const std::set<managed_window *> &windows(void) const noexcept;
+
+            /**
+             * @brief   Adds the given window to the set of managed windows.
+             * 
+             * @param   window  a pointer to the window to start managing
+             * 
+             * @return  true if and only if the window was not already being managed
+             * 
+             * @throw   runtime exception if the given window pointer is null
+             */
+            bool register_window(managed_window *window);
+            
+            /**
+             * @brief   Removes the given window from the set of managed windows.
+             * 
+             * @param   window  a pointer to the window to stop managing
+             * 
+             * @return  true if and only if the window was being managed
+             * 
+             * @throw   runtime exception if the given window pointer is null
+             */
+            bool unregister_window(managed_window *window);
 
             /**
              * @brief   Polls the events of all living managed windows.
@@ -79,6 +101,17 @@ namespace leaf
              * @throw   exception if an error occured polling events
              */
             virtual bool poll_events(void) = 0;
+
+            /**
+             * @brief   Performs a close call on all living managed windows. Note that this does not
+             *          immediately destroy them, it simply instructs them to close the next time
+             *          their events are polled. After this call and events for all windows are
+             *          polled, the number of living windows should be 0.
+             * 
+             * @return  The number of living windows that had not previously been flagged for
+             *          closing that were newly flagged
+             */
+            size_t close_all_windows(void) noexcept;
     };
 }
 
