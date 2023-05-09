@@ -1,14 +1,14 @@
-/**
- * @file    window_i.hpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    April 28, 2023
- * 
- * @brief   Header for an abstract class that represents an interface specification for a graphical
- *          user interface window. A window is immediately alive (open) upon its object's
- *          construction, however, it may be closed before its object's destruction.
- *
- * @copyright Copyright (c) 2023
- */
+///
+/// @file   window_i.hpp
+/// @author Will Brandon (brandon.w@northeastern.edu)
+/// @date   April 28, 2023
+///
+/// @brief  Header for an abstract class that represents an interface specification for a graphical
+///         user interface window. A window is immediately alive (open) upon its object's
+///         construction, however, it may be closed before its object's destruction.
+///
+/// @copyright Copyright (c) 2023
+///
 
 #ifndef WINDOW_I_H_HEADER_GUARD
 #define WINDOW_I_H_HEADER_GUARD
@@ -18,11 +18,11 @@
 
 namespace leaf
 {
-    /**
-     * @brief   Represents an interface specification for a graphical user interface window. A
-     *          window is immediately alive (open) upon its object's construction, however, it may
-     *          be closed before its object's destruction.
-     */
+    ///
+    /// @brief  Represents an interface specification for a graphical user interface window. A
+    ///         window is immediately alive (open) upon its object's construction, however, it may
+    ///         be closed before its object's destruction.
+    ///
     class window_i : public virtual pos_surface_i
     {
         public:
@@ -76,17 +76,16 @@ namespace leaf
              *          enable the close flag
              */
             virtual window_i *set_user_closable(bool is_user_closable) = 0;
-
-            /**
-             * @brief   Determines whether the user can interact with the window's frame to resize
-             *          it.
-             * 
-             * @return  true if and only if the user can interact with the window's frame to resize
-             *          it
-             * 
-             * @throw   exception if an error occured determining whether the window is user
-             *          resizable
-             */
+            
+            /// @brief  Determines whether the user can interact with the window's frame to resize
+            ///         it.
+            ///
+            /// @return true if and only if the user can interact with the window's frame to resize
+            ///         it
+            ///
+            /// @throw  exception if an error occured determining whether the window is user
+            ///         resizable
+            ///
             virtual bool is_user_resizable(void) const = 0;
 
             /**
