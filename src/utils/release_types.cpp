@@ -1,12 +1,12 @@
-/**
- * @file    release_types.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    May 7, 2023
- * 
- * @brief   Implementation for type definitions for software releases.
- *
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       release_types.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       May 7, 2023
+/// 
+/// @brief      Implementation for type definitions for software releases.
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include <sstream>
 #include "release_types.hpp"

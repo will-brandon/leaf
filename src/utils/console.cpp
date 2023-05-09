@@ -1,13 +1,13 @@
-/**
- * @file    console.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    February 6, 2023
- * 
- * @brief   Implementation for a class with static functionality to interact with the terminal
- *          console.
- * 
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       console.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       February 6, 2023
+/// 
+/// @brief      Implementation for a class with static functionality to interact with the terminal
+///             console.
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include "console.hpp"
 

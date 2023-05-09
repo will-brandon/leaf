@@ -1,12 +1,12 @@
-/**
- * @file    main.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    April 19, 2023
- * 
- * @brief   
- * 
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       main.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       April 19, 2023
+/// 
+/// @brief   
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>

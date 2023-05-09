@@ -1,14 +1,14 @@
-/**
- * @file    sdl.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    May 8, 2023
- * 
- * @brief   Implementation for a class that represents the Simple DirectMedia Layer (SDL) window
- *          library manager. The class creates a singleton object, i.e. only one window manager
- *          object can be created.
- *
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       sdl.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       May 8, 2023
+/// 
+/// @brief      Implementation for a class that represents the Simple DirectMedia Layer (SDL) window
+///             library manager. The class creates a singleton object, i.e. only one window manager
+///             object can be created.
+///
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include <SDL2/SDL.h>
 #include "sdl.hpp"

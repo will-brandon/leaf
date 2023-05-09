@@ -77,7 +77,7 @@ namespace utl
         /// 
         bool operator==(const uuid &other) const noexcept;
 
-         /// 
+        /// 
         /// @brief  Determines whether the UUID structure is not equal to another UUID structure.
         ///         This simply performs a byte-by-byte comparison.
         /// 

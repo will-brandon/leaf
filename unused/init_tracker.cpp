@@ -1,15 +1,15 @@
-/**
- * @file    init_tracker.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    February 6, 2023
- * 
- * @brief   Implementation for a class that produces an object with functionality to track whether
- *          something was initialized. This functionality is typically used in a composition design
- *          pattern, i.e. classes will contain an Initiable object to track whether they have been
- *          initialized.
- * 
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       init_tracker.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       February 6, 2023
+/// 
+/// @brief      Implementation for a class that produces an object with functionality to track
+///             whether something was initialized. This functionality is typically used in a
+///             composition design pattern, i.e. classes will contain an Initiable object to track
+///             whether they have been initialized.
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include <stdexcept>
 #include "init_tracker.hpp"

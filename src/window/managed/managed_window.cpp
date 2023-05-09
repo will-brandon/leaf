@@ -1,14 +1,15 @@
-/**
- * @file    managed_window.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    May 5, 2023
- * 
- * @brief   Implementation for an abstract class that represents a graphical user interface window
- *          that is managed by a window manager. A window is immediately alive (open) upon its
- *          object's construction, however, it may be closed before its object's destruction.
- *
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       managed_window.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       May 5, 2023
+/// 
+/// @brief      Implementation for an abstract class that represents a graphical user interface
+///             window that is managed by a window manager. A window is immediately alive (open)
+///             upon its object's construction, however, it may be closed before its object's
+///             destruction.
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include "managed_window.hpp"
 
