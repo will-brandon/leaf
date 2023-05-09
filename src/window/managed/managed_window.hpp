@@ -20,7 +20,7 @@ namespace leaf
     class managed_window;
 }
 
-#include "../../utils/unique/identifiable.hpp"
+#include "../../utils/unique/unique.hpp"
 #include "../../graphics/surface/native_surface_i.hpp"
 #include "../nonatomic_window_i.hpp"
 #include "window_manager.hpp"
@@ -32,7 +32,7 @@ namespace leaf
      *          window is immediately alive (open) upon its object's construction, however, it may
      *          be closed before its object's destruction.
      */
-    class managed_window : public utl::identifiable, public virtual nonatomic_window_i
+    class managed_window : public utl::unique, public virtual nonatomic_window_i
     {
         // The window manager must be able to access hidden functionality of a managed window.
         friend class window_manager;

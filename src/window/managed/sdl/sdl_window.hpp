@@ -62,6 +62,11 @@ namespace leaf
             bool m_is_user_resizable;
 
             /**
+             * @brief   The internal SDL 4-byte identifier of the window.
+             */
+            uint32_t m_id;
+
+            /**
              * @brief   The internal SDL window pointer.
              */
             SDL_Window *m_internal_window;
@@ -124,6 +129,13 @@ namespace leaf
              *          returned
              */
             virtual bool poll_events(void) noexcept override;
+
+            /**
+             * @brief   Determines the window's 4-byte internal SDL identifier.
+             * 
+             * @return  the 4-byte ID
+             */
+            uint32_t id(void) const noexcept;
 
             /**
              * @brief   Handles an SDL event that is relevant to this window (i.e. this window is

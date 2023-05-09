@@ -37,11 +37,14 @@ namespace leaf
 
     void sdl::handle_event_on_subject_window(const SDL_Event &event) const noexcept
     {
-        // Check each window to determine if it has focus.
+        // Check each window to determine if it matches the ID of the event.
         for (managed_window *window : windows())
         {
-            // If the window has focus, instruct it to handle the SDL event.
-            if (window->has_focus())
+            // Cast the managed window pointer to an SDL window pointer. Compare the window's ID to
+            // the ID of the event. It is assumed that despite variation in SDL event types, the
+            // 'windowID' field of the 'window' structure will always be populated with the correct
+            // ID.
+            if (((sdl_window *)window)->id() == event.window.windowID)
             {
                 // Cast the managed window pointer to an SDL window pointer and instruct it to
                 // handle the SDL event.

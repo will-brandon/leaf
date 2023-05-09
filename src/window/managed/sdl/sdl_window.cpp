@@ -15,7 +15,7 @@
 #include "sdl_window.hpp"
 
 using namespace std;
-#include <iostream>
+
 namespace leaf
 {
     void sdl_window::init_natives(void)
@@ -96,6 +96,9 @@ namespace leaf
         {
             throw runtime_error("Failed to create SDL window. (" + string(SDL_GetError()) + ')');
         }
+
+        // Get the SDL 4-byte internal ID.
+        m_id = SDL_GetWindowID(m_internal_window);
 
         // Read the SDL version into the system information structure.
         SDL_VERSION(&m_system_info.version)
@@ -181,6 +184,12 @@ namespace leaf
         return true;
     }
 
+    uint32_t sdl_window::id(void) const noexcept
+    {
+        // Return the internal SDL identifier.
+        return m_id;
+    }
+
     void sdl_window::handle_sdl_event(const SDL_Event &event) noexcept
     {
         switch (event.type)
@@ -195,8 +204,6 @@ namespace leaf
                         {
                             this->close();
                         }
-
-                        cout << "CLOSE : " << title() << "!!!\n";
                 }
 
                 break;
