@@ -1,13 +1,13 @@
-/**
- * @file    uuid.cpp
- * @author  Will Brandon (brandon.w@northeastern.edu)
- * @date    May 6, 2023
- * 
- * @brief   Implementation for a structure that represents a UUID (universally unique identifier)
- *          that adheres to the RFC 4122 protocol.
- * 
- * @copyright Copyright (c) 2023
- */
+/// 
+/// @file       uuid.cpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       May 6, 2023
+/// 
+/// @brief      Implementation for a structure that represents a UUID (universally unique identifier)
+///             that adheres to the RFC 4122 protocol.
+/// 
+/// @copyright  Copyright (c) 2023
+/// 
 
 #include <uuid/uuid.h>
 #include "uuid.hpp"

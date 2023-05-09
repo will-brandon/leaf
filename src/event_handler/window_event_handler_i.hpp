@@ -1,13 +1,13 @@
 /// 
-/// @file   window_event_handler_i.hpp
-/// @author Will Brandon (brandon.w@northeastern.edu)
-/// @date   May 8, 2023
+/// @file       window_event_handler_i.hpp
+/// @author     Will Brandon (brandon.w@northeastern.edu)
+/// @date       May 8, 2023
 /// 
-/// @brief  Header for an abstract class that represents an interface specification for a window
-///         event handler. A window event handler will contain functionality that will be triggered
-///         by a window when the handler object is subscribed to the window.
+/// @brief      Header for an abstract class that represents an interface specification for a window
+///             event handler. A window event handler will contain functionality that will be
+///             triggered by a window when the handler object is subscribed to the window.
 /// 
-/// @copyright Copyright (c) 2023
+/// @copyright  Copyright (c) 2023
 /// 
 
 #ifndef WINDOW_EVENT_HANDLER_I_H_HEADER_GUARD
