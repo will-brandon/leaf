@@ -11,8 +11,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef INIT_TRACKER_H_HEADER_GUARD
-#define INIT_TRACKER_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_INIT_TRACKER_HEADER_GUARD
+#define LEAF_UTIL_SRC_INIT_TRACKER_HEADER_GUARD
 
 #include <string>
 

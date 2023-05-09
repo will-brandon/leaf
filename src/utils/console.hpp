@@ -9,8 +9,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef CONSOLE_H_HEADER_GUARD
-#define CONSOLE_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_CONSOLE_HEADER_GUARD
+#define LEAF_UTIL_SRC_CONSOLE_HEADER_GUARD
 
 #include <iostream>
 

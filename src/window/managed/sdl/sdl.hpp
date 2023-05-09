@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 ///
 
-#ifndef SDL_H_HEADER_GUARD
-#define SDL_H_HEADER_GUARD
+#ifndef LEAF_SRC_SDL_HEADER_GUARD
+#define LEAF_SRC_SDL_HEADER_GUARD
 
 // The class must be forward declared because there are circular includes between the SDL window
 // manager and SDL window classes.
@@ -21,6 +21,7 @@ namespace leaf
 }
 
 #include <set>
+#include <SDL3/SDL.h>
 #include <bx/platform.h>
 #include "../../../utils/release_types.hpp"
 #include "../window_manager.hpp"

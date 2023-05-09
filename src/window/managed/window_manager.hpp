@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef WINDOW_MANAGER_H_HEADER_GUARD
-#define WINDOW_MANAGER_H_HEADER_GUARD
+#ifndef LEAF_SRC_WINDOW_MANAGER_HEADER_GUARD
+#define LEAF_SRC_WINDOW_MANAGER_HEADER_GUARD
 
 // The class must be forward declared because there are circular includes between the window manager
 // and managed window classes.

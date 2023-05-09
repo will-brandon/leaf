@@ -8,8 +8,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef PTR_H_HEADER_GUARD
-#define PTR_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_PTR_HEADER_GUARD
+#define LEAF_UTIL_SRC_PTR_HEADER_GUARD
 
 #include <memory>
 

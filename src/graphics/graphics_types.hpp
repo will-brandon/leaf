@@ -8,8 +8,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef GRAPHICS_TYPES_H_HEADER_GUARD
-#define GRAPHICS_TYPES_H_HEADER_GUARD
+#ifndef LEAF_SRC_GRAPHICS_TYPES_HEADER_GUARD
+#define LEAF_SRC_GRAPHICS_TYPES_HEADER_GUARD
 
 #include <cstdint>
 

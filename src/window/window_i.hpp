@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 ///
 
-#ifndef WINDOW_I_H_HEADER_GUARD
-#define WINDOW_I_H_HEADER_GUARD
+#ifndef LEAF_SRC_WINDOW_I_HEADER_GUARD
+#define LEAF_SRC_WINDOW_I_HEADER_GUARD
 
 #include <string>
 #include "../graphics/surface/pos_surface_i.hpp"

@@ -8,8 +8,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef MEMORY_H_HEADER_GUARD
-#define MEMORY_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_MEMORY_HEADER_GUARD
+#define LEAF_UTIL_SRC_MEMORY_HEADER_GUARD
 
 namespace utl
 {

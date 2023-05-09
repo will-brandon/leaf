@@ -9,8 +9,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef NATIVE_SURFACE_TYPES_H_HEADER_GUARD
-#define NATIVE_SURFACE_TYPES_H_HEADER_GUARD
+#ifndef LEAF_SRC_NATIVE_SURFACE_TYPES_HEADER_GUARD
+#define LEAF_SRC_NATIVE_SURFACE_TYPES_HEADER_GUARD
 
 #include "../../utils/displayable.hpp"
 

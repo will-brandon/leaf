@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef WINDOW_EVENT_HANDLER_I_H_HEADER_GUARD
-#define WINDOW_EVENT_HANDLER_I_H_HEADER_GUARD
+#ifndef LEAF_SRC_WINDOW_EVENT_HANDLER_I_HEADER_GUARD
+#define LEAF_SRC_WINDOW_EVENT_HANDLER_I_HEADER_GUARD
 
 #include "event_handler_i.hpp"
 #include "../graphics/graphics_types.hpp"

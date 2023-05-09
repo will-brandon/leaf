@@ -14,8 +14,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef NONATOMIC_WINDOW_I_H_HEADER_GUARD
-#define NONATOMIC_WINDOW_I_H_HEADER_GUARD
+#ifndef LEAF_SRC_NONATOMIC_WINDOW_I_HEADER_GUARD
+#define LEAF_SRC_NONATOMIC_WINDOW_I_HEADER_GUARD
 
 #include "window_i.hpp"
 

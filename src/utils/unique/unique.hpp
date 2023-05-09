@@ -9,8 +9,8 @@
 /// @copyright  Copyright (c) 2023
 ///
 
-#ifndef UNIQUE_H_HEADER_GUARD
-#define UNIQUE_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_UNIQUE_HEADER_GUARD
+#define LEAF_UTIL_SRC_UNIQUE_HEADER_GUARD
 
 namespace utl
 {

@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef POS_SURFACE_I_H_HEADER_GUARD
-#define POS_SURFACE_I_H_HEADER_GUARD
+#ifndef LEAF_SRC_POS_SURFACE_I_HEADER_GUARD
+#define LEAF_SRC_POS_SURFACE_I_HEADER_GUARD
 
 #include "surface_i.hpp"
 

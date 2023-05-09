@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef NATIVE_SURFACE_I_H_HEADER_GUARD
-#define NATIVE_SURFACE_I_H_HEADER_GUARD
+#ifndef LEAF_SRC_NATIVE_SURFACE_I_HEADER_GUARD
+#define LEAF_SRC_NATIVE_SURFACE_I_HEADER_GUARD
 
 #include <string>
 #include "surface_i.hpp"

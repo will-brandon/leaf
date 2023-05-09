@@ -9,8 +9,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef UUID_H_HEADER_GUARD
-#define UUID_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_UUID_HEADER_GUARD
+#define LEAF_UTIL_SRC_UUID_HEADER_GUARD
 
 #include "../memory_types.hpp"
 #include "../displayable.hpp"

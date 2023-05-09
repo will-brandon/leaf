@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef IDENTIFIABLE_H_HEADER_GUARD
-#define IDENTIFIABLE_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_IDENTIFIABLE_HEADER_GUARD
+#define LEAF_UTIL_SRC_IDENTIFIABLE_HEADER_GUARD
 
 #include "uuid.hpp"
 #include "unique.hpp"

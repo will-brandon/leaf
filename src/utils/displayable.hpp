@@ -10,8 +10,8 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#ifndef DISPLAYABLE_H_HEADER_GUARD
-#define DISPLAYABLE_H_HEADER_GUARD
+#ifndef LEAF_UTIL_SRC_DISPLAYABLE_HEADER_GUARD
+#define LEAF_UTIL_SRC_DISPLAYABLE_HEADER_GUARD
 
 #include <ostream>
 #include <sstream>
