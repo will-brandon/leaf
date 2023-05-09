@@ -20,3 +20,8 @@
 [submodule "libs/bimg"]
 	path = libs/bimg
 	url = https://github.com/bkaradzic/bimg.git
+
+# SDL 2 cross-platform window library
+[submodule "libs/SDL3"]
+	path = libs/SDL3
+	url = https://github.com/libsdl-org/SDL.git

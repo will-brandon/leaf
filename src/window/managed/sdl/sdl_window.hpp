@@ -20,7 +20,7 @@ namespace leaf
     class sdl_window;
 }
 
-#include <SDL2/SDL_syswm.h>
+#include <SDL3/SDL_syswm.h>
 #include "../../../utils/release_types.hpp"
 #include "../../../graphics/surface/native_surface_i.hpp"
 #include "../managed_window.hpp"
@@ -84,7 +84,8 @@ namespace leaf
             /// 
             /// @brief  Creates the native data for the window's display surface.
             /// 
-            /// @throw  runtime_error if the operating system is not supported
+            /// @throw  runtime_error if the operating system is not supported or the window handle
+            ///         could not be obtained
             /// 
             void init_natives(void);
 

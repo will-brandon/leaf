@@ -29,7 +29,8 @@ OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 # Define any includes.
 INCLUDES =	-I $(PROJECTROOT)/libs/bx/include \
 			-I $(PROJECTROOT)/libs/bgfx/include \
-			-I $(PROJECTROOT)/libs/bimg/include
+			-I $(PROJECTROOT)/libs/bimg/include \
+			-I $(PROJECTROOT)/libs/SDL3/include
 
 
 # This target is the default. It will create output directories, recursively build any
@@ -55,4 +56,4 @@ $(SUBDIRS):
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $(OBJDIR)/$@
 
 # All targets in this Makefile are phony (they are not file names).
-.PHONY: all outdir $(SUBDIRS)
+.PHONY: all outdirs $(SUBDIRS)

@@ -10,7 +10,7 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #include <bx/platform.h>
 #include "sdl_window.hpp"
 
@@ -24,6 +24,9 @@ namespace leaf
         // null.
         m_native_data = {NULL, NULL};
 
+        // Indicates whether the operating system is supported.
+        bool supported_os = false;
+
         // At compile time, determine which operating system is being used and appropriately
         // retrieve the native window data.
         #if BX_PLATFORM_LINUX || BX_PLATFORM_BSD
@@ -33,17 +36,26 @@ namespace leaf
             m_native_data.display_type = m_system_info.info.x11.display;
             m_native_data.handle = (void*)(uintptr_t)m_system_info.info.x11.window;
 
+            // Mark the flag true indicating that the linux operating system is supported.
+            supported_os = true;
+
         #elif BX_PLATFORM_OSX
 
             // If macOS OSX is used, no display type is necessary. Access the cocoa structure to get
             // the window handle.
             m_native_data.handle = m_system_info.info.cocoa.window;
 
+            // Mark the flag true indicating that the OSX operating system is supported.
+            supported_os = true;
+
         #elif BX_PLATFORM_WINDOWS
 
             // If Windows is used, no display type is necessary. Access the win structure to get the
             // window handle.
             m_native_data.handle = m_system_info.info.win.window;
+
+            // Mark the flag true indicating that the Windows operating system is supported.
+            supported_os = true;
 
         #elif BX_PLATFORM_STEAMLINK
 
@@ -52,15 +64,25 @@ namespace leaf
             m_native_data.display_type = m_system_info.info.vivante.display;
             m_native_data.handle = m_system_info.info.vivante.window;
 
+            // Mark the flag true indicating that the Steamlink operating system is supported.
+            supported_os = true;
+
         #endif
 
-        // If the native window handle is null, the operating system is not supported. In this case,
-        // throw an error.
-        if (!m_native_data.handle)
+        // Ensure that the operating system is supported.
+        if (!supported_os)
         {
             throw runtime_error(
                 "Failed to initialize native data for SDL window. (Operating system '"
                 + native_os_name() + "' is not supported)");
+        }
+
+        // Ensure the native window handle is not null.
+        if (!m_native_data.handle)
+        {
+            throw runtime_error(
+                "Failed to initialize native data for SDL window. (Failed to obtain window handle "
+                + string("for operating system '") + native_os_name() + "')");
         }
     }
 
@@ -89,7 +111,7 @@ namespace leaf
         uint32_t window_flags = SDL_INIT_VIDEO | SDL_WINDOW_HIDDEN;
 
         // Create an SDL window using the default flags and store the pointer to it.
-        m_internal_window = SDL_CreateWindow(title.c_str(), x, y, width, height, window_flags);
+        m_internal_window = SDL_CreateWindow(title.c_str(), width, height, window_flags);
 
         // Ensure that the pointer is not null, i.e. the window was successfully created.
         if (!m_internal_window)
@@ -100,12 +122,9 @@ namespace leaf
         // Get the SDL 4-byte internal ID.
         m_id = SDL_GetWindowID(m_internal_window);
 
-        // Read the SDL version into the system information structure.
-        SDL_VERSION(&m_system_info.version)
-
         // Attempt to read driver-specific properties about the window. If the read fails, throw an
         // error.
-        if (!SDL_GetWindowWMInfo(m_internal_window, &m_system_info))
+        if (SDL_GetWindowWMInfo(m_internal_window, &m_system_info, SDL_SYSWM_CURRENT_VERSION))
         {
             throw runtime_error(
                 "Failed to create SDL window (Failed to read driver-specific properties: "
@@ -194,17 +213,11 @@ namespace leaf
     {
         switch (event.type)
         {
-            case SDL_WINDOWEVENT:
-
-                switch (event.window.event)
-                {
-                    case SDL_WINDOWEVENT_CLOSE:
-                        
+            case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
                         if (is_user_closable())
                         {
                             this->close();
                         }
-                }
 
                 break;
         }
@@ -265,7 +278,7 @@ namespace leaf
     {
         // Use SDL functionality to determine if the window shown flag is enabled denoting that the
         // window is not hidden.
-        return SDL_GetWindowFlags(m_internal_window) & SDL_WINDOW_SHOWN;
+        return !(SDL_GetWindowFlags(m_internal_window) & SDL_WINDOW_HIDDEN);
     }
 
     sdl_window *sdl_window::set_visible(bool is_visible) noexcept

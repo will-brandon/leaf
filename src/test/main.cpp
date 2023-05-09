@@ -8,9 +8,6 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_syswm.h>
-#include <thread>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
 #include <bx/platform.h>

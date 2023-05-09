@@ -10,7 +10,7 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #include "sdl.hpp"
 
 using namespace std;

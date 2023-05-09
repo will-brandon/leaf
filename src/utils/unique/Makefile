@@ -55,4 +55,4 @@ $(SUBDIRS):
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $(OBJDIR)/$@
 
 # All targets in this Makefile are phony (they are not file names).
-.PHONY: all outdir $(SUBDIRS)
+.PHONY: all outdirs $(SUBDIRS)

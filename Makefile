@@ -22,13 +22,25 @@ EXECDIR = ./build/bin
 EXEC = test
 
 # Define any installed libraries, manual libraries, and platform dependent frameworks.
-INSTALLED_LIBS = -lSDL2
-MANUAL_LIBS = ./libs/bgfx/.build/osx-x64/bin/*.a
+MANUAL_LIBS = ./libs/bgfx/.build/osx-x64/bin/*.a ./libs/SDL3/build/os-x64/libSDL3.dylib
 FRAMEWORKS = -framework Cocoa -framework IOKit -framework Metal -framework QuartzCore
 
 
 # This target is the default. It will create output directories, compile, and link.
 all: outdirs compile link
+
+# This target will build all submodules / libraries.
+libs: lib_bgfx lib_sdl
+
+# This target will build the bgfx submodule. Note that it also builds bx and bimg.
+lib_bgfx:
+	make -C $(PROJECTROOT)/libs/bgfx/Makefile os-x64
+
+# This target will build the SDL submodule. Note that it also builds bx and bimg.
+lib_sdl:
+	mkdir -p $(PROJECTROOT)/libs/SDL3/build/os-x64
+	cmake --build $(PROJECTROOT)/libs/SDL3/build/os-x64 -B $(PROJECTROOT)/libs/SDL3/build/os-x64
+	cmake --install $(PROJECTROOT)/libs/SDL3/build/os-x64 -B $(PROJECTROOT)/libs/SDL3/build/os-x64
 
 # This target will create the directories for the produced output if they do not already exist.
 outdirs:
@@ -42,7 +54,7 @@ compile:
 # This target will link all the objects into an executable. Find all objects in the binary output
 # directory tree.
 link:
-	$(CC) $(CFLAGS) $(INSTALLED_LIBS) $(MANUAL_LIBS) $(FRAMEWORKS) \
+	$(CC) $(CFLAGS) $(MANUAL_LIBS) $(FRAMEWORKS) \
 		$(shell find $(OBJDIR) -name *.o) -o $(EXECDIR)/$(EXEC)
 
 # This target will clean up the output by removing all generated objects and executables.
@@ -51,4 +63,4 @@ clean:
 	rm -rf $(EXECDIR)/*
 
 # All targets in this Makefile are phony (they are not file names).
-.PHONY: all outdirs compile link clean
+.PHONY: all libs lib_bgfx lib_sdl outdirs compile link clean
