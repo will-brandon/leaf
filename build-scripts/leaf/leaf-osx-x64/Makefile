@@ -27,7 +27,7 @@ EXEC = test
 
 # Define manual libraries and platform dependent frameworks.
 MANUAL_LIBS = \
-	$(LIBSDIR)/bgfx/.build/$(ARCNAME)/bin/*.a \
+	$(LIBSDIR)/bgfx/.build/osx-x64/bin/*.a \
 	$(LIBSDIR)/SDL3/build/$(ARCNAME)/libSDL3.dylib
 FRAMEWORKS = -framework Cocoa -framework IOKit -framework Metal -framework QuartzCore
 
