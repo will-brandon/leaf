@@ -5,7 +5,7 @@ May 10, 2023
 
 
 ## Overview
-Building the Leaf project comes in three parts.
+Building the Leaf project requires four steps.
 
  1. Acquire any prerequisite software
  2. Clone the Git submodule libraries

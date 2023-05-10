@@ -5,7 +5,7 @@ May 10, 2023
 
 
 ## Overview
-Building the Leaf project comes in four steps.
+Building the Leaf project requires four steps.
  
  1. Acquire any prerequisite software
  2. Clone the Git submodule libraries
@@ -27,6 +27,7 @@ To acquire the library Git submodules, first initialize the submodule schematic,
 
     git submodule init
     git submodule update
+
 
 ## Building Libraries
 To build all libraries at once, use the GNU Makefile in the project root.
