@@ -22,8 +22,9 @@ clean: clean-sdl clean-bgfx
 # This target will build the SDL library.
 sdl:
 	mkdir -p $(LIBSDIR)/SDL3/build/os-x64
-#cmake --build -S $(LIBSDIR)/SDL3/build/os-x64 -B $(LIBSDIR)/SDL3/build/os-x64
-#cmake --install -S $(LIBSDIR)/SDL3/build/os-x64 -B $(LIBSDIR)/SDL3/build/os-x64
+	cmake -S $(LIBSDIR)/SDL3 -B $(LIBSDIR)/SDL3/build/os-x64
+	cmake --build $(LIBSDIR)/SDL3/build/os-x64
+	cmake --install $(LIBSDIR)/SDL3/build/os-x64
 
 # Cleans the SDL build.
 clean-sdl:
