@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
         while (sdl::instance.poll_events())
         {
-
+            
         }
     }
     catch (const exception &exc)

@@ -419,6 +419,28 @@ namespace leaf
             virtual sdl_window *focus(void) noexcept override;
 
             /// 
+            /// @brief      Determines whether the window has a frame.
+            ///
+            /// @return     true if and only if the window has a frame
+            ///
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            /// 
+            virtual bool framed(void) const noexcept override;
+
+            /// 
+            /// @brief      Sets whether the window has a frame.
+            /// 
+            /// @param      framed  true if the window should have a frame
+            /// 
+            /// @return     a pointer to the window for chaining
+            /// 
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            ///
+            virtual sdl_window *set_framed(bool framed) noexcept override;
+
+            /// 
             /// @brief   Determines the name of the operating system the window resides on.
             /// 
             /// @return  The name string of the operating system

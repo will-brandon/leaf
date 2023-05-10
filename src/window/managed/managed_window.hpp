@@ -134,28 +134,16 @@ namespace leaf
 
         public:
             /// 
-            /// @brief      Determines the width of the window's display surface in pixels. Note
-            ///             that the surface is only the inner content area of the window, not the
-            ///             frame.
+            /// @brief  Determines the bounds of the window's display surface in pixel measurements.
+            ///         Note that the surface is only the inner content area of the window, not the
+            ///         frame.
             /// 
-            /// @return     the width of the surface in pixels
-            /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
-            ///
-            virtual px_t width(void) const noexcept override = 0;
-
-            /// 
-            /// @brief      Determines the height of the window's display surface in pixels. Note
-            ///             that the surface is only the inner content area of the window, not the
-            ///             frame.
-            /// 
-            /// @return     the height of the surface in pixels
+            /// @return the bounds of the window's display surface
             /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
-            ///
-            virtual px_t height(void) const noexcept override = 0;
+            /// 
+            virtual bounds2_t bounds(void) const noexcept override = 0;
 
             /// 
             /// @brief      Sets the width of the window's display surface in pixels. The height is
@@ -232,30 +220,16 @@ namespace leaf
             virtual managed_window *set_visible(bool is_visible) noexcept override = 0;
 
             /// 
-            /// @brief      Determines the x-position of the window's display surface in pixels.
-            ///             Note that the surface is only the inner content area of the window, not
-            ///             the frame. The coordinates are cartesian and originate from the upper
-            ///             left corner of the monitor that the window primarily resides in.
+            /// @brief      Determines the position of the top left corner of the window's display
+            ///             surface. Coordinates are cartesian and originate from the top left
+            ///             corner of the monitor the window resides in.
             /// 
-            /// @return     the x-position of the surface in pixels
-            /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
-            ///
-            virtual px_t x(void) const noexcept override = 0;
-
-            /// 
-            /// @brief      Determines the y-position of the window's display surface in pixels.
-            ///             Note that the surface is only the inner content area of the window, not
-            ///             the frame. The coordinates are cartesian and originate from the upper
-            ///             left corner of the monitor that the window primarily resides in.
-            /// 
-            /// @return     the y-position of the surface in pixels
+            /// @return     the position of the window's display surface
             /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
-            ///
-            virtual px_t y(void) const noexcept override = 0;
+            /// 
+            virtual pos2_t pos(void) const noexcept override = 0;
 
             /// 
             /// @brief      Sets the x-position of the window's display surface in pixels. The
@@ -415,6 +389,49 @@ namespace leaf
             ///             is likely.
             ///
             virtual managed_window *focus(void) noexcept override = 0;
+
+            /// 
+            /// @brief      Determines whether the window has a frame.
+            ///
+            /// @return     true if and only if the window has a frame
+            ///
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            /// 
+            virtual bool framed(void) const noexcept override = 0;
+
+            /// 
+            /// @brief      Sets whether the window has a frame.
+            /// 
+            /// @param      framed  true if the window should have a frame
+            /// 
+            /// @return     a pointer to the window for chaining
+            /// 
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            ///
+            virtual managed_window *set_framed(bool framed) noexcept override = 0;
+
+            /// 
+            /// @brief  Determines the size of the frame as border measurements. If the window is
+            ///         frameless, all dimensions of the border will be 0.
+            ///         
+            /// @return the size of the frame as border measurements
+            /// 
+            /// @throw  exception if an error occurs determining the size of the frame
+            ///
+            virtual border_t frame_size(void) const = 0;
+
+            /// 
+            /// @brief  Determines the position of the top left corner of the frame originating from
+            ///         the top left corner of the monitor the window resides in. If the window is
+            ///         frameless, the frame position is the same as the surface position.
+            ///  
+            /// @return the position of the frame
+            /// 
+            /// @throw  exception if an error occurs determining the position of the frame
+            /// 
+            virtual pos2_t frame_pos(void) const = 0;
     };
 }
 

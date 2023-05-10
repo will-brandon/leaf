@@ -143,6 +143,47 @@ namespace leaf
             /// @throw  exception if an error occurs giving the window input focus
             /// 
             virtual window_i *focus(void) = 0;
+
+            /// 
+            /// @brief  Determines whether the window has a frame.
+            ///
+            /// @return true if and only if the window has a frame
+            ///
+            /// @throw  exception if an error occurs determining whether the window has a frame
+            /// 
+            virtual bool framed(void) const = 0;
+
+            /// 
+            /// @brief  Sets whether the window has a frame.
+            /// 
+            /// @param  framed  true if the window should have a frame
+            /// 
+            /// @return a pointer to the window for chaining
+            /// 
+            /// @throw  exception if an error occurs determining whether the window has a frame
+            ///
+            virtual window_i *set_framed(bool framed) = 0;
+
+            /// 
+            /// @brief  Determines the size of the frame as border measurements. If the window is
+            ///         frameless, all dimensions of the border will be 0.
+            ///         
+            /// @return the size of the frame as border measurements
+            /// 
+            /// @throw  exception if an error occurs determining the size of the frame
+            ///
+            virtual border_t frame_size(void) const = 0;
+
+            /// 
+            /// @brief  Determines the position of the top left corner of the frame originating from
+            ///         the top left corner of the monitor the window resides in. If the window is
+            ///         frameless, the frame position is the same as the surface position.
+            ///  
+            /// @return the position of the frame
+            /// 
+            /// @throw  exception if an error occurs determining the position of the frame
+            /// 
+            virtual pos2_t frame_pos(void) const = 0;
     };
 }
 

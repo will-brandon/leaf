@@ -26,26 +26,15 @@ namespace leaf
     {
         public:
             /// 
-            /// @brief  Determines the x-position of the surface in pixels. The coordinates are
-            ///         cartesian and originate from the upper left corner of the monitor that the
-            ///         surface primarily resides in.
+            /// @brief  Determines the position of the top left corner of the surface. Coordinates
+            ///         are cartesian and originate from the top left corner of the monitor the
+            ///         surface resides in.
             /// 
-            /// @return the x-position of the surface in pixels
+            /// @return the position of the surface
             /// 
-            /// @throw  exception if an error occured retrieving the x-position
+            /// @throw  exception if an error occured retrieving the position
             /// 
-            virtual px_t x(void) const = 0;
-
-            /// 
-            /// @brief  Determines the y-position of the surface in pixels. The coordinates are
-            ///         cartesian and originate from the upper left corner of the monitor that the
-            ///         surface primarily resides in.
-            /// 
-            /// @return the y-position of the surface in pixels
-            /// 
-            /// @throw  exception if an error occured retrieving the y-position
-            /// 
-            virtual px_t y(void) const = 0;
+            virtual pos2_t pos(void) const = 0;
 
             /// 
             /// @brief  Sets the x-position of the surface in pixels. The y-position is not
@@ -103,8 +92,11 @@ namespace leaf
             /// 
             virtual pos_surface_i *move_horizontally(px_t x_displacement)
             {
+                // Get the position of the surface.
+                pos2_t pos = this->pos();
+
                 // Increment (or decrement) the x-position by the given distance.
-                set_x(x() + x_displacement);
+                set_x(pos.y + x_displacement);
 
                 // Return a pointer to the surface for chaining.
                 return this;
@@ -126,8 +118,11 @@ namespace leaf
             /// 
             virtual pos_surface_i *move_vertically(px_t y_displacement)
             {
+                // Get the position of the surface.
+                pos2_t pos = this->pos();
+
                 // Increment (or decrement) the y-position by the given distance.
-                set_y(y() + y_displacement);
+                set_y(pos.y + y_displacement);
 
                 // Return a pointer to the surface for chaining.
                 return this;
@@ -152,8 +147,11 @@ namespace leaf
             /// 
             virtual pos_surface_i *move(px_t x_displacement, px_t y_displacement)
             {
+                // Get the position of the surface.
+                pos2_t pos = this->pos();
+
                 // Increment (or decrement) the x-position and y-position by the given distances.
-                set_position(x() + x_displacement, y() + y_displacement);
+                set_position(pos.x + x_displacement, pos.y + y_displacement);
 
                 // Return a pointer to the surface for chaining.
                 return this;

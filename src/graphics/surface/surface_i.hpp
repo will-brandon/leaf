@@ -24,22 +24,13 @@ namespace leaf
     {
         public:
             /// 
-            /// @brief  Determines the width of the surface in pixels.
+            /// @brief  Determines the bounds of the surface in pixel measurements.
             /// 
-            /// @return the width of the surface in pixels
+            /// @return the bounds of the surface
             /// 
-            /// @throw  exception if an error occured retrieving the width
+            /// @throw  exception if an error occured retrieving the bounds
             /// 
-            virtual px_t width(void) const = 0;
-
-            /// 
-            /// @brief  Determines the height of the surface in pixels.
-            /// 
-            /// @return the height of the surface in pixels
-            /// 
-            /// @throw  exception if an error occured retrieving the height
-            /// 
-            virtual px_t height(void) const = 0;
+            virtual bounds2_t bounds(void) const = 0;
 
             /// 
             /// @brief  Sets the width of the surface in pixels. The height is not affected.
@@ -75,21 +66,6 @@ namespace leaf
             /// @throw  exception if an error occured setting the size
             /// 
             virtual surface_i *set_size(px_t width, px_t height) = 0;
-
-            /// 
-            /// @brief  Determines the dimensional aspect ratio (width/height) of the surface.
-            /// 
-            /// @return the aspect ratio of the surface
-            /// 
-            /// @throw  exception if an error occured retrieving the aspect ratio
-            /// 
-            /// @note   A default implementation is provided in this interface.
-            /// 
-            virtual double aspect_ratio(void) const
-            {
-                // Divide the with of the surface by the height of the surface.
-                return (double)width() / (double)height();
-            }
 
             /// 
             /// @brief  Determines whether the surface is currently visible on the user's display.

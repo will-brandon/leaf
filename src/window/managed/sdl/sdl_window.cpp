@@ -401,6 +401,19 @@ namespace leaf
         return this;
     }
 
+    bool sdl_window::framed(void) const noexcept
+    {
+        // Use SDL functionality to determine if the window borderless flag is enabled denoting that
+        // the window has a border (frame).
+        return !(SDL_GetWindowFlags(m_internal_window) & SDL_WINDOW_BORDERLESS);
+    }
+
+    sdl_window *sdl_window::set_framed(bool framed) noexcept
+    {
+        // Use SDL functionality to set whether the window has a border (frame).
+        SDL_SetWindowBordered(m_internal_window, (SDL_bool)framed);
+    }
+
     string sdl_window::native_os_name(void) const noexcept
     {
         // Return the platform name macro from the BX library.
