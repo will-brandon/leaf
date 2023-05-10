@@ -3,7 +3,6 @@
 ### By Will Brandon
 May 10, 2023
 
----
 
 ## Overview
 Building the Leaf project comes in three parts.
