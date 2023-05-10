@@ -28,7 +28,7 @@ EXEC = test
 # Define manual libraries.
 MANUAL_LIBS = \
 	$(LIBSDIR)/bgfx/.build/linux64_gcc/bin/*.a \
-	$(LIBSDIR)/SDL3/build/$(ARCNAME)/libSDL3.dylib
+	$(LIBSDIR)/SDL3/build/$(ARCNAME)/libSDL3.so
 
 
 # This target is the default. It will create output directories, compile, and link.
