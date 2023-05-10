@@ -7,16 +7,25 @@ May 10, 2023
 ## Overview
 Building the Leaf project comes in three parts.
 
- 1. Acquire any prerequisite software.
- 2. Build the libraries.
- 3. Build the Leaf source code.
+ 1. Acquire any prerequisite software
+ 2. Clone the Git submodule libraries
+ 3. Build the libraries
+ 4. Build the Leaf source code
 
 These three steps must be performed in order.
 
 
+## Cloning Git Submodule Libraries
+To acquire the library Git submodules, first initialize the submodule schematic, then update the submodules to clone them. Both operations should be performed in the project root.
+
+    git submodule init
+    git submodule update
+
+
 ## Prerequisite Software
 
- * GNU Make (can be installed with Homebrew)
+ * Git (If you have cloned this project you probably have Git installed)
+ * GNU Make (Can be installed with Homebrew)
  * Metal (Should be installed on all Apple machines by default)
 
 

@@ -5,20 +5,28 @@ May 10, 2023
 
 
 ## Overview
-Building the Leaf project comes in three parts.
-
- 1. Acquire any prerequisite software.
- 2. Build the libraries.
- 3. Build the Leaf source code.
+Building the Leaf project comes in four steps.
+ 
+ 1. Acquire any prerequisite software
+ 2. Clone the Git submodule libraries
+ 3. Build the libraries
+ 4. Build the Leaf source code
 
 These three steps must be performed in order.
 
 
 ## Prerequisite Software
 
- * GNU Make (can be installed with apt)
- * OpenGL (can be installed with apt)
+ * Git (If you have cloned this project you probably have Git installed)
+ * GNU Make (Can be installed with apt)
+ * OpenGL (Can be installed with apt)
 
+
+## Cloning Git Submodule Libraries
+To acquire the library Git submodules, first initialize the submodule schematic, then update the submodules to clone them. Both operations should be performed in the project root.
+
+    git submodule init
+    git submodule update
 
 ## Building Libraries
 To build all libraries at once, use the GNU Makefile in the project root.
