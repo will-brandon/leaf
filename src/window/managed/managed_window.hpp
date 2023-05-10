@@ -20,7 +20,7 @@ namespace leaf
     class managed_window;
 }
 
-#include "../../utils/unique/unique.hpp"
+#include "../../utils/unique.hpp"
 #include "../../graphics/surface/native_surface_i.hpp"
 #include "../nonatomic_window_i.hpp"
 #include "window_manager.hpp"
