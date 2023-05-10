@@ -2,15 +2,15 @@
 #
 # Type:		GNU Makefile
 # Author:	Will Brandon
-# Date:		May 9, 2023
+# Date:		May 10, 2023
 #
-# Builds libraries for the project for the macOS X x64 architecture.
+# Builds libraries for the project for the Linux architecture.
 #
 # Usage:	make
 
 
 # Define the architecture name.
-ARCNAME = osx-x64
+ARCNAME = linux
 
 # Define a path to the library root.
 LIBSDIR = ../../../libs
@@ -39,7 +39,7 @@ bgfx:
 
 # Cleans the BGFX build.
 clean-bgfx:
-	rm -rf $(LIBSDIR)/bgfx/.build/$(ARCNAME)
+	rm -rf $(LIBSDIR)/bgfx/.build/*linux*
 
 # All targets in this Makefile are phony (they are not file names).
 .PHONY: all clean sdl bgfx
