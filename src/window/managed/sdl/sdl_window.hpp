@@ -441,6 +441,30 @@ namespace leaf
             virtual sdl_window *set_framed(bool framed) noexcept override;
 
             /// 
+            /// @brief      Determines the size of the frame as border measurements. If the window
+            ///             is frameless, all dimensions of the border will be 0.
+            ///         
+            /// @return     the size of the frame as border measurements
+            /// 
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            ///
+            virtual border_t frame_size(void) const noexcept override;
+
+            /// 
+            /// @brief      Determines the position of the top left corner of the frame originating
+            ///             from the top left corner of the monitor the window resides in. If the
+            ///             window is frameless, the frame position is the same as the surface
+            ///             position.
+            ///  
+            /// @return     the position of the frame
+            /// 
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
+            /// 
+            virtual pos2_t frame_pos(void) const noexcept override;
+
+            /// 
             /// @brief   Determines the name of the operating system the window resides on.
             /// 
             /// @return  The name string of the operating system

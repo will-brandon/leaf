@@ -413,25 +413,28 @@ namespace leaf
             virtual managed_window *set_framed(bool framed) noexcept override = 0;
 
             /// 
-            /// @brief  Determines the size of the frame as border measurements. If the window is
-            ///         frameless, all dimensions of the border will be 0.
+            /// @brief      Determines the size of the frame as border measurements. If the window
+            ///             is frameless, all dimensions of the border will be 0.
             ///         
-            /// @return the size of the frame as border measurements
+            /// @return     the size of the frame as border measurements
             /// 
-            /// @throw  exception if an error occurs determining the size of the frame
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
             ///
-            virtual border_t frame_size(void) const = 0;
+            virtual border_t frame_size(void) const noexcept = 0;
 
             /// 
-            /// @brief  Determines the position of the top left corner of the frame originating from
-            ///         the top left corner of the monitor the window resides in. If the window is
-            ///         frameless, the frame position is the same as the surface position.
+            /// @brief      Determines the position of the top left corner of the frame originating
+            ///             from the top left corner of the monitor the window resides in. If the
+            ///             window is frameless, the frame position is the same as the surface
+            ///             position.
             ///  
-            /// @return the position of the frame
+            /// @return     the position of the frame
             /// 
-            /// @throw  exception if an error occurs determining the position of the frame
+            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
+            ///             is likely.
             /// 
-            virtual pos2_t frame_pos(void) const = 0;
+            virtual pos2_t frame_pos(void) const noexcept = 0;
     };
 }
 
