@@ -34,7 +34,7 @@ To build all libraries at once, use the GNU Makefile in the project root.
 
     make lib-osx-x64
 
-To build libraries individually, use the GNU Makefile in the build-scripts/libs/lib-osx-x64 directory and specify the library to build.
+To build libraries individually, use the GNU Makefile in the ./build-scripts/libs/lib-osx-x64/ directory and specify the library to build.
 
     make -C ./build-scripts/libs/lib-osx-x64 sdl
     make -C ./build-scripts/libs/lib-osx-x64 bgfx
