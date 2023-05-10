@@ -16,7 +16,7 @@ CFLAGS = -std=c++17 -O0 -Wall
 # Define a path back to the project root.
 PROJECTROOT = ../../../..
 
-# Define a path the binary object root for the source directory built by this Makefile.
+# Define a path to the binary object root for the source directory built by this Makefile.
 OBJDIR = $(PROJECTROOT)/build/obj/window/managed/sdl
 
 # Get a list of all subdirectories.
