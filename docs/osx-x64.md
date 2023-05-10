@@ -40,7 +40,7 @@ To build libraries individually, use the GNU Makefile in the ./build-scripts/lib
     make -C ./build-scripts/libs/lib-osx-x64 bgfx
 
 
-## Building Leaf
+## Building Leaf Source Code
 
 To build the Leaf source code, use the GNU Makefile in the project root.
 
