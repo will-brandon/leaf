@@ -27,9 +27,11 @@ SRCS := $(wildcard *.cpp)
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 
 # Define any includes.
-INCLUDES =	-I $(PROJECTROOT)/libs/bx/include \
-			-I $(PROJECTROOT)/libs/bgfx/include \
-			-I $(PROJECTROOT)/libs/bimg/include
+INCLUDES = \
+	-I $(PROJECTROOT)/libs/SDL3/include \
+	-I $(PROJECTROOT)/libs/bx/include \
+	-I $(PROJECTROOT)/libs/bgfx/include \
+	-I $(PROJECTROOT)/libs/bimg/include
 
 
 # This target is the default. It will create output directories, recursively build any
