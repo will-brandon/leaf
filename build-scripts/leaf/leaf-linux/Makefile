@@ -2,15 +2,15 @@
 #
 # Type:		GNU Makefile
 # Author:	Will Brandon
-# Date:		May 9, 2023
+# Date:		May 10, 2023
 #
-# Recursively builds and links the entire project for the macOS X x64 architecture.
+# Recursively builds and links the entire project for the Linux architecture.
 #
 # Usage:	make
 
 
 # Define the architecture name.
-ARCNAME = osx-x64
+ARCNAME = linux
 
 # Define the compiler program, C++ version, optimization level, and accepted warnings.
 CC = g++
@@ -25,11 +25,10 @@ EXECDIR = ../../../build/bin
 # Define the name of the executable.
 EXEC = test
 
-# Define manual libraries and platform dependent frameworks.
+# Define manual libraries.
 MANUAL_LIBS = \
 	$(LIBSDIR)/bgfx/.build/$(ARCNAME)/bin/*.a \
 	$(LIBSDIR)/SDL3/build/$(ARCNAME)/libSDL3.dylib
-FRAMEWORKS = -framework Cocoa -framework IOKit -framework Metal -framework QuartzCore
 
 
 # This target is the default. It will create output directories, compile, and link.
@@ -47,8 +46,7 @@ compile:
 # This target will link all the objects into an executable. Find all objects in the binary output
 # directory tree.
 link:
-	$(CC) $(CFLAGS) $(MANUAL_LIBS) $(FRAMEWORKS) \
-		$(shell find $(OBJDIR) -name *.o) -o $(EXECDIR)/$(EXEC)
+	$(CC) $(CFLAGS) $(MANUAL_LIBS) $(shell find $(OBJDIR) -name *.o) -o $(EXECDIR)/$(EXEC)
 
 # All targets in this Makefile are phony (they are not file names).
 .PHONY: all outdirs compile link
