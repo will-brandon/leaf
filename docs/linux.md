@@ -1,4 +1,4 @@
-# Leaf on mac OS X x64 Architecture
+# Leaf on mac Linux Architecture
 
 ### By Will Brandon
 May 10, 2023
