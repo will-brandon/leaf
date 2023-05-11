@@ -12,7 +12,7 @@
 #define LEAF_UTIL_SRC_RELEASE_TYPES_HEADER_GUARD
 
 #include "memory_types.hpp"
-#include "displayable.hpp"
+#include "display.hpp"
 
 namespace utl
 {

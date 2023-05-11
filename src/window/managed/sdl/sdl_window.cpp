@@ -223,34 +223,31 @@ namespace leaf
         }
     }
 
-    px_t sdl_window::width(void) const noexcept
+    bounds2_t sdl_window::bounds(void) const noexcept
     {
-        // Allocate a variable to read the width into.
-        int width;
+        // Allocate variables to store the width and height.
+        int width, height;
 
-        // Use SDL fucntionality to read the width into the variable.
-        SDL_GetWindowSizeInPixels(m_internal_window, &width, NULL);
+        // Use SDL fucntionality to read the width and height.
+        SDL_GetWindowSizeInPixels(m_internal_window, &width, &height);
 
-        // Return the width.
-        return width;
-    }
-
-    px_t sdl_window::height(void) const noexcept
-    {
-        // Allocate a variable to read the height into.
-        int height;
-
-        // Use SDL fucntionality to read the height into the variable.
-        SDL_GetWindowSizeInPixels(m_internal_window, NULL, &height);
-
-        // Return the height.
-        return height;
+        // Return a bounding rectangle structure of the given width and height. The downcast can be
+        // assumed to never truncate the dimension since it is currently safe to assume that no
+        // single dimension will ever need to store a value of more than 65532 pixels (the maximum
+        // value of a 16-byte integer).
+        return {(px_t)width, (px_t)height};
     }
 
     sdl_window *sdl_window::set_width(px_t width) noexcept
     {
+        // Allocate a variable to store the current height.
+        int height;
+
+        // Use SDL fucntionality to read the current height.
+        SDL_GetWindowSizeInPixels(m_internal_window, NULL, &height);
+
         // Use SDL functionality to set the width, explicitly set the height to its previous value.
-        SDL_SetWindowSize(m_internal_window, width, height());
+        SDL_SetWindowSize(m_internal_window, width, height);
 
         // Return a pointer to the window for chaining.
         return this;
@@ -258,8 +255,14 @@ namespace leaf
 
     sdl_window *sdl_window::set_height(px_t height) noexcept
     {
+        // Allocate a variable to store the current width.
+        int width;
+
+        // Use SDL fucntionality to read the current width.
+        SDL_GetWindowSizeInPixels(m_internal_window, &width, NULL);
+
         // Use SDL functionality to set the height, explicitly set the width to its previous value.
-        SDL_SetWindowSize(m_internal_window, width(), height);
+        SDL_SetWindowSize(m_internal_window, width, height);
 
         // Return a pointer to the window for chaining.
         return this;
@@ -299,35 +302,32 @@ namespace leaf
         return this;
     }
 
-    px_t sdl_window::x(void) const noexcept
+    pos2_t sdl_window::pos(void) const noexcept
     {
-        // Allocate a variable to read the x-position into.
-        int x;
+        // Allocate variables to store the x-position and y-position.
+        int x, y;
 
-        // Use SDL fucntionality to read the x-position into the variable.
-        SDL_GetWindowPosition(m_internal_window, &x, NULL);
+        // Use SDL fucntionality to read the x-position and y-position.
+        SDL_GetWindowPosition(m_internal_window, &x, &y);
 
-        // Return the x-position.
-        return x;
-    }
-
-    px_t sdl_window::y(void) const noexcept
-    {
-        // Allocate a variable to read the y-position into.
-        int y;
-
-        // Use SDL fucntionality to read the y-position into the variable.
-        SDL_GetWindowPosition(m_internal_window, NULL, &y);
-
-        // Return the y-position.
-        return y;
+        // Return a position structure of the given x-position and y-position. The downcast can be
+        // assumed to never truncate the dimension since it is currently safe to assume that no
+        // single dimension will ever need to store a value of more than 65532 pixels (the maximum
+        // value of a 16-byte integer).
+        return {(px_t)x, (px_t)y};
     }
 
     sdl_window *sdl_window::set_x(px_t x) noexcept
     {
+        // Allocate a variable to store the current y-position.
+        int y;
+
+        // Use SDL fucntionality to read the current y-position.
+        SDL_GetWindowSizeInPixels(m_internal_window, NULL, &y);
+
         // Use SDL functionality to set the x-position, explicitly set the y-position to its
         // previous value.
-        SDL_SetWindowPosition(m_internal_window, x, y());
+        SDL_SetWindowPosition(m_internal_window, x, y);
 
         // Return a pointer to the window for chaining.
         return this;
@@ -335,9 +335,15 @@ namespace leaf
 
     sdl_window *sdl_window::set_y(px_t y) noexcept
     {
+        // Allocate a variable to store the current x-position.
+        int x;
+
+        // Use SDL fucntionality to read the current x-position.
+        SDL_GetWindowSizeInPixels(m_internal_window, &x, NULL);
+
         // Use SDL functionality to set the y-position, explicitly set the x-position to its
         // previous value.
-        SDL_SetWindowPosition(m_internal_window, x(), y);
+        SDL_SetWindowPosition(m_internal_window, x, y);
 
         // Return a pointer to the window for chaining.
         return this;
@@ -412,6 +418,20 @@ namespace leaf
     {
         // Use SDL functionality to set whether the window has a border (frame).
         SDL_SetWindowBordered(m_internal_window, (SDL_bool)framed);
+    }
+
+    border_t sdl_window::frame_size(void) const noexcept
+    {
+        int left, top, right, bottom;
+
+        SDL_GetWindowBordersSize(m_internal_window, &top, &left, &bottom, &right);
+
+        return {(px_t)left, (px_t)top, (px_t)right, (px_t)bottom};
+    }
+
+    pos2_t sdl_window::frame_pos(void) const noexcept
+    {
+
     }
 
     string sdl_window::native_os_name(void) const noexcept

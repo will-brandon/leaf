@@ -140,148 +140,138 @@ namespace leaf
             /// 
             /// @return the bounds of the window's display surface
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured retrieving the bounds
             /// 
-            virtual bounds2_t bounds(void) const noexcept override = 0;
+            virtual bounds2_t bounds(void) const override = 0;
 
             /// 
-            /// @brief      Sets the width of the window's display surface in pixels. The height is
-            ///             not affected. Note that the surface is only the inner content area of
-            ///             the window, not the frame. The frame will be resized appropriately to
-            ///             accomodate the change.
+            /// @brief  Sets the width of the window's display surface in pixels. The height is not
+            ///         affected. Note that the surface is only the inner content area of the
+            ///         window, not the frame. The frame will be resized appropriately to accomodate
+            ///         the change.
             /// 
-            /// @param      width   the new width of the surface in pixels
+            /// @param  width   the new width of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the width
             ///
-            virtual managed_window *set_width(px_t width) noexcept override = 0;
+            virtual managed_window *set_width(px_t width) override = 0;
 
             ///
-            /// @brief      Sets the height of the window's display surface in pixels. The width is
-            ///             not affected. Note that the surface is only the inner content area of
-            ///             the window, not the frame. The frame will be resized appropriately to
-            ///             accomodate the change. 
+            /// @brief  Sets the height of the window's display surface in pixels. The width is not
+            ///         affected. Note that the surface is only the inner content area of the
+            ///         window, not the frame. The frame will be resized appropriately to accomodate
+            ///         the change. 
             /// 
-            /// @param      height  the new height of the surface in pixels
+            /// @param  height  the new height of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the height
             ///
-            virtual managed_window *set_height(px_t height) noexcept override = 0;
+            virtual managed_window *set_height(px_t height) override = 0;
 
             /// 
-            /// @brief      Sets the size of the surface in pixels. Both the width and height are
-            ///             affected. Note that the surface is only the inner content area of the
-            ///             window, not the frame. The frame will be resized appropriately to
-            ///             accomodate the change. 
+            /// @brief  Sets the size of the surface in pixels. Both the width and height are
+            ///         affected. Note that the surface is only the inner content area of the
+            ///         window, not the frame. The frame will be resized appropriately to accomodate
+            ///         the change. 
             /// 
-            /// @param      width   the new width of the surface in pixels
-            /// @param      height  the new height of the surface in pixels
+            /// @param  width   the new width of the surface in pixels
+            /// @param  height  the new height of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the size
             ///
-            virtual managed_window *set_size(px_t width, px_t height) noexcept override = 0;
+            virtual managed_window *set_size(px_t width, px_t height) override = 0;
 
             /// 
-            /// @brief      Determines whether the window is currently visible on the user's
-            ///             display. This will only account for whether the window visible in an
-            ///             absolute sense. Z-overlapping or minimization may cause the surface to
-            ///             appear out of view. These cases will not be considered hidden.
+            /// @brief  Determines whether the window is currently visible on the user's display.
+            ///         This will only account for whether the window visible in an absolute sense.
+            ///         Z-overlapping or minimization may cause the surface to appear out of view.
+            ///         These cases will not be considered hidden.
             /// 
-            /// @return     whether the window is currently visible
+            /// @return whether the window is currently visible
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured determining whether the window is currently
+            ///         visible
             ///
-            virtual bool is_visible(void) const noexcept override = 0;
+            virtual bool is_visible(void) const override = 0;
 
             /// 
-            /// @brief      Sets whether the window is currently visible on the user's display. A
-            ///             true value will make the window visible while a false value will hide
-            ///             the window. This will hide or show the window in an absolute sense.
-            ///             Z-overlapping or minimization may cause the window to appear out of
-            ///             view. These cases are not congruent with the functionality of this
-            ///             action.
+            /// @brief  Sets whether the window is currently visible on the user's display. A true
+            ///         value will make the window visible while a false value will hide the window.
+            ///         This will hide or show the window in an absolute sense. Z-overlapping or
+            ///         minimization may cause the window to appear out of view. These cases are not
+            ///         congruent with the functionality of this action.
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the visibility of the window
             ///
-            virtual managed_window *set_visible(bool is_visible) noexcept override = 0;
+            virtual managed_window *set_visible(bool is_visible) override = 0;
 
             /// 
-            /// @brief      Determines the position of the top left corner of the window's display
-            ///             surface. Coordinates are cartesian and originate from the top left
-            ///             corner of the monitor the window resides in.
+            /// @brief  Determines the position of the top left corner of the window's display
+            ///         surface. Coordinates are cartesian and originate from the top left corner of
+            ///         the monitor the window resides in.
             /// 
-            /// @return     the position of the window's display surface
+            /// @return the position of the window's display surface
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured retrieving the position
             /// 
-            virtual pos2_t pos(void) const noexcept override = 0;
+            virtual pos2_t pos(void) const override = 0;
 
             /// 
-            /// @brief      Sets the x-position of the window's display surface in pixels. The
-            ///             y-position is not affected. The coordinates are cartesian and originate
-            ///             from the upper left corner of the monitor that the window primarily
-            ///             resides in. Note that the surface is only the inner content area of the
-            ///             window, not the frame. The frame will be repositioned appropriately to
-            ///             accomodate the change. 
+            /// @brief  Sets the x-position of the window's display surface in pixels. The
+            ///         y-position is not affected. The coordinates are cartesian and originate from
+            ///         the upper left corner of the monitor that the window primarily resides in.
+            ///         Note that the surface is only the inner content area of the window, not the
+            ///         frame. The frame will be repositioned appropriately to accomodate the
+            ///         change. 
             /// 
-            /// @param      x   the new x-position of the surface in pixels
+            /// @param  x   the new x-position of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the x-position
             ///
             virtual managed_window *set_x(px_t x) noexcept override = 0;
 
             /// 
-            /// @brief      Sets the y-position of the window's display surface in pixels. The
-            ///             x-position is not affected. The coordinates are cartesian and originate
-            ///             from the upper left corner of the monitor that the window primarily
-            ///             resides in. Note that the surface is only the inner content area of the
-            ///             window, not the frame. The frame will be repositioned appropriately to
-            ///             accomodate the change. 
+            /// @brief  Sets the y-position of the window's display surface in pixels. The
+            ///         x-position is not affected. The coordinates are cartesian and originate from
+            ///         the upper left corner of the monitor that the window primarily resides in.
+            ///         Note that the surface is only the inner content area of the window, not the
+            ///         frame. The frame will be repositioned appropriately to accomodate the
+            ///         change. 
             /// 
-            /// @param      y   the new y-position of the surface in pixels
+            /// @param  y   the new y-position of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the y-position
             ///
-            virtual managed_window *set_y(px_t y) noexcept override = 0;
+            virtual managed_window *set_y(px_t y) override = 0;
 
             /// 
-            /// @brief      Sets the position of the window's display surface in pixels. Both the
-            ///             x-position and y-position are affected. The coordinates are cartesian
-            ///             and originate from the upper left corner of the monitor that the window 
-            ///             rimarily resides in. Note that the surface is only the inner content
-            ///             area of the window, not the frame. The frame will be repositioned
-            ///             appropriately to accomodate the change. 
+            /// @brief  Sets the position of the window's display surface in pixels. Both the
+            ///         x-position and y-position are affected. The coordinates are cartesian and
+            ///         originate from the upper left corner of the monitor that the window 
+            ///         primarily resides in. Note that the surface is only the inner content area
+            ///         of the window, not the frame. The frame will be repositioned appropriately
+            ///         to accomodate the change. 
             /// 
-            /// @param      x   the new x-position of the surface in pixels
-            /// @param      y   the new y-position of the surface in pixels
+            /// @param  x   the new x-position of the surface in pixels
+            /// @param  y   the new y-position of the surface in pixels
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting the position
             ///
-            virtual managed_window *set_position(px_t x, px_t y) noexcept override = 0;
+            virtual managed_window *set_position(px_t x, px_t y) override = 0;
 
             /// 
             /// @brief  Determines whether the window is alive (as opposed to being closed).
@@ -297,7 +287,7 @@ namespace leaf
             /// 
             /// @return true if and only if the window was not already closed (or flagged to close)
             ///
-            virtual bool close(void) noexcept override;
+            virtual bool close(void)  noexcept override;
 
             /// 
             /// @brief  Determines whether the window will automatically enable the close flag when
@@ -315,126 +305,115 @@ namespace leaf
             /// @param  is_user_closable    a true value indicates that the window should
             ///                             automatically enable the close flag
             /// 
-            /// @return  a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             ///
             virtual managed_window *set_user_closable(bool is_user_closable) noexcept override;
 
             /// 
-            /// @brief      Determines whether the user can interact with the window's frame to
-            ///             resize it.
+            /// @brief  Determines whether the user can interact with the window's frame to resize
+            ///         it.
             /// 
-            /// @return     true if and only if the user can interact with the frame to resize it
+            /// @return true if and only if the user can interact with the frame to resize it
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured determining whether the window is user
+            ///         resizable
             ///
-            virtual bool is_user_resizable(void) const noexcept override = 0;
+            virtual bool is_user_resizable(void) const override = 0;
 
             /// 
-            /// @brief      Sets whether the user can interact with the window's frame to resize it.
+            /// @brief  Sets whether the user can interact with the window's frame to resize it.
             /// 
-            /// @param      is_user_resizable   whether the user can interact with the frame to
-            ///                                 resize it
+            /// @param  is_user_resizable   whether the user can interact with the frame to resize
+            ///                             it
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occured setting whether the window is user resizable
             ///
-            virtual managed_window *set_user_resizable(
-                bool is_user_resizable) noexcept override = 0;
+            virtual managed_window *set_user_resizable(bool is_user_resizable) override = 0;
 
             /// 
-            /// @brief      Determines the title of the window displayed on the frame.
+            /// @brief  Determines the title of the window displayed on the frame.
             /// 
-            /// @return     the title of the window
+            /// @return the title of the window
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining the title of the window
             ///
-            virtual std::string title(void) const noexcept override = 0;
+            virtual std::string title(void) const override = 0;
 
             /// 
-            /// @brief      Sets the title of the window displayed on the frame.
+            /// @brief  Sets the title of the window displayed on the frame.
             /// 
-            /// @param      title   the title of the window
+            /// @param  title   the title of the window
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs setting the title
             ///
-            virtual managed_window *set_title(const std::string &title) noexcept override = 0;
+            virtual managed_window *set_title(const std::string &title) override = 0;
 
             /// 
-            /// @brief      Determines whether the window has input focus. This also generally means
-            ///             that it in the front in terms of z-position, but this is
-            ///             implementation-dependent.
+            /// @brief  Determines whether the window has input focus. This also generally means
+            ///         that it in the front in terms of z-position, but this is
+            ///         implementation-dependent.
             /// 
-            /// @return     true if and only if the window has input focus
+            /// @return true if and only if the window has input focus
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining whether the window has input focus
             ///
-            virtual bool has_focus(void) const noexcept override = 0;
+            virtual bool has_focus(void) const override = 0;
 
             /// 
-            /// @brief      Gives the window input focus if it did not have it previously. This also
-            ///             generally means that it will be brought to the front in terms of
-            ///             z-position, but this is implementation-dependent.
+            /// @brief  Gives the window input focus if it did not have it previously. This also
+            ///         generally means that it will be brought to the front in terms of z-position,
+            ///         but this is implementation-dependent.
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs giving the window input focus
             ///
-            virtual managed_window *focus(void) noexcept override = 0;
+            virtual managed_window *focus(void) override = 0;
 
             /// 
-            /// @brief      Determines whether the window has a frame.
+            /// @brief  Determines whether the window has a frame.
             ///
-            /// @return     true if and only if the window has a frame
+            /// @return true if and only if the window has a frame
             ///
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining whether the window has a frame
             /// 
-            virtual bool framed(void) const noexcept override = 0;
+            virtual bool framed(void) const override = 0;
 
             /// 
-            /// @brief      Sets whether the window has a frame.
+            /// @brief  Sets whether the window has a frame.
             /// 
-            /// @param      framed  true if the window should have a frame
+            /// @param  framed  true if the window should have a frame
             /// 
-            /// @return     a pointer to the window for chaining
+            /// @return a pointer to the window for chaining
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining whether the window has a frame
             ///
-            virtual managed_window *set_framed(bool framed) noexcept override = 0;
+            virtual managed_window *set_framed(bool framed) override = 0;
 
             /// 
-            /// @brief      Determines the size of the frame as border measurements. If the window
-            ///             is frameless, all dimensions of the border will be 0.
+            /// @brief  Determines the size of the frame as border measurements. If the window is
+            ///         frameless, all dimensions of the border will be 0.
             ///         
-            /// @return     the size of the frame as border measurements
+            /// @return the size of the frame as border measurements
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining the size of the frame
             ///
-            virtual border_t frame_size(void) const noexcept = 0;
+            virtual border_t frame_size(void) const override = 0;
 
             /// 
-            /// @brief      Determines the position of the top left corner of the frame originating
-            ///             from the top left corner of the monitor the window resides in. If the
-            ///             window is frameless, the frame position is the same as the surface
-            ///             position.
+            /// @brief  Determines the position of the top left corner of the frame originating from
+            ///         the top left corner of the monitor the window resides in. If the window is
+            ///         frameless, the frame position is the same as the surface position.
             ///  
-            /// @return     the position of the frame
+            /// @return the position of the frame
             /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
+            /// @throw  exception if an error occurs determining the position of the frame
             /// 
-            virtual pos2_t frame_pos(void) const noexcept = 0;
+            virtual pos2_t frame_pos(void) const override = 0;
     };
 }
 

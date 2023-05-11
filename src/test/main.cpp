@@ -47,6 +47,8 @@ int main(int argc, char **argv)
         window2.set_visible(true)->set_user_resizable(true);
         window3.set_visible(true)->set_user_resizable(true);
 
+        cout << window1.frame_size() << '\n';
+
         while (sdl::instance.poll_events())
         {
             

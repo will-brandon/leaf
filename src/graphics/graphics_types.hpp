@@ -12,6 +12,7 @@
 #define LEAF_SRC_GRAPHICS_TYPES_HEADER_GUARD
 
 #include <cstdint>
+#include "../utils/display.hpp"
 
 namespace leaf
 {
@@ -23,7 +24,7 @@ namespace leaf
     ///
     /// @brief  Represents a 2-dimensional bounding rectangle in integer pixel measurements.
     ///
-    typedef struct bounds2
+    typedef struct bounds2 : public utl::displayable
     {
         /// 
         /// @brief  Defines the width of the bounding rectangle in pixels.
@@ -35,25 +36,41 @@ namespace leaf
         /// 
         px_t height;
 
+        bounds2(void) noexcept = default;
+
+        bounds2(px_t width, px_t height) noexcept
+        {
+            this->width = width;
+            this->height = height;
+        }
+
         /// 
         /// @brief  Determines the dimensional aspect ratio (width/height) of the bounding
         ///         rectangle.
         /// 
         /// @return the aspect ratio of the bounds
         /// 
-        double aspect_ratio(void) const noexcept
+        inline double aspect_ratio(void) const noexcept
         {
             // Divide the width by the height, ensure both are doubles so the decimal places are
             // preserved.
             return (double)width / (double)height;
         }
 
+        /// 
+        /// @brief  Creates a display string for the bounding rectangle. The width and height are
+        ///         displayed in that order.
+        ///
+        /// @return the display string
+        /// 
+        virtual std::string to_string(void) const noexcept override;
+
     } bounds2_t;
 
     ///
     /// @brief  Represents a 2-dimensional position in integer pixel cartesian coordinates.
     ///
-    typedef struct pos2
+    typedef struct pos2 : public utl::displayable
     {
         /// 
         /// @brief  Defines the x-position in pixels.
@@ -65,12 +82,28 @@ namespace leaf
         /// 
         px_t y;
 
+        pos2(void) noexcept = default;
+
+        pos2(px_t x, px_t y) noexcept
+        {
+            this->x = x;
+            this->y = y;
+        }
+
+        /// 
+        /// @brief  Creates a display string for the position. The x-position and y-position are
+        ///         displayed in that order.
+        ///
+        /// @return the display string
+        /// 
+        virtual std::string to_string(void) const noexcept override;
+
     } pos2_t;
 
     ///
     /// @brief  Represents the dimensions of a border in integer pixel measurements.
     ///
-    typedef struct border
+    typedef struct border : public utl::displayable
     {
         /// 
         /// @brief  Defines the left measure in pixels.
@@ -91,6 +124,24 @@ namespace leaf
         /// @brief  Defines the bottom measure in pixels.
         /// 
         px_t bottom;
+
+        border(void) noexcept = default;
+
+        border(px_t left, px_t top, px_t right, px_t bottom) noexcept
+        {
+            this->left = left;
+            this->top = top;
+            this->right = right;
+            this->bottom = bottom;
+        }
+
+        /// 
+        /// @brief  Creates a display string for the border. The left, right, top, and bottom
+        ///         measures are displayed in that order.
+        ///
+        /// @return the display string
+        /// 
+        virtual std::string to_string(void) const noexcept override;
     
     } border_t;
 }

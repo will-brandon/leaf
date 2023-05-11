@@ -184,28 +184,16 @@ namespace leaf
             virtual ~sdl_window() noexcept;
 
             /// 
-            /// @brief      Determines the width of the window's display surface in pixels. Note
-            ///             that the surface is only the inner content area of the window, not the
-            ///             frame.
+            /// @brief      Determines the bounds of the window's display surface in pixel
+            ///             measurements. Note that the surface is only the inner content area of
+            ///             the window, not the frame.
             /// 
-            /// @return     the width of the surface in pixels
-            /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
-            /// 
-            virtual px_t width(void) const noexcept override;
-
-            /// 
-            /// @brief      Determines the height of the window's display surface in pixels. Note
-            ///             that the surface is only the inner content area of the window, not the
-            ///             frame.
-            /// 
-            /// @return     the height of the surface in pixels
+            /// @return     the bounds of the window's display surface
             /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
-            /// 
-            virtual px_t height(void) const noexcept override;
+            ///
+            virtual bounds2_t bounds(void) const noexcept override;
 
             /// 
             /// @brief      Sets the width of the window's display surface in pixels. The height is
@@ -282,30 +270,16 @@ namespace leaf
             virtual sdl_window *set_visible(bool is_visible) noexcept override;
 
             /// 
-            /// @brief      Determines the x-position of the window's display surface in pixels.
-            ///             Note that the surface is only the inner content area of the window, not
-            ///             the frame. The coordinates are cartesian and originate from the upper
-            ///             left corner of the monitor that the window primarily resides in.
+            /// @brief      Determines the position of the top left corner of the window's display
+            ///             surface. Coordinates are cartesian and originate from the top left
+            ///             corner of the monitor the window resides in.
             /// 
-            /// @return     the x-position of the surface in pixels
-            /// 
-            /// @warning    Behavior is undefined if the window is closed and a segmentation fault
-            ///             is likely.
-            /// 
-            virtual px_t x(void) const noexcept override;
-
-            /// 
-            /// @brief      Determines the y-position of the window's display surface in pixels.
-            ///             Note that the surface is only the inner content area of the window, not
-            ///             the frame. The coordinates are cartesian and originate from the upper
-            ///             left corner of the monitor that the window primarily resides in.
-            /// 
-            /// @return     the y-position of the surface in pixels
+            /// @return     the position of the window's display surface
             /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
             /// 
-            virtual px_t y(void) const noexcept override;
+            virtual pos2_t pos(void) const noexcept override;
 
             /// 
             /// @brief      Sets the x-position of the window's display surface in pixels. The
