@@ -271,7 +271,7 @@ namespace leaf
             /// 
             /// @throw  exception if an error occured setting the position
             ///
-            virtual managed_window *set_position(px_t x, px_t y) override = 0;
+            virtual managed_window *set_pos(px_t x, px_t y) override = 0;
 
             /// 
             /// @brief  Determines whether the window is alive (as opposed to being closed).
@@ -402,7 +402,7 @@ namespace leaf
             /// 
             /// @throw  exception if an error occurs determining the size of the frame
             ///
-            virtual border_t frame_size(void) const override = 0;
+            virtual border_t frame_border(void) const override = 0;
 
             /// 
             /// @brief  Determines the position of the top left corner of the frame originating from

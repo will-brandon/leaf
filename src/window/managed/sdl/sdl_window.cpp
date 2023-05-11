@@ -95,11 +95,11 @@ namespace leaf
 
     sdl_window::sdl_window(void)
         // Delegate to the constructor with explicit parameters.
-        : sdl_window(
-            "",
-            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		    LEAF_SDL_WINDOW_DEFAULT_WIDTH, LEAF_SDL_WINDOW_DEFAULT_HEIGHT
-        ) {}
+        : sdl_window("", LEAF_SDL_WINDOW_DEFAULT_WIDTH, LEAF_SDL_WINDOW_DEFAULT_HEIGHT) {}
+    
+    sdl_window::sdl_window(const string &title, int width, int height)
+        // Delegate to the constructor with explicit parameters.
+        : sdl_window(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height ) {}
 
     sdl_window::sdl_window(const string &title, int x, int y, int width, int height)
         // Upon creation, the window should not be flagged to close. It will not be resizable by the
@@ -130,6 +130,9 @@ namespace leaf
                 "Failed to create SDL window (Failed to read driver-specific properties: "
                 + string(SDL_GetError()) + ')');
         }
+        
+        // Set the default position.
+        set_pos(x, y);
 
         // Initialize the window's native data.
         init_natives();
@@ -349,7 +352,7 @@ namespace leaf
         return this;
     }
 
-    sdl_window *sdl_window::set_position(px_t x, px_t y) noexcept
+    sdl_window *sdl_window::set_pos(px_t x, px_t y) noexcept
     {
         // Use SDL functionality to set the position.
         SDL_SetWindowPosition(m_internal_window, x, y);
@@ -420,18 +423,53 @@ namespace leaf
         SDL_SetWindowBordered(m_internal_window, (SDL_bool)framed);
     }
 
-    border_t sdl_window::frame_size(void) const noexcept
+    border_t sdl_window::frame_border(void) const
     {
+        // SDL fails to recognize the macOS X frame border size. It can be manually defined.
+        #if BX_PLATFORM_OSX
+
+            // mac OS X frames only have a bar on top that is 28 pixels tall.
+            return {0, 28, 0, 0};
+
+        #endif
+
+        // Allocate variables to store the left, top, right, and bottom measurements.
         int left, top, right, bottom;
 
-        SDL_GetWindowBordersSize(m_internal_window, &top, &left, &bottom, &right);
+        // Use SDL functionality to try to read the measurements of the frame border. If the call
+        // fails and the window is framed, an error must have occured, and a runtime error will be
+        // thrown.
+        if (
+            SDL_GetWindowBordersSize(m_internal_window, &top, &left, &bottom, &right) < 0
+            && framed()
+        )
+        {
+            throw runtime_error("Failed to determine SDL window frame border size. ("
+                + string(SDL_GetError()) + ')');
+        }
 
+        // Return a border structure of the given left, top, right, and bottom measurements. The
+        // downcast can be assumed to never truncate the dimension since it is currently safe to
+        // assume that no single dimension will ever need to store a value of more than 65532 pixels
+        // (the maximum value of a 16-byte integer).
         return {(px_t)left, (px_t)top, (px_t)right, (px_t)bottom};
     }
 
-    pos2_t sdl_window::frame_pos(void) const noexcept
+    pos2_t sdl_window::frame_pos(void) const
     {
+        // Get the position of the window's display surface.
+        pos2_t surface_pos = pos();
 
+        // Get the frame border measurements.
+        border_t frame_border = this->frame_border();
+
+        // Using the position of the surface and the frame border measurements on the left and top
+        // sides of the surface, use subtraction to determine where the top left corner of the frame
+        // sits on the coordinate plane.
+        return {
+            (px_t)(surface_pos.x - frame_border.left),
+            (px_t)(surface_pos.y - frame_border.top)
+        };
     }
 
     string sdl_window::native_os_name(void) const noexcept

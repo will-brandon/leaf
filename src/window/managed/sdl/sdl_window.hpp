@@ -154,13 +154,29 @@ namespace leaf
         public:
             /// 
             /// @brief  Creates an SDL window. The title, position, and size are set to default
-            ///         values. When the window is created it is immediately active. Assuming that
-            ///         it is visible and SDL events are polled, it will begin displaying upon
-            ///         creation.
+            ///         values. This often means it will be centered in the monitor it resides in
+            ///         but this cannot be assumed on all operating systems. When the window is
+            ///         created it is immediately active. Assuming that it is visible and SDL events
+            ///         are polled, it will begin displaying upon creation.
             /// 
             /// @throw  runtime_error if an error occurs creating the SDL window
             /// 
             sdl_window(void);
+
+            /// 
+            /// @brief  Creates an SDL window. The position is set to a default value. This often
+            ///         means it will be centered in the monitor it resides in but this cannot be
+            ///         assumed on all operating systems. When the  window is created it is
+            ///         immediately active. Assuming that it is visible and SDL events are polled,
+            ///         it will begin displaying upon creation.
+            /// 
+            /// @param  title   the title bar content string
+            /// @param  width   the initial width
+            /// @param  height  the initial height
+            /// 
+            /// @throw  runtime_error if an error occurs creating the SDL window
+            /// 
+            sdl_window(const std::string &title, int width, int height);
 
             /// 
             /// @brief  Creates an SDL window. When the window is created it is immediately active.
@@ -331,7 +347,7 @@ namespace leaf
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
             /// 
-            virtual sdl_window *set_position(px_t x, px_t y) noexcept override;
+            virtual sdl_window *set_pos(px_t x, px_t y) noexcept override;
 
             /// 
             /// @brief      Determines whether the user can interact with the window's frame to
@@ -420,10 +436,13 @@ namespace leaf
             ///         
             /// @return     the size of the frame as border measurements
             /// 
+            /// @throw      runtime_error if the size of the frame border could not be determined on
+            ///             the operating system
+            /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
             ///
-            virtual border_t frame_size(void) const noexcept override;
+            virtual border_t frame_border(void) const override;
 
             /// 
             /// @brief      Determines the position of the top left corner of the frame originating
@@ -433,10 +452,13 @@ namespace leaf
             ///  
             /// @return     the position of the frame
             /// 
+            /// @throw      runtime_error if the position of the frame could not be determined on
+            ///             the operating system
+            /// 
             /// @warning    Behavior is undefined if the window is closed and a segmentation fault
             ///             is likely.
             /// 
-            virtual pos2_t frame_pos(void) const noexcept override;
+            virtual pos2_t frame_pos(void) const override;
 
             /// 
             /// @brief   Determines the name of the operating system the window resides on.

@@ -25,33 +25,19 @@ int main(int argc, char **argv)
 {
     try
     {
-        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
-            << sdl::instance.window_count() << '\n';
+        sdl_window window1("Test1", 100, 100, 200, 200);
+        sdl_window window2("Test2", 200, 128, 200, 200);
+        sdl_window window3("Test3", 300, 156, 200, 200);
         
-        sdl_window window1("Test1", 0, 0, 600, 400);
-
-        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
-            << sdl::instance.window_count() << '\n';
-
-        sdl_window window2("Test2", 0, 0, 600, 400);
-
-        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
-            << sdl::instance.window_count() << '\n';
-
-        sdl_window window3("Test3", 0, 0, 600, 400);
-
-        cout << "Living: " << sdl::instance.living_window_count() << "\t | Total: "
-            << sdl::instance.window_count() << '\n';
-        
-        window1.set_visible(true)->set_user_resizable(true);
-        window2.set_visible(true)->set_user_resizable(true);
-        window3.set_visible(true)->set_user_resizable(true);
-
-        cout << window1.frame_size() << '\n';
+        window1.set_visible(true)->set_user_resizable(true)->set_framed(true);
+        window2.set_visible(true)->set_user_resizable(true)->set_framed(true);
+        window3.set_visible(true)->set_user_resizable(true)->set_framed(true);
 
         while (sdl::instance.poll_events())
         {
-            
+            //cout << "Surface pos:\t" << window1.pos() << '\n';
+            //cout << "Surface bounds:\t" << window1.bounds() << '\n';
+            cout << "Frame pos:\t" << window1.frame_pos() << '\n';
         }
     }
     catch (const exception &exc)

@@ -172,7 +172,7 @@ namespace leaf
             /// 
             /// @throw  exception if an error occurs determining the size of the frame
             ///
-            virtual border_t frame_size(void) const = 0;
+            virtual border_t frame_border(void) const = 0;
 
             /// 
             /// @brief  Determines the position of the top left corner of the frame originating from

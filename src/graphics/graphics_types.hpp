@@ -36,13 +36,21 @@ namespace leaf
         /// 
         px_t height;
 
+        /// 
+        /// @brief  Constructs a new 2-dimensional bounding rectangle structure.
+        /// 
+        /// @note   This implementation is set to default; it just allocates the space but does not
+        ///         update the memory content.
+        ///
         bounds2(void) noexcept = default;
 
-        bounds2(px_t width, px_t height) noexcept
-        {
-            this->width = width;
-            this->height = height;
-        }
+        ///
+        /// @brief  Constructs a new 2-dimensional bounding rectangle structure.
+        /// 
+        /// @param  width   the width measured in pixels
+        /// @param  height  the height measured in pixels
+        /// 
+        bounds2(px_t width, px_t height) noexcept;
 
         /// 
         /// @brief  Determines the dimensional aspect ratio (width/height) of the bounding
@@ -82,13 +90,21 @@ namespace leaf
         /// 
         px_t y;
 
+        /// 
+        /// @brief  Constructs a new 2-dimensional position structure.
+        /// 
+        /// @note   This implementation is set to default; it just allocates the space but does not
+        ///         update the memory content.
+        ///
         pos2(void) noexcept = default;
 
-        pos2(px_t x, px_t y) noexcept
-        {
-            this->x = x;
-            this->y = y;
-        }
+        ///
+        /// @brief  Constructs a new 2-dimensional position structure.
+        /// 
+        /// @param  x   the x-position measured in pixels
+        /// @param  y   the y-position measured in pixels
+        /// 
+        pos2(px_t x, px_t y) noexcept;
 
         /// 
         /// @brief  Creates a display string for the position. The x-position and y-position are
@@ -124,16 +140,24 @@ namespace leaf
         /// @brief  Defines the bottom measure in pixels.
         /// 
         px_t bottom;
-
+        
+        /// 
+        /// @brief  Constructs a new border measurement structure.
+        /// 
+        /// @note   This implementation is set to default; it just allocates the space but does not
+        ///         update the memory content.
+        ///
         border(void) noexcept = default;
 
-        border(px_t left, px_t top, px_t right, px_t bottom) noexcept
-        {
-            this->left = left;
-            this->top = top;
-            this->right = right;
-            this->bottom = bottom;
-        }
+        ///
+        /// @brief  Constructs a new border measurement structure.
+        /// 
+        /// @param  left    the left measure in pixels
+        /// @param  top     the top measure in pixels
+        /// @param  right   the right measure in pixels
+        /// @param  bottom  the bottom measure in pixels
+        /// 
+        border(px_t left, px_t top, px_t right, px_t bottom) noexcept;
 
         /// 
         /// @brief  Creates a display string for the border. The left, right, top, and bottom

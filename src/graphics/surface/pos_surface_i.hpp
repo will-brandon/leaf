@@ -74,7 +74,7 @@ namespace leaf
             /// 
             /// @throw  exception if an error occured setting the position
             /// 
-            virtual pos_surface_i *set_position(px_t x, px_t y) = 0;
+            virtual pos_surface_i *set_pos(px_t x, px_t y) = 0;
 
             /// 
             /// @brief  Moves the surface horizontally by the given displacement in pixels. Only the
@@ -151,7 +151,7 @@ namespace leaf
                 pos2_t pos = this->pos();
 
                 // Increment (or decrement) the x-position and y-position by the given distances.
-                set_position(pos.x + x_displacement, pos.y + y_displacement);
+                set_pos(pos.x + x_displacement, pos.y + y_displacement);
 
                 // Return a pointer to the surface for chaining.
                 return this;
