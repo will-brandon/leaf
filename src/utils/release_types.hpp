@@ -44,6 +44,14 @@ namespace utl
         byte_t patch;
 
         /// 
+        /// @brief  Constructs a new release version structure.
+        /// 
+        /// @note   This implementation is set to default; it just allocates the space but does not
+        ///         update the memory content.
+        ///
+        release_version(void) noexcept = default;
+
+        /// 
         /// @brief  Constructs a new release version object given major, minor, and patch
         ///         components.
         /// 

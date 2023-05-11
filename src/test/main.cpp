@@ -29,9 +29,9 @@ int main(int argc, char **argv)
         sdl_window window2("Test2", 200, 128, 200, 200);
         sdl_window window3("Test3", 300, 156, 200, 200);
         
-        window1.set_visible(true)->set_user_resizable(true)->set_framed(true);
-        window2.set_visible(true)->set_user_resizable(true)->set_framed(true);
-        window3.set_visible(true)->set_user_resizable(true)->set_framed(true);
+        window1.set_visible(true)->set_user_resizable(true);
+        window2.set_visible(true)->set_user_resizable(true);
+        window3.set_visible(true)->set_user_resizable(true);
 
         while (sdl::instance.poll_events())
         {
