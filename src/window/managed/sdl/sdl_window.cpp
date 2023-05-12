@@ -236,7 +236,7 @@ namespace leaf
 
         // Return a bounding rectangle structure of the given width and height. The downcast can be
         // assumed to never truncate the dimension since it is currently safe to assume that no
-        // single dimension will ever need to store a value of more than 65532 pixels (the maximum
+        // single dimension will ever need to store a value of more than 32767 pixels (the maximum
         // value of a 16-byte integer).
         return {(px_t)width, (px_t)height};
     }
@@ -315,7 +315,7 @@ namespace leaf
 
         // Return a position structure of the given x-position and y-position. The downcast can be
         // assumed to never truncate the dimension since it is currently safe to assume that no
-        // single dimension will ever need to store a value of more than 65532 pixels (the maximum
+        // single dimension will ever need to store a value of more than 32767 pixels (the maximum
         // value of a 16-byte integer).
         return {(px_t)x, (px_t)y};
     }
@@ -421,6 +421,9 @@ namespace leaf
     {
         // Use SDL functionality to set whether the window has a border (frame).
         SDL_SetWindowBordered(m_internal_window, (SDL_bool)framed);
+
+        // Return a pointer to the window for chaining.
+        return this;
     }
 
     border_t sdl_window::frame_border(void) const
@@ -450,7 +453,7 @@ namespace leaf
 
         // Return a border structure of the given left, top, right, and bottom measurements. The
         // downcast can be assumed to never truncate the dimension since it is currently safe to
-        // assume that no single dimension will ever need to store a value of more than 65532 pixels
+        // assume that no single dimension will ever need to store a value of more than 32767 pixels
         // (the maximum value of a 16-byte integer).
         return {(px_t)left, (px_t)top, (px_t)right, (px_t)bottom};
     }
