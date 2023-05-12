@@ -8,15 +8,11 @@
 /// @copyright  Copyright (c) 2023
 /// 
 
-#include <bgfx/bgfx.h>
-#include <bgfx/platform.h>
-#include <bx/platform.h>
-#include <stdio.h>
 #include <iostream>
 #include "../utils/console.hpp"
 #include "../window/managed/sdl/sdl.hpp"
 #include "../window/managed/sdl/sdl_window.hpp"
-#include <limits>
+
 using namespace std;
 using namespace utl;
 using namespace leaf;
@@ -32,8 +28,6 @@ int main(int argc, char **argv)
         window1.set_visible(true)->set_user_resizable(true);
         window2.set_visible(true)->set_user_resizable(true);
         window3.set_visible(true)->set_user_resizable(true);
-
-        cout << numeric_limits<px_t>::max() << '\n';
         
         while (sdl::instance.poll_events())
         {
