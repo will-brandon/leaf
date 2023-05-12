@@ -1,13 +1,13 @@
-///
+/// 
 /// @file       window_event_manager.hpp
 /// @author     Will Brandon (brandon.w@northeastern.edu)
 /// @date       May 12, 2023
-///
+/// 
 /// @brief      Header for a class that represents a manager for window events. Event handlers can
 ///             be subscribed and unsubscribed. Windows can notify the manager of events.
-///
+/// 
 /// @copyright  Copyright (c) 2023
-///
+/// 
 
 #ifndef LEAF_SRC_WINDOW_EVENT_MANAGER_HEADER_GUARD
 #define LEAF_SRC_WINDOW_EVENT_MANAGER_HEADER_GUARD
@@ -59,6 +59,96 @@ namespace leaf
             /// 
             virtual ~window_event_manager() noexcept = default;
 
+            /// 
+            /// @brief  Notifies all handlers that the window was closed either by the user or
+            ///         automatically. 
+            /// 
+            /// @param  user_initiated  true if and only if the close was initated by the user as
+            ///                         opposed to being automatic
+            /// 
+            virtual void closed(bool user_initiated) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window was resized either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the resize was initated by the user as
+            ///                         opposed to being automatic
+            /// @param  new_bounds      a bounding rectangle defining the new width and height of
+            ///                         the resized window display surface
+            /// 
+            virtual void resized(
+                bool user_initiated, const bounds2_t &new_bounds) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window was moved either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the move was initated by the user as
+            ///                         opposed to being automatic
+            /// @param  new_pos         a position defining the new x-position and y-position in
+            ///                         pixels of the window's display surface after the move
+            /// @param  new_frame_pos   a position defining the new x-position and y-position in
+            ///                         pixels of the window's frame after the move
+            /// 
+            virtual void moved(
+                bool user_initiated, const pos2_t &new_pos, const pos2_t &new_frame_pos
+            ) noexcept override;
+            
+            /// 
+            /// @brief  Notifies all handlers that the window was hidden either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the hide was initated by the user as
+            ///                         opposed to being automatic
+            /// 
+            virtual void hidden(bool user_initiated) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window was shown either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the show was initated by the user as
+            ///                         opposed to being automatic
+            /// 
+            virtual void shown(bool user_initiated) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window was minimized either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the minimization was initated by the user as
+            ///                         opposed to being automatic
+            /// 
+            virtual void minimized(bool user_initiated) noexcept override;
+            
+            /// 
+            /// @brief  Notifies all handlers that the window was maximized either by the user or
+            ///         automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the maximization was initated by the user as
+            ///                         opposed to being automatic
+            /// 
+            virtual void maximized(bool user_initiated) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window entered fullscreen mode either by the
+            ///         user or automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the fullscreen was initated by the user
+            ///                         as opposed to being automatic
+            /// 
+            virtual void entered_fullscreen(bool user_initiated) noexcept override;
+
+            /// 
+            /// @brief  Notifies all handlers that the window exited fullscreen mode either by the
+            ///         user or automatically.
+            /// 
+            /// @param  user_initiated  true if and only if the fullscreen exit was initated by the
+            ///                         user as opposed to being automatic
+            /// 
+            virtual void exited_fullscreen(bool user_initiated) noexcept override;
+
         public:
             /// 
             /// @brief  Subscribes a window event handler.
@@ -91,7 +181,7 @@ namespace leaf
             /// @brief  Unsubscribes a keyboard event handler.
             /// 
             /// @param  key_event_handler   a pointer to the keyboard event handler to remove
-            ///
+            /// 
             /// @return false if and only if the event handler was not subscribed
             /// 
             bool unsubscribe(key_event_handler_i *key_event_handler) noexcept;
