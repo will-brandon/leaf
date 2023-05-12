@@ -14,85 +14,84 @@
 
 namespace leaf
 {
-    void window_event_manager::closed(bool user_initiated) noexcept
+    void window_event_manager::closed(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->closed(user_initiated);
+            handler->closed();
         }
     }
 
-    void window_event_manager::resized(bool user_initiated, const bounds2_t &new_bounds) noexcept
+    void window_event_manager::resized(const bounds2_t &new_bounds) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->resized(user_initiated, new_bounds);
+            handler->resized(new_bounds);
         }
     }
 
-    void window_event_manager::moved(
-        bool user_initiated, const pos2_t &new_pos, const pos2_t &new_frame_pos) noexcept
+    void window_event_manager::moved(const pos2_t &new_pos, const pos2_t &new_frame_pos) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->moved(user_initiated, new_pos, new_frame_pos);
+            handler->moved(new_pos, new_frame_pos);
         }
     }
             
-    void window_event_manager::hidden(bool user_initiated) noexcept
+    void window_event_manager::hidden(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->hidden(user_initiated);
+            handler->hidden();
         }
     }
 
-    void window_event_manager::shown(bool user_initiated) noexcept
+    void window_event_manager::shown(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->shown(user_initiated);
+            handler->shown();
         }
     }
 
-    void window_event_manager::minimized(bool user_initiated) noexcept
+    void window_event_manager::minimized(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->minimized(user_initiated);
+            handler->minimized();
         }
     }
             
-    void window_event_manager::maximized(bool user_initiated) noexcept
+    void window_event_manager::maximized() noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->maximized(user_initiated);
+            handler->maximized(void);
         }
     }
 
-    void window_event_manager::entered_fullscreen(bool user_initiated) noexcept
+    void window_event_manager::entered_fullscreen(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->entered_fullscreen(user_initiated);
+            handler->entered_fullscreen();
         }
     }
 
-    void window_event_manager::exited_fullscreen(bool user_initiated) noexcept
+    void window_event_manager::exited_fullscreen(void) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->exited_fullscreen(user_initiated);
+            handler->exited_fullscreen();
         }
     }
 

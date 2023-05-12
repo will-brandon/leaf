@@ -15,6 +15,7 @@
 
 #include <string>
 #include "../graphics/surface/pos_surface_i.hpp"
+#include "window_event_manager.hpp"
 
 namespace leaf
 {
@@ -184,6 +185,16 @@ namespace leaf
             /// @throw  exception if an error occurs determining the position of the frame
             /// 
             virtual pos2_t frame_pos(void) const = 0;
+
+            /// 
+            /// @brief  Returns a pointer to the window's event manager. The event manager can be
+            ///         used to subscribe event handlers.
+            ///
+            /// @return a pointer to the window's event manager
+            /// 
+            /// @throw  exception if an error occurs getting the event manager
+            /// 
+            virtual window_event_manager *event_manager(void) const = 0;
     };
 }
 

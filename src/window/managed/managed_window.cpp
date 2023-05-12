@@ -18,7 +18,17 @@ using namespace std;
 namespace leaf
 {
     // The window is alive upon construction. By default, it is closable by the user.
-    managed_window::managed_window(void) noexcept : m_is_alive(true), m_is_user_closable(true) {}
+    managed_window::managed_window(void) noexcept : m_is_alive(true), m_is_user_closable(true)
+    {
+        // Dynamically create a new window event manager on the heap.
+        m_event_manager = new window_event_manager;
+    }
+
+    managed_window::~managed_window() noexcept
+    {
+        // Destroy the window event manager.
+        delete m_event_manager;
+    }
 
     bool managed_window::is_alive(void) const noexcept
     {
@@ -56,5 +66,11 @@ namespace leaf
 
         // Return a pointer to the window for chaining.
         return this;
+    }
+
+    window_event_manager *managed_window::event_manager(void) const noexcept
+    {
+        // Return a pointer to the window's event manager.
+        return m_event_manager;
     }
 }
