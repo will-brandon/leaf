@@ -28,6 +28,8 @@ int main(int argc, char **argv)
         window1.set_visible(true)->set_user_resizable(true);
         window2.set_visible(true)->set_user_resizable(true);
         window3.set_visible(true)->set_user_resizable(true);
+
+        cout << window1.event_manager() << '\n';
         
         while (sdl::instance.poll_events())
         {

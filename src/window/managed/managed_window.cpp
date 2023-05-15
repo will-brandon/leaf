@@ -17,12 +17,10 @@ using namespace std;
 
 namespace leaf
 {
-    // The window is alive upon construction. By default, it is closable by the user.
-    managed_window::managed_window(void) noexcept : m_is_alive(true), m_is_user_closable(true)
-    {
+    managed_window::managed_window(void) noexcept
+        // The window is alive upon construction. By default, it is closable by the user.
         // Dynamically create a new window event manager on the heap.
-        m_event_manager = new window_event_manager;
-    }
+        : m_is_alive(true), m_is_user_closable(true), m_event_manager(new window_event_manager) {}
 
     managed_window::~managed_window() noexcept
     {

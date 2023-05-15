@@ -14,7 +14,6 @@
 
 #include <set>
 #include "../utils/unique.hpp"
-#include "window_i.hpp"
 #include "../event_handler/window_event_handler_i.hpp"
 #include "../event_handler/key_event_handler_i.hpp"
 
@@ -88,8 +87,8 @@ namespace leaf
             /// @brief  Notifies all handlers that the window was maximized either by the user or
             ///         automatically.
             /// 
-            /// @param  user_initiated  true if and only if the maximization was initated by the user as
-            ///                         opposed to being automatic
+            /// @param  user_initiated  true if and only if the maximization was initated by the
+            ///                         user as opposed to being automatic
             /// 
             virtual void maximized(void) noexcept override;
 
@@ -106,6 +105,14 @@ namespace leaf
             virtual void exited_fullscreen(void) noexcept override;
 
         public:
+            /// 
+            /// @brief  Destructs the window event manager.
+            /// 
+            /// @note   There are no resources to manually destroy, the destructor is explicitly
+            ///         declared default to ensure that it is virtual.
+            /// 
+            virtual ~window_event_manager() noexcept = default;
+            
             /// 
             /// @brief  Subscribes a window event handler.
             /// 

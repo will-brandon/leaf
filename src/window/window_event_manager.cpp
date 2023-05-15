@@ -73,7 +73,7 @@ namespace leaf
         // Loop through all window event handlers and notify them of the event.
         for (window_event_handler_i *handler : m_window_event_handlers)
         {
-            handler->maximized(void);
+            handler->maximized();
         }
     }
 

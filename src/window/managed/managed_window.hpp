@@ -53,7 +53,7 @@ namespace leaf
             /// @brief  A pointer to the event manager for the window. The event manager holds
             ///         subscribed event handlers for the window.
             /// 
-            window_event_manager *m_event_manager;
+            window_event_manager *const m_event_manager;
 
         protected:
             /// 
@@ -70,7 +70,7 @@ namespace leaf
             /// @note   The destructor is marked virtual so that it can be overriden by child
             ///         classes if needed.
             ///
-            virtual ~managed_window() noexcept = default;
+            virtual ~managed_window() noexcept;
 
             /// 
             /// @brief  Destroys the window (deallocates internal functionality and deems it dead
