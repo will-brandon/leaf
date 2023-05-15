@@ -37,7 +37,10 @@ namespace leaf
             /// @param  new_bounds      a bounding rectangle defining the new width and height of
             ///                         the resized window display surface
             /// 
-            virtual void resized(const bounds2_t &new_bounds) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void resized(const bounds2_t &new_bounds) noexcept {}
 
             /// 
             /// @brief  Called when the window is moved either by the user or automatically.
@@ -47,39 +50,60 @@ namespace leaf
             /// @param  new_frame_pos   a position defining the new x-position and y-position in
             ///                         pixels of the window's frame after the move
             /// 
-            virtual void moved(const pos2_t &new_pos, const pos2_t &new_frame_pos) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void moved(const pos2_t &new_pos, const pos2_t &new_frame_pos) noexcept {}
             
             /// 
             /// @brief  Called when the window is hidden either by the user or automatically.
             /// 
-            virtual void hidden(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void hidden(void) noexcept {}
 
             /// 
             /// @brief  Called when the window is shown either by the user or automatically.
             /// 
-            virtual void shown(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void shown(void) noexcept {}
 
             /// 
             /// @brief  Called when the window is minimized either by the user or automatically.
             /// 
-            virtual void minimized(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void minimized(void) noexcept {}
             
             /// 
             /// @brief  Called when the window is maximized either by the user or automatically.
             /// 
-            virtual void maximized(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void maximized(void) noexcept {}
 
             /// 
             /// @brief  Called when the window enters fullscreen mode either by the user or
             ///         automatically.
             /// 
-            virtual void entered_fullscreen(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void entered_fullscreen(void) noexcept {}
 
             /// 
             /// @brief  Called when the window exits fullscreen mode either by the user or
             ///         automatically.
             /// 
-            virtual void exited_fullscreen(void) noexcept = 0;
+            /// @note   A default empty implementation is provided. Therefore, the method is not
+            ///         required to be provided an overriden implementation if it is not wanted.
+            /// 
+            virtual void exited_fullscreen(void) noexcept {}
     };
 }
 

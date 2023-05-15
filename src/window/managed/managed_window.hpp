@@ -97,7 +97,7 @@ namespace leaf
                 }
 
                 // Set the flag to true indicating that the window is closed.
-                m_is_alive = true;
+                m_is_alive = false;
 
                 // Return true indicating that the flag was set successfully.
                 return true;

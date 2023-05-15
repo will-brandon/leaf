@@ -37,7 +37,15 @@ namespace leaf
             /// 
             std::set<key_event_handler_i *> m_key_event_handlers;
         
-        protected:
+        public:
+            /// 
+            /// @brief  Destructs the window event manager.
+            /// 
+            /// @note   There are no resources to manually destroy, the destructor is explicitly
+            ///         declared default to ensure that it is virtual.
+            /// 
+            virtual ~window_event_manager() noexcept = default;
+            
             /// 
             /// @brief  Notifies all handlers that the window was closed either by the user or
             ///         automatically.
@@ -103,15 +111,6 @@ namespace leaf
             ///         user or automatically.
             /// 
             virtual void exited_fullscreen(void) noexcept override;
-
-        public:
-            /// 
-            /// @brief  Destructs the window event manager.
-            /// 
-            /// @note   There are no resources to manually destroy, the destructor is explicitly
-            ///         declared default to ensure that it is virtual.
-            /// 
-            virtual ~window_event_manager() noexcept = default;
             
             /// 
             /// @brief  Subscribes a window event handler.

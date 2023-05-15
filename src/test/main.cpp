@@ -17,6 +17,14 @@ using namespace std;
 using namespace utl;
 using namespace leaf;
 
+class event_handler : virtual public window_event_handler_i
+{
+    virtual void closed(void) noexcept override
+    {
+        cout << "Closed\n";
+    }
+};
+
 int main(int argc, char **argv)
 {
     try
@@ -29,7 +37,9 @@ int main(int argc, char **argv)
         window2.set_visible(true)->set_user_resizable(true);
         window3.set_visible(true)->set_user_resizable(true);
 
-        cout << window1.event_manager() << '\n';
+        event_handler event_handler1;
+
+        window1.event_manager()->subscribe(&event_handler1);
         
         while (sdl::instance.poll_events())
         {

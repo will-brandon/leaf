@@ -162,6 +162,9 @@ namespace leaf
             return false;
         }
         
+        // Notify the event manager of a close action.
+        event_manager()->closed();
+        
         // Destroy the SDL window.
         SDL_DestroyWindow(m_internal_window);
 
