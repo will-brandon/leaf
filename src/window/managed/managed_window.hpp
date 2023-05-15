@@ -49,12 +49,6 @@ namespace leaf
             ///
             bool m_is_user_closable;
 
-            /// 
-            /// @brief  A pointer to the event manager for the window. The event manager holds
-            ///         subscribed event handlers for the window.
-            /// 
-            window_event_manager *const m_event_manager;
-
         protected:
             /// 
             /// @brief  Creates a managed window. The title, position, and size are set to default
@@ -67,10 +61,10 @@ namespace leaf
             /// 
             /// @brief  Destructs the window object.
             /// 
-            /// @note   The destructor is marked virtual so that it can be overriden by child
-            ///         classes if needed.
-            ///
-            virtual ~managed_window() noexcept;
+            /// @note   There are no resources to manually destroy, the destructor is explicitly
+            ///         declared default to ensure that it is virtual.
+            /// 
+            virtual ~managed_window() noexcept = default;
 
             /// 
             /// @brief  Destroys the window (deallocates internal functionality and deems it dead
@@ -421,16 +415,14 @@ namespace leaf
             virtual pos2_t frame_pos(void) const override = 0;
 
             /// 
-            /// @brief      Returns a pointer to the window's event manager. The event manager can be
-            ///             used to subscribe event handlers.
+            /// @brief  Returns a pointer to the window's event manager. The event manager can
+            ///         be used to subscribe event handlers.
             ///
-            /// @return     a pointer to the window's event manager
+            /// @return a pointer to the window's event manager
             /// 
-            /// @warning    The event manager object is destroyed when the window object is
-            ///             destroyed. The pointer will lead to a null object after the window
-            //              object is destroyed and a segmentation fault will occur.
+            /// @throw  exception if an error occurs getting the event manager
             /// 
-            virtual window_event_manager *event_manager(void) const noexcept override;
+            virtual window_event_manager *event_manager(void) const noexcept = 0;
     };
 }
 

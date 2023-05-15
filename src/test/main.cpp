@@ -23,6 +23,21 @@ class event_handler : virtual public window_event_handler_i
     {
         cout << "Closed\n";
     }
+
+    virtual void user_requested_close(void) noexcept override
+    {
+        cout << "Close requested\n";
+    }
+
+    virtual void resized(const bounds2_t &bounds) noexcept override
+    {
+        cout << "Resized: " << bounds << '\n';
+    }
+
+    virtual void moved(const pos2_t &pos, const pos2_t &frame_pos) noexcept override
+    {
+        cout << "Moved: " << pos << ", " << frame_pos << '\n';
+    }
 };
 
 int main(int argc, char **argv)
@@ -33,11 +48,14 @@ int main(int argc, char **argv)
         sdl_window window2("Test2", 200, 128, 200, 200);
         sdl_window window3("Test3", 300, 156, 200, 200);
         
-        window1.set_visible(true)->set_user_resizable(true);
-        window2.set_visible(true)->set_user_resizable(true);
-        window3.set_visible(true)->set_user_resizable(true);
+        window1.set_visible(true)->set_user_resizable(true)->focus();
+        window2.set_visible(true)->set_user_resizable(true)->focus();
+        window3.set_visible(true)->set_user_resizable(true)->focus();
 
         event_handler event_handler1;
+
+        window2.close();
+        window3.close();
 
         window1.event_manager()->subscribe(&event_handler1);
         

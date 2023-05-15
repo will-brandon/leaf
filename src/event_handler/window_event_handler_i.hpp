@@ -27,9 +27,16 @@ namespace leaf
     {
         public:
             /// 
-            /// @brief  Called when the window is closed either by the user or automatically.
+            /// @brief  Called when the window is closed either by the user or automatically. This
+            ///         indicates a full window destruction has finished.
             /// 
             virtual void closed(void) noexcept = 0;
+
+            /// 
+            /// @brief  Called when the user requests that the window close. This most often occurs
+            ///         when the user clicks the close button on a window's frame.
+            /// 
+            virtual void user_requested_close(void) noexcept = 0;
 
             /// 
             /// @brief  Called when the window is resized either by the user or automatically.

@@ -25,6 +25,7 @@ namespace leaf
 #include "../../../graphics/surface/native_surface_i.hpp"
 #include "../managed_window.hpp"
 #include "sdl.hpp"
+#include "sdl_window_event_manager.hpp"
 
 /// 
 /// @brief  The default width of an SDL window.
@@ -35,8 +36,6 @@ namespace leaf
 /// @brief  The default height of an SDL window.
 /// 
 #define LEAF_SDL_WINDOW_DEFAULT_HEIGHT (leaf::px_t)400
-
-using namespace std;
 
 namespace leaf
 {
@@ -60,6 +59,12 @@ namespace leaf
             /// @brief  Denotes whether the window is resizable by the user.
             /// 
             bool m_is_user_resizable;
+
+            /// 
+            /// @brief  A pointer to the event manager for the window. The event manager holds
+            ///         subscribed event handlers for the window.
+            /// 
+            sdl_window_event_manager *const m_event_manager;
 
             /// 
             /// @brief  The internal SDL 4-byte identifier of the window.
@@ -459,6 +464,18 @@ namespace leaf
             ///             is likely.
             /// 
             virtual pos2_t frame_pos(void) const override;
+
+            /// 
+            /// @brief      Returns a pointer to the window's event manager. The event manager can
+            ///             be used to subscribe event handlers.
+            ///
+            /// @return     a pointer to the window's event manager
+            /// 
+            /// @warning    The event manager object is destroyed when the window object is
+            ///             destroyed. The pointer will lead to a null object after the window
+            ///             object is destroyed and a segmentation fault will occur.
+            /// 
+            virtual sdl_window_event_manager *event_manager(void) const noexcept override;
 
             /// 
             /// @brief   Determines the name of the operating system the window resides on.

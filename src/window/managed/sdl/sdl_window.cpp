@@ -103,8 +103,9 @@ namespace leaf
 
     sdl_window::sdl_window(const string &title, int x, int y, int width, int height)
         // Upon creation, the window should not be flagged to close. It will not be resizable by the
-        // user.
-        : m_should_close(false), m_is_user_resizable(false)
+        // user. Dynamically create a new window event manager on the heap.
+        : m_should_close(false), m_is_user_resizable(false),
+        m_event_manager(new sdl_window_event_manager)
     {
         // Establish some default flags for the window state upon creation. Only the video window
         // mode is needed and the window should start hidden.
@@ -151,6 +152,9 @@ namespace leaf
 
         // Ensure that the internal window is destroyed.
         destroy();
+
+        // Destroy the event manager.
+        delete m_event_manager;
     }
 
     bool sdl_window::destroy(void) noexcept
@@ -161,9 +165,6 @@ namespace leaf
         {
             return false;
         }
-        
-        // Notify the event manager of a close action.
-        event_manager()->closed();
         
         // Destroy the SDL window.
         SDL_DestroyWindow(m_internal_window);
@@ -217,16 +218,7 @@ namespace leaf
 
     void sdl_window::handle_sdl_event(const SDL_Event &event) noexcept
     {
-        switch (event.type)
-        {
-            case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
-                        if (is_user_closable())
-                        {
-                            this->close();
-                        }
-
-                break;
-        }
+        
     }
 
     bounds2_t sdl_window::bounds(void) const noexcept
@@ -476,6 +468,12 @@ namespace leaf
             (px_t)(surface_pos.x - frame_border.left),
             (px_t)(surface_pos.y - frame_border.top)
         };
+    }
+
+    sdl_window_event_manager *sdl_window::event_manager(void) const noexcept
+    {
+        // Return a pointer to the window's event manager.
+        return m_event_manager;
     }
 
     string sdl_window::native_os_name(void) const noexcept

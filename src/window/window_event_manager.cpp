@@ -23,6 +23,15 @@ namespace leaf
         }
     }
 
+    void window_event_manager::user_requested_close(void) noexcept
+    {
+        // Loop through all window event handlers and notify them of the event.
+        for (window_event_handler_i *handler : m_window_event_handlers)
+        {
+            handler->user_requested_close();
+        }
+    }
+
     void window_event_manager::resized(const bounds2_t &new_bounds) noexcept
     {
         // Loop through all window event handlers and notify them of the event.
